@@ -13,7 +13,7 @@ public class run_sendsms {
 
     public static void main(String[] args) {
         z.send.sms.main _do1 = new z.send.sms.main();
-        _do1.run();     //123 
+        _do1.run();   
     }
 
 }
