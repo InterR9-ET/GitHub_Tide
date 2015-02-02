@@ -13,7 +13,7 @@ public class run_sendalarm {
 
     public static void main(String[] args) {
 
-        z.send.alarm.main _do1 = new z.send.alarm.main();
+        z.send_alarm.main _do1 = new z.send_alarm.main();
         try {
             _do1.run();
         } catch (Exception e) {

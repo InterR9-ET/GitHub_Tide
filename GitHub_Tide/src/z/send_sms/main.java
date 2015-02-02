@@ -1,4 +1,4 @@
-package z.send.sms;
+package z.send_sms;
 
 import java.io.FileInputStream;
 import java.io.IOException;

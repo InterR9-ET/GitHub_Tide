@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package z.send.sms;
+package z.send_sms;
 
-import z.send.alarm.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
