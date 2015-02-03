@@ -15,13 +15,9 @@ import java.util.List;
  * @author 功能：数据库加载
  * @author 描述：
  * @author 数据库加载判断
- *
- *
  */
 public class db {
-
     private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
-
     public static boolean ini(org.apache.log4j.Logger log, util.GetSql.csnms _csnms) {
         boolean _bs = false;
         if (_csnms.load()) {
@@ -82,7 +78,6 @@ public class db {
 
         List _msm_list = new ArrayList();
         String str_sql = "";
-
         str_sql = "select s.id as ID,s.phone as PHONE,s.description as DEC,s.cityid as CITYID,s.LINKNAME as LINKNAME ,s.ALARM_ID as ALARM_ID "
                 + " from sendmessage s where s.serialnum is NULL and (s.HASDH='-1' or s.HASDH is null) "
                 + " and (to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') - to_date(to_char(s.createtime,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') )*24*60*60<60";

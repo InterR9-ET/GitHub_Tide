@@ -11,7 +11,6 @@ package util.GetSql;
  */
 import util.AbstractClass.databases;
 import java.io.BufferedReader;
-import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,6 +39,10 @@ public class csnms extends databases {
 
     private static util.GetFile.xml _xml = new util.GetFile.xml();
 
+    /**
+     * 关闭
+     * @param param 
+     */
     @Override
     public void close(Object[] param) {
         if (param != null) {
@@ -127,8 +130,7 @@ public class csnms extends databases {
     @Override
     public boolean load() {
         boolean _bs = false;
-
-        String _url = "/conf/conf.xml";
+        String _url = "\\conf\\conf.xml";
         try {
 
             if (this.get_db_name().toString().length() > 0) {
