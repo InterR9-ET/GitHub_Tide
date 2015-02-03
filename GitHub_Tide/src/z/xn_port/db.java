@@ -50,7 +50,7 @@ public class db {
      * @param fil
      * @return
      */
-    static Runnable createTask( final org.apache.log4j.Logger log,final String fil,final util.GetSql.csnms _csnms) {
+    static Runnable createTask( final org.apache.log4j.Logger log,final String fil,final util.GetSql.csnms _csnms,final Hashtable lst_p2) {
         return new Runnable() {
             public void run() {
                 try {
@@ -61,15 +61,15 @@ public class db {
                     	 */
                         if (fil.indexOf("cus_ftth_flux") != -1) {
                         	//如果包含cus_ftth_flux，则调用PortList_ftth方法，用list接收结果集
-                            list = fun.PortList_ftth(log,fil);
+                            list = fun.PortList_ftth(log,fil,lst_p2);
                         } else if (fil.indexOf("wuxi") != -1) {
                         	//如果包含wuxi，则调用PortList_wx方法，用list接收结果集
                             System.out.println(fil+"               *********************************");
-                            list =fun.PortList_wx(log,fil);
+                            list =fun.PortList_wx(log,fil,lst_p2);
                             System.out.println(list.size()+"               *********************************");
                         } else {
                         	//最后一种情况，调用PortList方法，用list接收结果集
-                            list = fun.PortList(log,fil);
+                            list = fun.PortList(log,fil,lst_p2);
                         }
                     } catch (Exception e) {
                         System.out.println("异常#######" + fil);

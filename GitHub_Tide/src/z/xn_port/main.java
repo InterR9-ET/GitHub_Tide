@@ -18,7 +18,6 @@ import java.util.Hashtable;
 public class main extends Thread {
     //-------------------------------------日志---------------------------------------//
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(main.class.getName()); //获得logger
-
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_xnport.config");
     }
@@ -28,9 +27,7 @@ public class main extends Thread {
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
     private static util.GetSql.donghuan_mysql _donghuan_mysql = new util.GetSql.donghuan_mysql();
     private static util.GetThread.thread _thread = new util.GetThread.thread(10);
-    private static util.GetTools.tools _tools = new util.GetTools.tools();
-    private static util.GetFile.excel _excel = new util.GetFile.excel();
-    public static Hashtable lst_p2 = new Hashtable();
+    public  Hashtable lst_p2 = new Hashtable();
 
     /**
      * 程序初始化
@@ -78,6 +75,7 @@ public class main extends Thread {
         }
         lst_p.clear();
         fun f=new fun();
-        f.pand(log,file,_thread,_csnms);                //文件数量大于0
+        //日志、文件名、线程池、数据连接
+        f.pand(log,file,_thread,_csnms,lst_p2);                //文件数量大于0
     }
 }

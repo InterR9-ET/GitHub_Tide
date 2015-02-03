@@ -18,7 +18,6 @@ import java.util.*;
  *
  */
 public class fun {
-    public static Hashtable lst_p2 = new Hashtable();
        /**
      * 获取下载好的信息
      *
@@ -49,7 +48,7 @@ public class fun {
     }
 
     //文件数量大于0
-    public void pand(org.apache.log4j.Logger log,List File_list,util.GetThread.thread _thread,util.GetSql.csnms _csnms) {
+    public void pand(org.apache.log4j.Logger log,List File_list,util.GetThread.thread _thread,util.GetSql.csnms _csnms,Hashtable lst_p2) {
         if (File_list.size() > 0) {
             log.info("执行多线程");
             for (int i = 0, leng = File_list.size(); i < leng; i++) {
@@ -62,7 +61,7 @@ public class fun {
                         String fil = file_name;
                         System.out.println(fil + "////////////////////////////////////////////////////////");
                         //-------------添加多线程任务----------------//传入日志，文件名，数据库信息
-                        _thread.execute(db.createTask(log, fil, _csnms));
+                        _thread.execute(db.createTask(log, fil, _csnms,lst_p2));
                         System.out.println("添加任务：" + i);
                         //-------------添加多线程任务----------------//
                     }
@@ -77,7 +76,7 @@ public class fun {
      * @param filename
      * @return
      */
-    public static List PortList_ftth(org.apache.log4j.Logger log,String filename) {
+    public static List PortList_ftth(org.apache.log4j.Logger log,String filename,Hashtable lst_p2) {
         List list = new ArrayList();
         try {
             //log.info("################"+filename);
@@ -167,7 +166,7 @@ public class fun {
      * @param filename
      * @return
      */
-    public static List PortList_wx(org.apache.log4j.Logger log, String filename) {
+    public static List PortList_wx(org.apache.log4j.Logger log, String filename,Hashtable lst_p2) {
         List list = new ArrayList();
         try {
             //log.info("################"+filename);  
@@ -413,7 +412,7 @@ public class fun {
      * @param filename
      * @return
      */
-    public static List PortList(org.apache.log4j.Logger log,String filename) {
+    public static List PortList(org.apache.log4j.Logger log,String filename,Hashtable lst_p2) {
         List list = new ArrayList();
         try {
             FileReader fw = new FileReader(filename);
