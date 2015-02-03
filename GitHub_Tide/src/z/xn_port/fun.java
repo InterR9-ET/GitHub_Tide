@@ -8,13 +8,7 @@ package z.xn_port;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import z.send_sms.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import org.apache.log4j.Logger;
+import java.util.*;
 
 /**
  *
@@ -24,28 +18,8 @@ import org.apache.log4j.Logger;
  *
  */
 public class fun {
-
-    private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
-    private static Logger log = Logger.getLogger(fun.class);
-    private static util.GetThread.thread _thread = new util.GetThread.thread(1);
     public static Hashtable lst_p2 = new Hashtable();
-
-    /**
-     * 加载数据库，加载成功返回true
-     *
-     * @return
-     */
-    public static boolean ini() {
-        boolean _bs = false;
-        if (_csnms.load()) {
-            if (_csnms.open()) {
-                _bs = true;
-            }
-        }
-        return _bs;
-    }
-
-    /**
+       /**
      * 获取下载好的信息
      *
      * @param file1 文件路径
@@ -75,19 +49,18 @@ public class fun {
     }
 
     //文件数量大于0
-
-    public void pand(List File_list) {
+    public void pand(org.apache.log4j.Logger log,List File_list,util.GetThread.thread _thread,util.GetSql.csnms _csnms) {
         if (File_list.size() > 0) {
             log.info("执行多线程");
             for (int i = 0, leng = File_list.size(); i < leng; i++) {
                 //获取文件名
                 String file_name = File_list.get(i).toString();
                 //判断文件是否是包含flux，不包含返回-1，包含，返回位置数
-                if (file_name.indexOf("flux") != -1) {
+                if (file_name.contains("flux")) {
                     //判断文件是否是包含bulk，不包含返回-1，包含，返回位置数
                     if (file_name.indexOf("bulk") != -1) {
                         String fil = file_name;
-                        System.out.println(fil+"////////////////////////////////////////////////////////");
+                        System.out.println(fil + "////////////////////////////////////////////////////////");
                         //-------------添加多线程任务----------------//传入日志，文件名，数据库信息
                         _thread.execute(db.createTask(log, fil, _csnms));
                         System.out.println("添加任务：" + i);
@@ -104,7 +77,7 @@ public class fun {
      * @param filename
      * @return
      */
-    public static List PortList_ftth(String filename) {
+    public static List PortList_ftth(org.apache.log4j.Logger log,String filename) {
         List list = new ArrayList();
         try {
             //log.info("################"+filename);
@@ -194,10 +167,11 @@ public class fun {
      * @param filename
      * @return
      */
-    public static List PortList_wx(String filename) {
+    public static List PortList_wx(org.apache.log4j.Logger log, String filename) {
         List list = new ArrayList();
         try {
-            //log.info("################"+filename);    
+            //log.info("################"+filename);  
+            
             FileReader fw = new FileReader(filename);
             BufferedReader reader = new BufferedReader(fw);
             String str = null;
@@ -439,7 +413,7 @@ public class fun {
      * @param filename
      * @return
      */
-    public static List PortList(String filename) {
+    public static List PortList(org.apache.log4j.Logger log,String filename) {
         List list = new ArrayList();
         try {
             FileReader fw = new FileReader(filename);

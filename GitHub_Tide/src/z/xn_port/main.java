@@ -41,7 +41,6 @@ public class main extends Thread {
                 try {
                     //主程序
                     doing_main();
-                    _thread = new util.GetThread.thread(10);
                     Thread.sleep(1000 * 5);//60秒
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -79,6 +78,6 @@ public class main extends Thread {
         }
         lst_p.clear();
         fun f=new fun();
-        f.pand(file);                //文件数量大于0
+        f.pand(log,file,_thread,_csnms);                //文件数量大于0
     }
 }

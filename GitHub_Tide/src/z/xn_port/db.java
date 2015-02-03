@@ -19,7 +19,6 @@ import org.apache.log4j.Logger;
  *
  */
 public class db {
-
     private static  util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     private static util.GetFile.excel _excel = new util.GetFile.excel();
  
@@ -62,13 +61,15 @@ public class db {
                     	 */
                         if (fil.indexOf("cus_ftth_flux") != -1) {
                         	//如果包含cus_ftth_flux，则调用PortList_ftth方法，用list接收结果集
-                            list = fun.PortList_ftth(fil);
+                            list = fun.PortList_ftth(log,fil);
                         } else if (fil.indexOf("wuxi") != -1) {
                         	//如果包含wuxi，则调用PortList_wx方法，用list接收结果集
-                            list =fun.PortList_wx(fil);
+                            System.out.println(fil+"               *********************************");
+                            list =fun.PortList_wx(log,fil);
+                            System.out.println(list.size()+"               *********************************");
                         } else {
                         	//最后一种情况，调用PortList方法，用list接收结果集
-                            list = fun.PortList(fil);
+                            list = fun.PortList(log,fil);
                         }
                     } catch (Exception e) {
                         System.out.println("异常#######" + fil);
