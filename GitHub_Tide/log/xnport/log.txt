@@ -1232,3 +1232,29 @@ INFO  2015-02-03 14:29:03 7322 fun (db.java:170)
  - Copy成功：E:\java\lianx\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
 INFO  2015-02-03 14:29:03 7326 fun (db.java:222)
  - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi
+INFO  2015-02-03 14:42:20 0    fun (fun.java:81)
+ - 执行多线程
+INFO  2015-02-03 14:42:21 295  fun (db.java:78)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong
+INFO  2015-02-03 14:42:21 312  fun (db.java:179)
+ - Copy成功：E:\java\lianx\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-03 14:42:21 314  fun (db.java:222)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong
+INFO  2015-02-03 14:42:22 1301 fun (db.java:78)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi
+INFO  2015-02-03 14:42:22 1329 fun (db.java:170)
+ - Copy成功：E:\java\lianx\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-03 14:42:22 1331 fun (db.java:222)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi
+INFO  2015-02-03 14:42:23 2166 fun (db.java:78)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi
+INFO  2015-02-03 14:42:23 2191 fun (db.java:170)
+ - Copy成功：E:\java\lianx\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-03 14:42:23 2193 fun (db.java:222)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi
+INFO  2015-02-03 14:42:23 2193 fun (db.java:78)
+ - 开始处理文件:portper\onu\cus_ftth_flux_2014_12_16.14.3.suzhou.0.bulk_onusuzhou
+INFO  2015-02-03 14:42:23 2195 fun (db.java:188)
+ - Copy成功：E:\java\lianx\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/cus_ftth_flux_2014_12_16.14.3.suzhou.0.bulk_onusuzhou_suzhou
+INFO  2015-02-03 14:42:23 2196 fun (db.java:222)
+ - 删除文件:portper\onu\cus_ftth_flux_2014_12_16.14.3.suzhou.0.bulk_onusuzhou
