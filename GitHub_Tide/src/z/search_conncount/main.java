@@ -39,7 +39,7 @@ public class main extends Thread {
             while (true) {
                 try {
                     doing_main();  //运行主方法  进行查询并记录数据
-                    Thread.sleep(1000 * 5);//5秒执行一次
+                    Thread.sleep(1000 * 10);//5秒执行一次
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     log.info("程序运行异常：" + ex.getMessage().toString());
