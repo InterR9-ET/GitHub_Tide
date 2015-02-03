@@ -130,7 +130,7 @@ public class csnms extends databases {
     @Override
     public boolean load() {
         boolean _bs = false;
-        String _url = "\\conf\\conf.xml";
+        String _url = "/conf/conf.xml";
         try {
 
             if (this.get_db_name().toString().length() > 0) {

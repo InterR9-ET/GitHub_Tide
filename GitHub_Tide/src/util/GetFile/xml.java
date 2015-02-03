@@ -200,7 +200,7 @@ public class xml extends files {
             String default_url = directory.getCanonicalPath().toString();
             //得到Document供操作
             Document doc = builder.build(default_url + file_url);
-            System.out.println(default_url + file_url+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(default_url + file_url);
             roots = doc.getRootElement();
         } catch (Exception ex) {
             ex.printStackTrace();
