@@ -87,6 +87,7 @@ public class fun {
                     //判断文件是否是包含bulk，不包含返回-1，包含，返回位置数
                     if (file_name.indexOf("bulk") != -1) {
                         String fil = file_name;
+                        System.out.println(fil+"////////////////////////////////////////////////////////");
                         //-------------添加多线程任务----------------//传入日志，文件名，数据库信息
                         _thread.execute(db.createTask(log, fil, _csnms));
                         System.out.println("添加任务：" + i);
