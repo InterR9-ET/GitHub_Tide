@@ -54,19 +54,15 @@ public class main extends Thread {
     public void doing_main() {
         List file_list_all = new ArrayList();
         List file_list1 = new ArrayList();
-        List file_list2 = new ArrayList();
 
         File file1 = new File("portper/");
         File file2 = new File("portper/onu");
 
-        file_list1 = new fun().huoqwuwenjian(file1);    //获取文件
-        file_list2 = new fun().huoqwuwenjian(file2);   //获取文件
+        file_list_all = new fun().huoqwuwenjian(file1);    //获取文件
+        file_list1 = new fun().huoqwuwenjian(file2);   //获取文件
 
         file_list_all.addAll(file_list1);//合并list
-        file_list_all.addAll(file_list2);//合并list
 
-        List list_in = new ArrayList();
-        fun.port _port = new fun.port();
         /**
          * 加载数据用于进行筛选
          */
