@@ -1,6 +1,7 @@
 package z.xn_ping;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -43,7 +44,7 @@ public class main extends Thread {
         }
     }
 
-    public void doing_main() {
+    public void doing_main() throws IOException {
        File file1 = new File("pingper/");//-------------------------------------------------------------
        File file2 = new File("pingper/dcn/");//                                 获
        File file3 = new File("pingper/wx/");//                                  
@@ -51,17 +52,26 @@ public class main extends Thread {
        File file5 = new File("pingper/jyw/");//                                 
        File file6 = new File("pingper/sz/");//                                 
        fun f=new fun();                     //                                  件
-       List file=f.huoqwuwenjian(file1);//                                 
+       List file=f.huoqwuwenjian(file1);//                             
        List file22=f.huoqwuwenjian(file2);//                                    文
        List file33=f.huoqwuwenjian(file3);//                                 
        List file44=f.huoqwuwenjian(file4);//                                    
        List file55=f.huoqwuwenjian(file5);//                                 
        List file66=f.huoqwuwenjian(file6);//                                 
-       file.add(file22);//                                 
-       file.add(file33);//                                 
-       file.add(file44);//                                 
-       file.add(file55);//                                 
+      if(file22.size()>0){
+          file.add(file22);
+      } if(file33.size()>0){
+          file.add(file33 );// 
+      }  
+      if(file44.size()>0){
+       file.add(file44);//
+      }            
+      if(file55.size()>0){
+       file.add(file55);//  
+      }             
+      if(file66.size()>0){
        file.add(file66);//--------------------------------------------------------------------------------
+      }
        //传入文件名，处理文件
        f.chulwj(log, file, _csnms);
     }

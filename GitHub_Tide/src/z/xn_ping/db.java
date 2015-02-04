@@ -58,7 +58,7 @@ public class db {
                 _list_obj.add(objs);
             }
             if (_list_obj.size() > 0) {
-                String str_sql = "insert into SWITCH_PING("
+                String str_sql = "insert into SWITCH_PING2("
                         + "STARTIP,"
                         + "PORTIP,"
                         + "CENTERIP,"
