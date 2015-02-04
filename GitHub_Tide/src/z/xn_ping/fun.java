@@ -23,28 +23,26 @@ public class fun {
      *返回List文件名
      * @param file1 文件路径
      * @return
+     * @throws java.io.IOException
      */
-    public List huoqwuwenjian(File file1) {
-        //获取下载下来的总目录
+    public List huoqwuwenjian(File file1) throws IOException {
         List File_list = new ArrayList();
+        //加载文件
         File[] files1 = file1.listFiles();
-        //遍历子目录的文件，并存放在File_list中
         if (files1 != null) {
             if (files1.length > 0) {
-                Arrays.sort(files1);//文件名排序
-                for (File files11 : files1) {
-                    //isDirectory()判断是不是目录，是返回true
-                    if (!files11.isDirectory()) {
-                        //判断文件名是否存在bulk   (下载下来的文件已bulk开头)
-                        if (files11.toString().contains("bulk")) {
-                            String fil = files11.toString();
+                Arrays.sort(files1);//排序
+                for (int kk = 0; kk < files1.length; kk++) {
+                    if (!files1[kk].isDirectory()) {
+                        if (files1[kk].toString().indexOf("ping_data") != -1) {
+                            String fil = files1[kk].toString();
                             File_list.add(fil);
                         }
                     }
                 }
             }
         }
-        return File_list;
+            return File_list;
     }
     //------------------------------------------------------------------------------
     /**
@@ -59,10 +57,11 @@ public class fun {
             List list_in = new ArrayList();
             //文件数量大于0
             if (File_list.size() > 0) {
-                ping _ping = new ping();
-                for (Object File_list1 : File_list) {
+                //ping _ping = new ping();
+                for (int i = 0; i < File_list.size(); i++) {
                     _csnms.rush();
-                    String fil = File_list1.toString(); //取出文件名
+                    String fil = File_list.get(i).toString(); //取出文件名
+                    System.out.println(fil+"2222222222222222222222222222222222222222222");
                     List list = PingList(fil);                  //传入文件名，调用筛选信息的方法，得到想要字段的信息
                     //处理数据
                     db DB=new db();                              //调用方法，将信息写入数据库
@@ -150,7 +149,7 @@ public class fun {
      */
     public void del_files(String str_type) {
         //str_type   _sz   _jyw   _lyg   _wx  _dcn   _nj
-        File file = new File("file//xingneng/ping/");
+        File file = new File("file/xingneng/ping/");
         File[] files = file.listFiles();
         List _list = new ArrayList();
         if (files != null) {
@@ -198,7 +197,16 @@ public class fun {
     }
     
     //------------------------------传入文件名，读取文件信息，返回得到字段的信息--------------------------------------------
-    public static List PingList(String filename) {
+
+    /**
+     *
+     * @param filename
+     * @return
+     * @throws IOException
+     */
+        public  List PingList(String filename) throws IOException {
+        //File path=new File("");
+        //filename= path.getCanonicalPath()+"/"+filename;
         //处理ping文件  58.213.239.80   58.213.14.1  58.213.14.4  1.000000  1390705234
         List list = new ArrayList();
         try {
@@ -209,8 +217,8 @@ public class fun {
             String pms[] = null;
             ping _ping = new ping();
             while ((str = reader.readLine()) != null) {
-                _ping = new ping();
-                str = str.replace("   ", "  ");//-------------------------------意义何在？
+                //_ping = new ping();
+                str = str.replace("   ", "  ");//-------------------------------三个空格换成两个空格
                 str = str.replace("  ", "$");
                 String[] pm = str.split("\\$");
                 //取出想要的字段
@@ -252,54 +260,6 @@ public class fun {
         }
         return list;
     }
-    
-    //--------------------------------------------------------------------------------------------------
-     public static List NodeList(String filename) {
-        //处理node文件   pm    000000000000000009900701460001$1390706400$31.00$900
-        List list = new ArrayList();
-        try {
-            FileReader fw = new FileReader(filename);
-            BufferedReader reader = new BufferedReader(fw);
-            String str = null;
-            int row = 1;
-            String pms[] = null;
-
-            Hashtable keyHash = new Hashtable();
-
-            while ((str = reader.readLine()) != null) {
-                node _node = new node();
-                String[] pm = str.split("\\$");
-                if (pm.length > 0) {
-                    try {
-                        _node.str1 = pm[0].toString();
-                        _node.str2 = pm[1].toString();
-                        _node.str3 = pm[2].toString();
-                        _node.str4 = pm[3].toString();
-
-                        //---------过滤重复的---------//
-                        String key = _node.str1 + "#" + _node.str2;
-                        if (!keyHash.containsKey(key)) {
-                            keyHash.put(key, key);
-                        } else {
-                            continue;
-                        }
-                        list.add(_node);
-                    } catch (Exception e) {
-                        System.out.println("###########" + str + "###########");
-                    }
-                }
-
-            }
-            reader.close();
-            fw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-    
      //-------------------------------------------------------------------------
     public static class ping {
 
@@ -318,8 +278,5 @@ public class fun {
         public String str3 = "";
         public String str4 = "";
     }
-    
-    
-    
     
 }
