@@ -9,11 +9,11 @@ package main;
  *
  * @author Administrator
  */
-public class run_xn_port {
-    public static  void main(String [] args){
-        z.xn_port.main Main=new z.xn_port.main();
+public class run_xn_ping {
+    public static void main(String [] args){
+        z.xn_ping.main RUN=new z.xn_ping.main();
         try{
-        Main.run();
+        RUN.run();
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -1,31 +1,8 @@
 package z.xn_ping;
 
-import z.xn_port.*;
-import z.send_sms.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-
-import java.rmi.RemoteException;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
+import java.io.File;
 import java.util.List;
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-import org.xml.sax.InputSource;
-import java.lang.Thread;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Hashtable;
 
-import javax.xml.rpc.ServiceException;
 
 
 /**
@@ -53,12 +30,40 @@ public class main extends Thread {
   
 
     public void run() {
-    
+        //加载数据库
+        if (db.ini(log,_csnms)) {
+            while (true) {
+                try {
+                    doing_main();
+                    Thread.sleep(1000 * 60 * 1);//60秒
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void doing_main() {
-       
-
+       File file1 = new File("pingper/");//-------------------------------------------------------------
+       File file2 = new File("pingper/dcn/");//                                 获
+       File file3 = new File("pingper/wx/");//                                  
+       File file4 = new File("pingper/lyg/");//                                 取
+       File file5 = new File("pingper/jyw/");//                                 
+       File file6 = new File("pingper/sz/");//                                 
+       fun f=new fun();                     //                                  件
+       List file=f.huoqwuwenjian(file1);//                                 
+       List file22=f.huoqwuwenjian(file2);//                                    文
+       List file33=f.huoqwuwenjian(file3);//                                 
+       List file44=f.huoqwuwenjian(file4);//                                    
+       List file55=f.huoqwuwenjian(file5);//                                 
+       List file66=f.huoqwuwenjian(file6);//                                 
+       file.add(file22);//                                 
+       file.add(file33);//                                 
+       file.add(file44);//                                 
+       file.add(file55);//                                 
+       file.add(file66);//--------------------------------------------------------------------------------
+       //传入文件名，处理文件
+       f.chulwj(log, file, _csnms);
     }
 
 }

@@ -64,9 +64,9 @@ public class db {
                             list = fun.PortList_ftth(log,fil,lst_p2);
                         } else if (fil.indexOf("wuxi") != -1) {
                         	//如果包含wuxi，则调用PortList_wx方法，用list接收结果集
-                            System.out.println(fil+"               *********************************");
+                            //System.out.println(fil+"               *********************************");
                             list =fun.PortList_wx(log,fil,lst_p2);
-                            System.out.println(list.size()+"               *********************************");
+                           // System.out.println(list.size()+"               *********************************");
                         } else {
                         	//最后一种情况，调用PortList方法，用list接收结果集
                             list = fun.PortList(log,fil,lst_p2);
