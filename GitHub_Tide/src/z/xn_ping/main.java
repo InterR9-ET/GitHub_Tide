@@ -9,10 +9,8 @@ import java.util.List;
 /**
  *
  * @author yangzhen
- * @author 功能：短信发送
+ * @author 功能：ping数据的 解析入库
  * @author 描述：
- * @author 系统内部短信发送，用于信息提醒。  电信走动环，移动联通走综调。  
- * @author 动环的需要等一段时间才有回执，综调可以立刻得到回执。   通过回执的状态判断短信的发送状态
  *
  */
 public class main extends Thread {
