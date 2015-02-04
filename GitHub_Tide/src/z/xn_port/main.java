@@ -37,6 +37,7 @@ public class main extends Thread {
     public void run() {
         if (db.ini(log, _csnms)) {
             while (true) {
+                System.out.println("开始运行");
                 try {
                     //主程序
                     doing_main();
@@ -66,6 +67,8 @@ public class main extends Thread {
         /**
          * 加载数据用于进行筛选
          */
+        System.out.println(file_list_all.size());
+        
         List lst_p = db.get_device_data(_csnms);  //调用get_device_data，获取device_id，去除重复用
         int m = lst_p.size();
         for (int p = 0; p < m; p++) {

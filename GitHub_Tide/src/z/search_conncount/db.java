@@ -42,9 +42,9 @@ public class db {
 
     public static List loaddata(util.GetSql.csnms _csnms) {
         List list = new ArrayList();
-        String sql = "select count(1) as COUNT,'连接数' as TYPE  from v$session    "
+        String sql = "select count(1) as COUNT,'连接数' as TYPE  , to_char(sysdate,'yyyy-mm-dd HH24:mi:ss') as TIMES    from v$session    "
                 + "union  "
-                + "Select count(1) as COUNT,'并发连接数' as TYPE  from v$session where status='ACTIVE'";
+                + "Select count(1) as COUNT,'并发连接数' as TYPE , to_char(sysdate,'yyyy-mm-dd HH24:mi:ss') as TIMES  from v$session where status='ACTIVE'";
         Object[] objs = new Object[]{};
         list = _csnms.getdata(sql, null);
         return list;

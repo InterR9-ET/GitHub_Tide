@@ -59,16 +59,20 @@ public class main extends Thread {
                 HashMap map = (HashMap) _list.get(i);
                 String count = "";
                 String type = "";
+                String times = "";
                 if (map.get("COUNT") != null) {
                     count = map.get("COUNT").toString();
                 }
                 if (map.get("TYPE") != null) {
                     type = map.get("TYPE").toString();
                 }
+                if (map.get("TIMES") != null) {
+                    times = map.get("TIMES").toString();
+                }
                 if (i > 0) {
                     mes += "#";
                 }
-                mes += type + ":" + count;
+                mes += type + ":" + count + ":" + times;
             }
             log.info(mes);
         }
