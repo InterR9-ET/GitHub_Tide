@@ -70,9 +70,9 @@ public class main extends Thread {
                     times = map.get("TIMES").toString();
                 }
                 if (i > 0) {
-                    mes += "#";
+                    mes += "####";
                 }else{
-                 mes="执行时间："+times;
+                 mes="执行时间："+times+"####";
                 }
                 mes += type + ":" + count ;
             }
