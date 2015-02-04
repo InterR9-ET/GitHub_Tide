@@ -71,8 +71,10 @@ public class main extends Thread {
                 }
                 if (i > 0) {
                     mes += "#";
+                }else{
+                 mes="执行时间："+times;
                 }
-                mes += type + ":" + count + ":" + times;
+                mes += type + ":" + count ;
             }
             log.info(mes);
         }
