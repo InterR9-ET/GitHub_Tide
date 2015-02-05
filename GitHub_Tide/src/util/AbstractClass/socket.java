@@ -33,13 +33,9 @@ import sun.net.ftp.FtpClient;
  */
 public abstract class socket {
 
-    public abstract void set_SOCKET_NAME(String SOCKET_NAME);
-
     public abstract void set_SOCKET_IP(String SOCKET_IP);
 
     public abstract void set_SOCKET_PORT(String SOCKET_PORT);
-
-    public abstract String get_SOCKET_NAME();
 
     public abstract String get_SOCKET_IP();
 
