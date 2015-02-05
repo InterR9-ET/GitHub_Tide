@@ -61,6 +61,7 @@ public class xmlconf {
 
                                             if (mess3.equals(Element)) {
                                                 str_values = mess3_text;
+                                                System.out.println(keyname + "#" + Element + "#" + str_values + " \r\n");
                                                 return str_values;
                                             }
                                         }
