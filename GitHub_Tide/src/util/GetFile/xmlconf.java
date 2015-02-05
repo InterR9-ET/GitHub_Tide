@@ -60,11 +60,9 @@ public class xmlconf {
                                             mes.append("------------").append(mess3).append("#").append(mess3_text).append("\r\n");
 
                                             if (mess3.equals(Element)) {
-                                                str_values = mess3_text;
-                                                System.out.println("\r\n");
-                                                String mess=keyname + "#" + Element + "#" + str_values;
+                                                str_values = mess3_text;                                           
+                                                String mess=keyname + "#" + Element + "#" + str_values+"\r\n";
                                                 System.out.println(mess);
-                                                System.out.println("\r\n");
                                                 return str_values;
                                             }
                                         }
