@@ -36,6 +36,7 @@ public class main extends Thread {
     private util.GetThread.thread _thread = new util.GetThread.thread(2);   //声明多线程 
     private util.GetSql.csnms _csnms = new util.GetSql.csnms();   //声明数据库
     private util.GetSocket.socketclient _socketclient = new util.GetSocket.socketclient();
+    private String socketname = "sc_alarmserver";
 
     public void run() {//启动线程      
         if (db.ini(log, _csnms)) {  //加载数据库
@@ -65,16 +66,18 @@ public class main extends Thread {
                 log.info("心跳线程启动");
                 while (true) {
                     z.allClass.sendalarm_sendtable _alarm = new z.allClass.sendalarm_sendtable();
-                    boolean bs = _socketclient.sendmessage("紫图心跳", log);
-                    if (bs) {
-                        log.info("心跳发送成功");
-                    } else {
-                        log.info("心跳发送失败");
-                    }
-                    try {
-                        Thread.sleep(1000 * 30);//中断30秒再执行
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    if (_socketclient.ini(socketname)) {
+                        boolean bs = _socketclient.sendmessage("紫图心跳");
+                        if (bs) {
+                            log.info("心跳发送成功");
+                        } else {
+                            log.info("心跳发送失败");
+                        }
+                        try {
+                            Thread.sleep(1000 * 30);//中断30秒再执行
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -108,17 +111,19 @@ public class main extends Thread {
                             _alarm.ID = map.get("ID").toString();
                             _alarm.ALARM = map.get("ALARM").toString();
                             //发送告警
-                            boolean bs = _socketclient.sendmessage(_alarm.ALARM, log);
-                            if (bs) {
-                                log.info("告警发送成功：Alarm_id:" + _alarm.ID + "\r\n" + _alarm.ALARM + "\r\n");
-                                //删除发送成功的告警                                
-                                if (db.deldata(_csnms, _alarm.ID)) {
-                                    log.info("删除告警成功：" + _alarm.ID);
+                            if (_socketclient.ini(socketname)) {
+                                boolean bs = _socketclient.sendmessage(_alarm.ALARM);
+                                if (bs) {
+                                    log.info("告警发送成功：Alarm_id:" + _alarm.ID + "\r\n" + _alarm.ALARM + "\r\n");
+                                    //删除发送成功的告警                                
+                                    if (db.deldata(_csnms, _alarm.ID)) {
+                                        log.info("删除告警成功：" + _alarm.ID);
+                                    } else {
+                                        log.info("删除告警失败：" + _alarm.ID);
+                                    }
                                 } else {
-                                    log.info("删除告警失败：" + _alarm.ID);
+                                    log.info("告警发送失败：" + _alarm);
                                 }
-                            } else {
-                                log.info("告警发送失败：" + _alarm);
                             }
                             if (i == list.size() - 1) {
                                 list.clear();//释放资源

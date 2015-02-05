@@ -17,6 +17,6 @@ public class socket {
 
     public static void main(String[] args) {
         util.GetSocket.socketclient _socket = new util.GetSocket.socketclient();
-        _socket.ini();
+        _socket.ini("sc_alarmserver");
     }
 }

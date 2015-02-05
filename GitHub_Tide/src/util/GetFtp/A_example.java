@@ -34,13 +34,17 @@ import util.AbstractClass.ftp;
  */
 public class A_example extends ftp {
 
+    private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
+
+    private String FTP_NAME = "";
     private String FTP_IP = "";
     private String FTP_USERNAME = "";
     private String FTP_PWD = "";
+    private String FTP_DIR = "";
     private int FTP_PORT = -1;
 
     private FtpClient FTP_CLIENT = null;
-    private String FTP_PATH = "";
+
     private OutputStream os = null;
     private FileInputStream is = null;
 
@@ -84,13 +88,21 @@ public class A_example extends ftp {
         return FTP_PORT;
     }
 
-    @Override
-    public boolean load() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private boolean load() {
+        boolean _bs = false;
+        try {
+            FTP_IP = _xmlconf.getvalue(FTP_NAME, "IP");
+            FTP_USERNAME = _xmlconf.getvalue(FTP_NAME, "USER");
+            FTP_PWD = _xmlconf.getvalue(FTP_NAME, "PWD");
+            FTP_DIR = _xmlconf.getvalue(FTP_NAME, "DIR");
+            _bs = true;
+        } catch (Exception e) {
+            System.out.println("load config.xml error:" + FTP_NAME);
+        }
+        return _bs;
     }
 
-    @Override
-    public boolean open() {
+    private boolean open() {
         boolean _bs = false;
         FTP_CLIENT = new FtpClient();
         try {
@@ -100,8 +112,8 @@ public class A_example extends ftp {
                 FTP_CLIENT.openServer(this.FTP_IP);
             }
             FTP_CLIENT.login(this.FTP_USERNAME, this.FTP_PWD);
-            if (this.FTP_PATH.length() != 0) {
-                FTP_CLIENT.cd(this.FTP_PATH);// path是ftp服务下主目录的子目录
+            if (this.FTP_DIR.length() != 0) {
+                FTP_CLIENT.cd(this.FTP_DIR);// path是ftp服务下主目录的子目录
             }
             FTP_CLIENT.binary();// 用2进制上传、下载
             System.out.println("FTP 已登录到\"" + FTP_CLIENT.pwd() + "\"目录");
@@ -245,6 +257,11 @@ public class A_example extends ftp {
             }
         }
         return _bs;
+    }
+
+    @Override
+    public boolean ini(String ftp_name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

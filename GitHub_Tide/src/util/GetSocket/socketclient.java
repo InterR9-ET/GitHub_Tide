@@ -24,30 +24,33 @@ public class socketclient {
     private Socket remote_socket = null;
     private PrintWriter out = null;
     private BufferedReader in = null;
-    private String socket_name = "sc_alarmserver";
-    private String socket_ip = null;
-    private String socket_port = null;
+    private String socket_name = "";
+    private String socket_ip = "";
+    private String socket_port = "";
 
-    public boolean load() {
+    private boolean load() {
         boolean _bs = false;
         try {
             socket_ip = _xmlconf.getvalue(socket_name, "IP");
-            socket_port = _xmlconf.getvalue(socket_name, "PORT");  
+            socket_port = _xmlconf.getvalue(socket_name, "PORT");
             _bs = true;
         } catch (Exception e) {
-            System.out.println("load config.xml error:" + socket_name);
+            e.printStackTrace();
         }
+        if (!_bs) {
+            System.out.println("SocketClient load error:" + socket_name + "#" + socket_ip + "#" + socket_port);
+        }
+
         return _bs;
 
     }
 
-    public boolean open() {
+    private boolean open() {
         boolean _bs = false;
         try {
             if (remote_socket == null || remote_socket.isClosed()) {
                 //新建连接
                 remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
-                System.out.println("Connection access:" + socket_ip + ":" + socket_port + ".");
                 //发送空字符串  验证状态
                 try {
                     remote_socket.sendUrgentData(0xFF);
@@ -55,7 +58,6 @@ public class socketclient {
                 } catch (Exception ex) {
                     //重新连接
                     remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
-                    System.out.println("Connection access:" + socket_ip + ":" + socket_port + ".");
                     System.out.println("对端断开,已重连");
                     _bs = true;
                 }
@@ -67,7 +69,6 @@ public class socketclient {
                 } catch (Exception ex) {
                     //重新连接
                     remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
-                    System.out.println("Connection access:" + socket_ip + ":" + socket_port + ".");
                     System.out.println("对端断开,已重连");
                     _bs = true;
                 }
@@ -77,38 +78,46 @@ public class socketclient {
             ex.printStackTrace();
         }
 
+        if (!_bs) {
+            System.out.println("SocketClient open error:" + socket_name + "#" + socket_ip + "#" + socket_port);
+        }
+
         return _bs;
     }
 
-    public boolean ini() {
+    public boolean ini(String socket_name) {
         boolean _bs = false;
+        this.socket_name = socket_name;
         if (load()) {
             if (open()) {
                 _bs = true;
-            } else {
-                System.out.println("Socket 连接失败....");
             }
-        } else {
-            System.out.println("配置文件读取错误....");
         }
+
+        if (!_bs) {
+            System.out.println("SocketClient ini error:" + socket_name + "#" + socket_ip + "#" + socket_port);
+        }
+
         return _bs;
     }
 
-    public boolean sendmessage(String mes, org.apache.log4j.Logger log) {
+    public boolean sendmessage(String mes) {
         boolean _bs = false;
         try {
-            if (mes.length() > 0 && ini()) {
-                socketclient _socketclient = new socketclient();
-                // socketclient.out = new PrintWriter(socketclient.remote_socket.getOutputStream(),"UTF-8");
-                _socketclient.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(remote_socket.getOutputStream(), "GBK")), true);
-                String mes1 = mes;
-                _socketclient.out.println(mes1);
-                _socketclient.out.flush();
-                System.out.println("Send access:" + mes1);
-                _bs = true;
-                //remote_socket.close();
-                //记录告警
-                log.info(mes);
+            if (ini(socket_name)) {
+                if (mes.length() > 0) {
+                    socketclient _socketclient = new socketclient();
+                    // socketclient.out = new PrintWriter(socketclient.remote_socket.getOutputStream(),"UTF-8");
+                    _socketclient.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(remote_socket.getOutputStream(), "GBK")), true);
+                    String mes1 = mes;
+                    _socketclient.out.println(mes1);
+                    _socketclient.out.flush();
+                    System.out.println("Send access:" + mes1);
+                    _bs = true;
+                    //remote_socket.close();              
+                } else {
+                    System.out.println("Send mes:is null");
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

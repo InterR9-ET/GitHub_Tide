@@ -49,10 +49,8 @@ public abstract class ftp {
 
     public abstract int get_FTP_PORT();
 
-    public abstract boolean load();
-
-    public abstract boolean open();
-
+    public abstract boolean ini(String ftp_name);
+  
     public abstract boolean close();
 
     public abstract boolean rush();

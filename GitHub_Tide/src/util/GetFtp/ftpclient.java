@@ -32,15 +32,18 @@ import util.AbstractClass.ftp;
  * @author why 2009-07-30
  *
  */
-public class ping_wx extends ftp {
+public class ftpclient extends ftp {
 
-    private String FTP_IP = "132.228.36.6";
-    private String FTP_USERNAME = "taisitong";
-    private String FTP_PWD = "Telecom@123";
+    private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
+
+    private String FTP_NAME = "";
+    private String FTP_IP = "";
+    private String FTP_USERNAME = "";
+    private String FTP_PWD = "";
+    private String FTP_DIR = "";
     private int FTP_PORT = -1;
 
     private FtpClient FTP_CLIENT = null;
-    private String FTP_PATH = "";
     private OutputStream os = null;
     private FileInputStream is = null;
 
@@ -84,13 +87,41 @@ public class ping_wx extends ftp {
         return FTP_PORT;
     }
 
-    @Override
-    public boolean load() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean ini(String ftp_name) {
+        boolean _bs = false;
+        this.FTP_NAME = ftp_name;
+        if (load()) {
+            if (open()) {
+                _bs = true;
+            }
+        }
+
+        if (!_bs) {
+            System.out.println("FtpClient ini error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
+
+        return _bs;
     }
 
-    @Override
-    public boolean open() {
+    private boolean load() {
+        boolean _bs = false;
+        try {
+            FTP_IP = _xmlconf.getvalue(FTP_NAME, "IP");
+            FTP_USERNAME = _xmlconf.getvalue(FTP_NAME, "USER");
+            FTP_PWD = _xmlconf.getvalue(FTP_NAME, "PWD");
+            FTP_DIR = _xmlconf.getvalue(FTP_NAME, "DIR");
+            _bs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (!_bs) {
+            System.out.println("FtpClient load error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
+        return _bs;
+    }
+
+    private boolean open() {
         boolean _bs = false;
         FTP_CLIENT = new FtpClient();
         try {
@@ -100,14 +131,18 @@ public class ping_wx extends ftp {
                 FTP_CLIENT.openServer(this.FTP_IP);
             }
             FTP_CLIENT.login(this.FTP_USERNAME, this.FTP_PWD);
-            if (this.FTP_PATH.length() != 0) {
-                FTP_CLIENT.cd(this.FTP_PATH);// path是ftp服务下主目录的子目录
+            if (this.FTP_DIR.length() != 0) {
+                FTP_CLIENT.cd(this.FTP_DIR);// path是ftp服务下主目录的子目录
             }
             FTP_CLIENT.binary();// 用2进制上传、下载
             System.out.println("FTP 已登录到\"" + FTP_CLIENT.pwd() + "\"目录");
             _bs = true;
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if (!_bs) {
+            System.out.println("FtpClient open error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
         }
         return _bs;
     }
