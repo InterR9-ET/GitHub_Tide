@@ -29,7 +29,10 @@ import util.AbstractClass.ftp;
 /**
  * ftp上传，下载
  *
- * @author why 2009-07-30
+ * @author yangzhen
+ *
+ * @author ini() ：初始化 传值类型的
+ * @author ini(String) ：初始化 conf类型的
  *
  */
 public class ftpclient extends ftp {
@@ -87,6 +90,20 @@ public class ftpclient extends ftp {
         return FTP_PORT;
     }
 
+    @Override
+    public boolean ini() {
+        boolean _bs = false;
+        if (load()) {
+            if (open()) {
+                _bs = true;
+            }
+        }
+        if (!_bs) {
+            System.out.println("FtpClient ini error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
+        return _bs;
+    }
+
     public boolean ini(String ftp_name) {
         boolean _bs = false;
         this.FTP_NAME = ftp_name;
@@ -95,11 +112,9 @@ public class ftpclient extends ftp {
                 _bs = true;
             }
         }
-
         if (!_bs) {
             System.out.println("FtpClient ini error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
         }
-
         return _bs;
     }
 

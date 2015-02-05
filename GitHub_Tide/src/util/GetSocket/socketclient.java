@@ -12,33 +12,38 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import org.jdom.Element;
+import util.AbstractClass.socket;
 
 /**
  *
  * @author yangzhen
+ *
+ * @author ini() ：初始化 传值类型的
+ * @author ini(String) ：初始化 conf类型的
+ *
  */
-public class socketclient {
+public class socketclient extends socket {
 
     private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
 
     private Socket remote_socket = null;
     private PrintWriter out = null;
     private BufferedReader in = null;
-    private String socket_name = "";
-    private String socket_ip = "";
-    private String socket_port = "";
+    private String SOCKET_NAME = "";
+    private String SOCKET_IP = "";
+    private String SOCKET_PORT = "";
 
     private boolean load() {
         boolean _bs = false;
         try {
-            socket_ip = _xmlconf.getvalue(socket_name, "IP");
-            socket_port = _xmlconf.getvalue(socket_name, "PORT");
+            SOCKET_IP = _xmlconf.getvalue(SOCKET_NAME, "IP");
+            SOCKET_PORT = _xmlconf.getvalue(SOCKET_NAME, "PORT");
             _bs = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (!_bs) {
-            System.out.println("SocketClient load error:" + socket_name + "#" + socket_ip + "#" + socket_port);
+            System.out.println("SocketClient load error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
         }
 
         return _bs;
@@ -50,14 +55,14 @@ public class socketclient {
         try {
             if (remote_socket == null || remote_socket.isClosed()) {
                 //新建连接
-                remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
+                remote_socket = new Socket(SOCKET_IP, Integer.parseInt(SOCKET_PORT));
                 //发送空字符串  验证状态
                 try {
                     remote_socket.sendUrgentData(0xFF);
                     _bs = true;
                 } catch (Exception ex) {
                     //重新连接
-                    remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
+                    remote_socket = new Socket(SOCKET_IP, Integer.parseInt(SOCKET_PORT));
                     System.out.println("对端断开,已重连");
                     _bs = true;
                 }
@@ -68,7 +73,7 @@ public class socketclient {
                     _bs = true;
                 } catch (Exception ex) {
                     //重新连接
-                    remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
+                    remote_socket = new Socket(SOCKET_IP, Integer.parseInt(SOCKET_PORT));
                     System.out.println("对端断开,已重连");
                     _bs = true;
                 }
@@ -79,32 +84,44 @@ public class socketclient {
         }
 
         if (!_bs) {
-            System.out.println("SocketClient open error:" + socket_name + "#" + socket_ip + "#" + socket_port);
+            System.out.println("SocketClient open error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
         }
 
         return _bs;
     }
 
-    public boolean ini(String socket_name) {
+    @Override
+    public boolean ini() {
         boolean _bs = false;
-        this.socket_name = socket_name;
         if (load()) {
             if (open()) {
                 _bs = true;
             }
         }
-
         if (!_bs) {
-            System.out.println("SocketClient ini error:" + socket_name + "#" + socket_ip + "#" + socket_port);
+            System.out.println("SocketClient ini error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
         }
+        return _bs;
+    }
 
+    public boolean ini(String SOCKET_NAME) {
+        boolean _bs = false;
+        this.SOCKET_NAME = SOCKET_NAME;
+        if (load()) {
+            if (open()) {
+                _bs = true;
+            }
+        }
+        if (!_bs) {
+            System.out.println("SocketClient ini error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
+        }
         return _bs;
     }
 
     public boolean sendmessage(String mes) {
         boolean _bs = false;
         try {
-            if (ini(socket_name)) {
+            if (ini(SOCKET_NAME)) {
                 if (mes.length() > 0) {
                     socketclient _socketclient = new socketclient();
                     // socketclient.out = new PrintWriter(socketclient.remote_socket.getOutputStream(),"UTF-8");
@@ -132,4 +149,35 @@ public class socketclient {
         }
         return _bs;
     }
+
+    @Override
+    public void set_SOCKET_NAME(String SOCKET_NAME) {
+        this.SOCKET_NAME = SOCKET_NAME;
+    }
+
+    @Override
+    public void set_SOCKET_IP(String SOCKET_IP) {
+        this.SOCKET_IP = SOCKET_IP;
+    }
+
+    @Override
+    public void set_SOCKET_PORT(String SOCKET_PORT) {
+        this.SOCKET_PORT = SOCKET_PORT;
+    }
+
+    @Override
+    public String get_SOCKET_NAME() {
+        return SOCKET_NAME.toString();
+    }
+
+    @Override
+    public String get_SOCKET_IP() {
+        return SOCKET_IP.toString();
+    }
+
+    @Override
+    public String get_SOCKET_PORT() {
+        return SOCKET_PORT.toString();
+    }
+
 }
