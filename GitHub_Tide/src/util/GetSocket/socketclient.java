@@ -24,15 +24,15 @@ import org.jdom.Element;
  */
 public class socketclient {
 
-     private util.GetFile.xml _xml = new util.GetFile.xml();
-     
+    private util.GetFile.xml _xml = new util.GetFile.xml();
+
     private Socket remote_socket = null;
     private PrintWriter out = null;
     private BufferedReader in = null;
-    private String socket_name = "SocketClient";
+    private String socket_name = "Alarmserver";
     private String socket_ip = null;
     private String socket_port = null;
-    
+
     public boolean load() {
         boolean _bs = false;
         String _url = "/conf/conf.xml";
@@ -68,10 +68,10 @@ public class socketclient {
                                             mes.append("------------").append(mess3).append("#").append(mess3_text).append("\r\n");
 
                                             if (mess3.equals("IP")) {
-                                              socket_ip=(mess3_text);
+                                                socket_ip = (mess3_text);
                                             }
                                             if (mess3.equals("PORT")) {
-                                                socket_port=(mess3_text);
+                                                socket_port = (mess3_text);
                                             }
                                         }
                                         mes.append("-----------------------").append("\r\n");
@@ -86,11 +86,11 @@ public class socketclient {
                 }
 
                 if (!_bs) {
-                    System.out.println("read " + _url + "  error");
+                    System.out.println("read " + _url + "  error:"+socket_name);
                 }
 
             } else {
-                System.out.println("db_name  is  null");
+                System.out.println("socket_name  is  null");
             }
 
         } catch (Exception e) {
