@@ -32,8 +32,7 @@ public class socketclient {
         boolean _bs = false;
         try {
             socket_ip = _xmlconf.getvalue(socket_name, "IP");
-            socket_port = _xmlconf.getvalue(socket_name, "PORT");            
-            System.out.println(socket_ip+"##"+socket_port);
+            socket_port = _xmlconf.getvalue(socket_name, "PORT");  
             _bs = true;
         } catch (Exception e) {
             System.out.println("load config.xml error:" + socket_name);
