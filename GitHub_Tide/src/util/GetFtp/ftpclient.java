@@ -93,10 +93,8 @@ public class ftpclient extends ftp {
     @Override
     public boolean ini() {
         boolean _bs = false;
-        if (load()) {
-            if (open()) {
-                _bs = true;
-            }
+        if (open()) {
+            _bs = true;
         }
         if (!_bs) {
             System.out.println("FtpClient ini error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);

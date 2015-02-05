@@ -17,6 +17,9 @@ public class socket {
 
     public static void main(String[] args) {
         util.GetSocket.socketclient _socket = new util.GetSocket.socketclient();
-        _socket.ini("sc_alarmserver");
+        _socket.set_SOCKET_IP("132.228.5.56");
+        _socket.set_SOCKET_PORT("9005");
+
+        _socket.ini();
     }
 }

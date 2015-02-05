@@ -93,10 +93,8 @@ public class socketclient extends socket {
     @Override
     public boolean ini() {
         boolean _bs = false;
-        if (load()) {
-            if (open()) {
-                _bs = true;
-            }
+        if (open()) {
+            _bs = true;
         }
         if (!_bs) {
             System.out.println("SocketClient ini error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
