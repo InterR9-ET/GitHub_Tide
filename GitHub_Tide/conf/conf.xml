@@ -108,8 +108,8 @@
 
     <CONFIG KEYNAME="SocketClient">
         <Client  KEYNAME="Alarmserver">
-            <ip>132.228.5.56</ip>
-            <port>9005</port>
+            <IP>132.228.5.56</IP>
+            <PORT>9005</PORT>
         </Client>
     </CONFIG>
 

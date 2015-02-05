@@ -61,6 +61,7 @@ public class xmlconf {
 
                                             if (mess3.equals(Element)) {
                                                 str_values = mess3_text;
+                                                return str_values;
                                             }
                                         }
                                         mes.append("-----------------------").append("\r\n");
