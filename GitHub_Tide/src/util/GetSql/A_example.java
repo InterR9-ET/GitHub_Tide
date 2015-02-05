@@ -188,7 +188,7 @@ public class A_example extends databases {
                 }
 
                 if (!_bs) {
-                    System.out.println("read " + _url + "  error");
+                    System.out.println("read " + _url + "  error:"+db_name);
                 }
 
             } else {
