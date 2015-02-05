@@ -97,8 +97,7 @@ public class main extends Thread {
 
                 log.info("删除历史数据");
                 db._del_xn_atm(_mysql, _atmif_performance);
-                log.info("删除数据完成");
-                System.out.println("-------------------执行完成-----------------------------");
+                log.info("删除数据完成");              
             }
         } catch (Exception e) {
             e.printStackTrace();
