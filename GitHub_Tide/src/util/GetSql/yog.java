@@ -38,7 +38,7 @@ public class yog extends databases {
     private String db_pwd = null;
     private Connection db_conn = null;
     
-    private static util.GetFile.xml _xml = new util.GetFile.xml();
+    private static util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
 
     @Override
     public void close(Object[] param) {
@@ -125,78 +125,16 @@ public class yog extends databases {
     }
 
     @Override
-     public boolean load() {
+      public boolean load() {
         boolean _bs = false;
-
-        String _url = "/conf/conf.xml";
         try {
-
-            if (this.get_db_name().toString().length() > 0) {
-                Element root = _xml.get_Elements(_url);
-                List _list = _xml.get_ChildrenElements(root, null);
-
-                if (_list.size() > 0) {
-                    for (int i = 0, m = _list.size(); i < m; i++) {
-                        Element dv1 = (Element) _list.get(i);
-                        String mess1 = _xml.get_Element_Name(dv1);
-                        List _list2 = _xml.get_ChildrenElements(dv1, null);
-                        if (_list2.size() > 0) {
-                            for (int i2 = 0, m2 = _list2.size(); i2 < m2; i2++) {
-                                Element dv2 = (Element) _list2.get(i2);
-                                String mess2 = _xml.get_Element_Name(dv2);
-                                String mess2_KEYNAME = _xml.get_Element_AttributeValue(dv2, "KEYNAME");//得到节点具体属性值 
-                                List _list3 = _xml.get_ChildrenElements(dv2, null);
-                                if (_list3.size() > 0) {
-
-                                    if (mess2_KEYNAME.equals(this.db_name.toString())) {
-                                        StringBuffer mes = new StringBuffer();
-                                        mes.append("-----------------------").append("\r\n");
-                                        mes.append("--").append(mess1).append("\r\n");
-                                        mes.append("------").append(mess2).append("||").append(mess2_KEYNAME).append("\r\n");//属性
-
-                                        //循环获取子元素的名称，并根据名称解析值
-                                        for (int i3 = 0, m3 = _list3.size(); i3 < m3; i3++) {
-                                            Element dv3 = (Element) _list3.get(i3);
-                                            String mess3 = _xml.get_Element_Name(dv3);
-                                            String mess3_text = _xml.get_Element_ChildText(dv2, mess3);//得到元素的值                                
-                                            mes.append("------------").append(mess3).append("#").append(mess3_text).append("\r\n");
-
-                                            if (mess3.equals("DRIVER")) {
-                                                set_db_driver(mess3_text);
-                                            }
-                                            if (mess3.equals("URL")) {
-                                                set_db_url(mess3_text);
-                                            }
-
-                                            if (mess3.equals("USER")) {
-                                                set_db_user(mess3_text);
-                                            }
-
-                                            if (mess3.equals("PWD")) {
-                                                set_db_pwd(mess3_text);
-                                            }
-                                        }
-                                        mes.append("-----------------------").append("\r\n");
-                                        System.out.println(mes.toString());
-
-                                        _bs = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (!_bs) {
-                    System.out.println("read " + _url + "  error:"+db_name);
-                }
-
-            } else {
-                System.out.println("db_name  is  null");
-            }
-
+            db_driver = _xmlconf.getvalue(db_name, "DRIVER");
+            db_url = _xmlconf.getvalue(db_name, "URL");
+            db_user = _xmlconf.getvalue(db_name, "USER");
+            db_pwd = _xmlconf.getvalue(db_name, "PWD");
+            _bs = true;
         } catch (Exception e) {
-            System.out.println(_url + " \r\n" + e.getMessage());
+            System.out.println("load config.xml error:" + db_name);
         }
         return _bs;
     }
