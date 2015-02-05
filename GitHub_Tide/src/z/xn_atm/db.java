@@ -60,7 +60,7 @@ public class db {
         for (int i = 0, m = _list.size(); i < m; i++) {
             //System.out.println("进度：" + (i + 1) + "/" + m);
             _xn = (tb_atmif_performance.atmif_performance) _list.get(i);
-            String str_sql = "delete   from atmif_performance2 where  "
+            String str_sql = "delete   from atmif_performance where  "
                     + " NODEID=" + _xn.NODEID + " and "
                     + " ATMIF= " + _xn.ATMIF + " and "
                     + " VPI=" + _xn.VPI + " and "
@@ -122,7 +122,7 @@ public class db {
                 _date1 = sdf_temp.parse(_datas.sjctime_prase_string(_GETTIME));
                 //------------------------------------//
                 if (type_in_up.equals("in")) {
-                    String str_sql = "insert into  atmif_performance2 ("
+                    String str_sql = "insert into  atmif_performance ("
                             + "NODEID,"
                             + "ATMIF,"
                             + "VPI,"
@@ -151,7 +151,7 @@ public class db {
                     _csnms.execute(str_sql, null);
 
                 } else if (type_in_up.equals("up")) {
-                    String str_sql = "update atmif_performance2  set  "
+                    String str_sql = "update atmif_performance  set  "
                             + " TXCELL=" + Long.parseLong(_datal.IFOUTOCTETS) + ","
                             + " TXCELLDISCARD=" + Long.parseLong(_datal.IFOUTDISCARDS) + ","
                             + " RXCELL=" + Long.parseLong(_datal.IFINOCTETS) + ","
