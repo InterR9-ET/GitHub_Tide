@@ -46,11 +46,11 @@ public class main extends Thread {
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_xnatm.config");
     }
-    private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
+    private util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//
-    private static util.GetSql.atm_mysql _mysql = new util.GetSql.atm_mysql();
-    private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
-    private static util.GetThread.thread _thread = new util.GetThread.thread(2);
+    private util.GetSql.atm_mysql _mysql = new util.GetSql.atm_mysql();
+    private util.GetSql.csnms _csnms = new util.GetSql.csnms();
+    private util.GetThread.thread _thread = new util.GetThread.thread(2);
 
     public void run() {
         if (db.ini(log, _csnms, _mysql)) {
@@ -97,7 +97,7 @@ public class main extends Thread {
 
                 log.info("删除历史数据");
                 db._del_xn_atm(_mysql, _atmif_performance);
-                log.info("删除数据完成");              
+                log.info("删除数据完成");
             }
         } catch (Exception e) {
             e.printStackTrace();

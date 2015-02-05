@@ -32,6 +32,7 @@ public class sendalarm_sendstr {
     public String alarm_update = "";
 }
 
+
 /*  告警级别
  ALARMLEVEL.put("1", "CRITICAL");
  ALARMLEVEL.put("2", "MAJOR");

@@ -38,7 +38,7 @@ public class atm_mysql extends databases {
     private String db_pwd = null;
     private Connection db_conn = null;
 
-    private static util.GetFile.xml _xml = new util.GetFile.xml();
+    private util.GetFile.xml _xml = new util.GetFile.xml();
 
     @Override
     public void close(Object[] param) {

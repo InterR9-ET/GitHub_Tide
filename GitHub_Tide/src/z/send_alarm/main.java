@@ -33,11 +33,12 @@ public class main extends Thread {
     }
     //-------------------------------------日志---------------------------------------//
 
-    private static util.GetThread.thread _thread = new util.GetThread.thread(2);   //声明多线程 
-    private static util.GetSql.csnms _csnms = new util.GetSql.csnms();   //声明数据库
+    private util.GetThread.thread _thread = new util.GetThread.thread(2);   //声明多线程 
+    private util.GetSql.csnms _csnms = new util.GetSql.csnms();   //声明数据库
+    private util.GetSocket.socketclient _socketclient = new util.GetSocket.socketclient();
 
     public void run() {//启动线程      
-        if (db.ini(log,_csnms)) {  //加载数据库
+        if (db.ini(log, _csnms)) {  //加载数据库
             doing_main();  //运行主方法
         } else {
             log.info("数据库初始化失败");
@@ -58,14 +59,13 @@ public class main extends Thread {
         }
     }
 
-    private static Runnable createTask2() throws Exception {
+    private Runnable createTask2() throws Exception {
         return new Runnable() {
             public void run() {
                 log.info("心跳线程启动");
                 while (true) {
                     z.allClass.sendalarm_sendtable _alarm = new z.allClass.sendalarm_sendtable();
-                    util.GetSocket.alarms _alarms = new util.GetSocket.alarms();
-                    boolean bs = _alarms.sendAlarm("紫图心跳");
+                    boolean bs = _socketclient.sendmessage("紫图心跳", log);
                     if (bs) {
                         log.info("心跳发送成功");
                     } else {
@@ -81,13 +81,10 @@ public class main extends Thread {
         };
     }
 
-    private static Runnable createTask1() throws Exception {
+    private Runnable createTask1() throws Exception {
         return new Runnable() {
             public void run() {
-
                 log.info("告警发送线程启动");
-                util.GetSocket.alarms alarmsocket = new util.GetSocket.alarms();//加载 socket 工具类
-
                 while (true) {
                     try {
                         Thread.sleep(1000 * 5);//间隔5秒循环一次执行
@@ -111,7 +108,7 @@ public class main extends Thread {
                             _alarm.ID = map.get("ID").toString();
                             _alarm.ALARM = map.get("ALARM").toString();
                             //发送告警
-                            boolean bs = alarmsocket.sendAlarm(_alarm.ALARM);
+                            boolean bs = _socketclient.sendmessage(_alarm.ALARM, log);
                             if (bs) {
                                 log.info("告警发送成功：Alarm_id:" + _alarm.ID + "\r\n" + _alarm.ALARM + "\r\n");
                                 //删除发送成功的告警                                

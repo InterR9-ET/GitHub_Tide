@@ -22,38 +22,15 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class socketclient {
 
-    private static Logger log_alarm = Logger.getLogger(socketclient.class);
+    private Socket remote_socket = null;
 
-    private static Socket remote_socket = null;
+    private PrintWriter out = null;
+    private BufferedReader in = null;
+    private String remote_ip = "132.228.5.56";
+    private String remote_port = "9005";
+    private String CONFIG_PATH = "conf/ftp.config";
 
-    static {
-        PropertyConfigurator.configureAndWatch("ini/log4j_alarm.config");
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static PrintWriter out = null;
-    public static BufferedReader in = null;
-    public static String remote_ip = "132.228.5.56";
-    public static String remote_port = "9005";
-    private static String CONFIG_PATH = "conf/ftp.config";
-
-    public static String str_mes = "";
-
-    public static void main(String[] args) {
-        //String str_alarm = "type=0,event_name=UP,alarm_level=MINOR,alarm_status=OPEN,Alm_Con=光功率,alarm_update=1397112215,alarm_type=100,vendor_type=79,node_name=222-苏宁电器数据中心-2500,description=<IDC>光功率过低,node_id=171007510070,shelf_id=1,slot_id=-1,port_id=-1";
-        //String str_alarm = "type=0,event_name=UP,alarm_level=MINOR,alarm_status=CLEAR,Alm_Con=光功率过低,alarm_update=1397292571,alarm_type=6,vendor_type=70,node_name=200-南湖-3500,description=<光功率过低>光功率过低小于-30 设备名称:200-南湖-3500 板卡=15 端口=2 值=-60.0,node_id=171007550070,shelf_id=1,slot_id=-1,port_id=-1,path_id=1399408";
-
-        for (int i = 0; i < 20; i++) {
-            String str_alarm = "type=0,event_name=UP,alarm_level=MINOR,alarm_status=CLEAR,Alm_Con=光功率过低,alarm_update=1397293953,alarm_type=6,vendor_type=70,node_name=180-游府西街衔接点2-9500,description=<光功率过低>光功率过低小于-30 设备名称:180-游府西街衔接点2-9500 板卡=19 端口=1 值=-29.0,node_id=171005420070,shelf_id=1,slot_id=-1,port_id=-1,path_id=245626";
-            str_mes = str_alarm;
-            sendmessage(str_mes);
-        }
-
-    }
-
-    public static boolean loadconfig() {
+    public boolean load() {
         boolean _bs = false;
         Properties prop = new Properties();
         File file = new File(CONFIG_PATH);
@@ -62,7 +39,7 @@ public class socketclient {
             System.getProperties().putAll(prop);
             remote_ip = prop.getProperty("sockethost");
             remote_port = prop.getProperty("sockethostport");
-            log_alarm.info("GET Config: IP:" + remote_ip + " Port:" + remote_port);
+            System.out.println("GET Config: IP:" + remote_ip + " Port:" + remote_port);
             _bs = true;
         } catch (Exception e) {
             System.out.println("配置文件读取异常:" + e.getMessage().toString());
@@ -70,56 +47,75 @@ public class socketclient {
         return _bs;
     }
 
-    public static boolean ini() {
+    public boolean open() {
+        boolean _bs = false;
         try {
-
             if (remote_socket == null || remote_socket.isClosed()) {
-                if (loadconfig()) {
+                //新建连接
+                remote_socket = new Socket(remote_ip, Integer.parseInt(remote_port));
+                System.out.println("Connection access:" + remote_ip + ":" + remote_port + ".");
+                //发送空字符串  验证状态
+                try {
+                    remote_socket.sendUrgentData(0xFF);
+                    _bs = true;
+                } catch (Exception ex) {
+                    //重新连接
                     remote_socket = new Socket(remote_ip, Integer.parseInt(remote_port));
-                    log_alarm.info("Connection access:" + remote_ip + ":" + remote_port + ".");
-                } else {
-                    log_alarm.info("配置文件读取错误....");
+                    System.out.println("Connection access:" + remote_ip + ":" + remote_port + ".");
+                    System.out.println("对端断开,已重连");
+                    _bs = true;
+                }
+            } else {
+                //发送空字符串  验证状态
+                try {
+                    remote_socket.sendUrgentData(0xFF);
+                    _bs = true;
+                } catch (Exception ex) {
+                    //重新连接
+                    remote_socket = new Socket(remote_ip, Integer.parseInt(remote_port));
+                    System.out.println("Connection access:" + remote_ip + ":" + remote_port + ".");
+                    System.out.println("对端断开,已重连");
+                    _bs = true;
                 }
             }
 
-            try {
-                remote_socket.sendUrgentData(0xFF);
-            } catch (Exception ex) {
-                remote_socket = new Socket(remote_ip, Integer.parseInt(remote_port));
-                System.out.println("Connection access:" + remote_ip + ":" + remote_port + ".");
-                log_alarm.info("对端断开,重连");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return true;
+
+        return _bs;
     }
 
-    public static boolean sendmessage(String mes) {
-
-        //加载并打开告警服务器
-        ini();
-
+    public boolean ini() {
         boolean _bs = false;
-        str_mes = mes;
+        if (load()) {
+            if (open()) {
+                _bs = true;
+            } else {
+                System.out.println("Socket 连接失败....");
+            }
+        } else {
+            System.out.println("配置文件读取错误....");
+        }
+        return _bs;
+    }
 
+    public boolean sendmessage(String mes, org.apache.log4j.Logger log) {
+        boolean _bs = false;
         try {
-
-            if (str_mes.length() > 0) {
+            if (mes.length() > 0 && ini()) {
+                socketclient _socketclient = new socketclient();
                 // socketclient.out = new PrintWriter(socketclient.remote_socket.getOutputStream(),"UTF-8");
-                socketclient.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(remote_socket.getOutputStream(), "GBK")), true);
-                String mes1 = str_mes;
-                socketclient.out.println(mes1);
-                socketclient.out.flush();
+                _socketclient.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(remote_socket.getOutputStream(), "GBK")), true);
+                String mes1 = mes;
+                _socketclient.out.println(mes1);
+                _socketclient.out.flush();
                 System.out.println("Send access:" + mes1);
                 _bs = true;
                 //remote_socket.close();
                 //记录告警
-                log_alarm.info(mes);
+                log.info(mes);
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
             if (remote_socket != null) {
