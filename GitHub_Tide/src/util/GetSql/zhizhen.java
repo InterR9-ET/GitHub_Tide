@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class zhizhen extends databases {
 
-    private String db_name = "zhizhen";
+    private String db_name = "db_zhizhen";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

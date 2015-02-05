@@ -30,7 +30,7 @@ import org.jdom.input.SAXBuilder;
 
 public class csnms extends databases {
 
-    private String db_name = "csnms";
+    private String db_name = "db_csnms";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

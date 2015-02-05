@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class A_example extends databases {
 
-    private String db_name = "yog";
+    private String db_name = "db_test";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

@@ -17,7 +17,7 @@ import org.jdom.Element;
  *
  * @author yangzhen
  */
-public class socketclient {
+public class A_example {
 
     private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
 
@@ -98,7 +98,7 @@ public class socketclient {
         boolean _bs = false;
         try {
             if (mes.length() > 0 && ini()) {
-                socketclient _socketclient = new socketclient();
+                A_example _socketclient = new A_example();
                 // socketclient.out = new PrintWriter(socketclient.remote_socket.getOutputStream(),"UTF-8");
                 _socketclient.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(remote_socket.getOutputStream(), "GBK")), true);
                 String mes1 = mes;

@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class ess extends databases {
 
-    private String db_name = "ess";
+    private String db_name = "db_ess";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

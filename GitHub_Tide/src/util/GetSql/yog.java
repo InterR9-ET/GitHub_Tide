@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class yog extends databases {
 
-    private String db_name = "yog";
+    private String db_name = "db_yog";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

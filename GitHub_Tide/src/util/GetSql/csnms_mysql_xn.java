@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class csnms_mysql_xn extends databases {
 
-    private String db_name = "csnms_mysql_xn";
+    private String db_name = "db_csnms_mysql_xn";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

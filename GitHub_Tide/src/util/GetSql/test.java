@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class test extends databases {
 
-    private String db_name = "test";
+    private String db_name = "db_test";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

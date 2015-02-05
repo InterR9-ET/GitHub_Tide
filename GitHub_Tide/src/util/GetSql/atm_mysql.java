@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class atm_mysql extends databases {
 
-    private String db_name = "56tongbupath";
+    private String db_name = "db_56tongbupath";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;
