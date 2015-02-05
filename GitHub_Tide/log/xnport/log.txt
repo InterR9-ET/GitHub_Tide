@@ -1662,3 +1662,109 @@ INFO  2015-02-03 16:27:59 16999 main (db.java:171)
  - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
 INFO  2015-02-03 16:27:59 17000 main (db.java:223)
  - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi
+INFO  2015-02-05 16:08:39 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-05 16:08:39 25   main (db.java:79)
+ - 开始处理文件:portper\cus_ftth_flux_2014_12_16.14.3.suzhou.0.bulk_onusuzhou_suzhou
+INFO  2015-02-05 16:08:39 167  main (db.java:189)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/cus_ftth_flux_2014_12_16.14.3.suzhou.0.bulk_onusuzhou_suzhou_suzhou
+INFO  2015-02-05 16:08:40 635  main (db.java:223)
+ - 删除文件:portper\cus_ftth_flux_2014_12_16.14.3.suzhou.0.bulk_onusuzhou_suzhou
+INFO  2015-02-05 16:08:40 1122 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:41 1327 main (db.java:180)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-05 16:08:41 1334 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:41 1596 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:41 1718 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:41 1834 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:41 1942 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:41 2018 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:41 2021 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:45 5372 main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-05 16:08:45 5807 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:45 5854 main (db.java:180)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-05 16:08:45 5857 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:46 6515 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:46 6550 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:46 6603 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:46 6614 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:46 6826 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:46 6830 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:50 10651 main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-05 16:08:50 11102 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:50 11183 main (db.java:180)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-05 16:08:50 11187 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:51 11752 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:51 11811 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:51 11887 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:51 11934 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:51 12046 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:51 12049 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:55 15923 main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-05 16:08:56 16338 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:56 16378 main (db.java:180)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-05 16:08:56 16381 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:08:56 16928 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:56 16983 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:56 17083 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:56 17114 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:08:57 17281 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:08:57 17285 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:09:00 21225 main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-05 16:09:01 21647 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:09:01 21691 main (db.java:180)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-05 16:09:01 21695 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-05 16:09:01 22220 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:09:02 22357 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:09:02 22364 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-05 16:09:02 22364 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-05 16:09:02 22782 main (db.java:171)
+ - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-05 16:09:02 22784 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
