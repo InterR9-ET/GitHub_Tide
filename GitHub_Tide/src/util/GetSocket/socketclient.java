@@ -120,6 +120,7 @@ public class socketclient extends socket {
         return _bs;
     }
 
+    @Override
     public boolean ini(String SOCKET_NAME) {
         boolean _bs = false;
         this.SOCKET_NAME = SOCKET_NAME;
@@ -134,6 +135,7 @@ public class socketclient extends socket {
         return _bs;
     }
 
+    @Override
     public boolean sendmessage(String mes) {
         boolean _bs = false;
         try {
