@@ -88,7 +88,7 @@ public class jason_idc extends ftp {
     public boolean load() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+//--------------------------------打开连接--------------------------------------
     @Override
     public boolean open() {
         boolean _bs = false;
@@ -111,7 +111,7 @@ public class jason_idc extends ftp {
         }
         return _bs;
     }
-
+//-----------------------------------关闭连接-----------------------------------
     @Override
     public boolean close() {
         boolean _bs = false;
@@ -137,6 +137,7 @@ public class jason_idc extends ftp {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //----------------------------------文件是否存在-----------------------------
     @Override
     public boolean isDirExist(String full_dir) {
         boolean _bs = false;
@@ -167,6 +168,7 @@ public class jason_idc extends ftp {
         return _bs;
     }
 
+    //----------------------------------创建文件夹--------------------------------
     @Override
     public boolean createDir(String full_dir) {
         try {
@@ -195,6 +197,7 @@ public class jason_idc extends ftp {
         }
     }
 
+    //------------------------------------得到所有文件------------------------------
     @Override
     public List getDirFileList(String full_dir) {
         List list = new ArrayList();
@@ -213,6 +216,7 @@ public class jason_idc extends ftp {
         return list;
     }
 
+    //-------------------------------下载文件------------------------------------
     @Override
     public boolean downloadFile(String full_filedir, String full_filedir_new) {
         boolean _bs = false;
