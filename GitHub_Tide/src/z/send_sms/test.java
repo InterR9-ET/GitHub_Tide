@@ -44,8 +44,7 @@ public class test extends Thread {
 
         if (db.ini(log, _csnms)) {
 
-            String str_sql = "insert into sendmessage (id,phone,description,cityid,linkname,sendtype) "
-                    + "values((select max(s2.id) from sendmessage s2)+1,'15358462836','短信收发测试','600837440','羊振','恢复通知')";
+            String str_sql = "insert into sendmessage (id,phone,description,cityid,linkname,sendtype) values((select max(s2.id) from sendmessage s2)+1,'15358462836','短信收发测试','600837440','羊振','恢复通知')";
             //_csnms.execute(str_sql, null);
         }
 
