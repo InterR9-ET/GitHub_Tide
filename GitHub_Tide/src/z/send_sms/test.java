@@ -40,7 +40,15 @@ public class test extends Thread {
 
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
 
-    public void test() {
+    
+     public void run() {
+         zongdiao_send();
+         //donghuan_send();
+     }
+    
+    
+    
+    public void donghuan_send() {
 
         if (db.ini(log, _csnms)) {
 
@@ -50,15 +58,14 @@ public class test extends Thread {
 
     }
 
-    public void test1() {
+    public void zongdiao_send() {
 
         int str_rows = 0;
 
         //String str_tel_id = "18914731993";
-        String str_tel_id = "15306188026";
-        String str_i_Content = "测试短信，车通升下发 ";
+        String str_tel_id = "18605236780";
+        String str_i_Content = "短信收发测试";
         String str_CITYID = "15";
-
         String str_xml = "";
         str_xml = str_xml + "<?xml version=\"1.0\" encoding=\"GBK\"?>";
         str_xml = str_xml + "<SERVICE>";
