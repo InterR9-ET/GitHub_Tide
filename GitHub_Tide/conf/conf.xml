@@ -129,70 +129,70 @@
             <IP>132.228.166.233</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/mnt/szx/pdsn_data/PmeeData/DataFile</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_node_hb">
             <IP>132.228.5.75</IP>
             <USER>dkhtest</USER>
             <PWD>iposs123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/Performance/DataFile</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_node_jyw">
             <IP>132.228.5.75</IP>
             <USER>dkhtest</USER>
             <PWD>iposs123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/Performance/DataFile/IQDATA</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_node_nanjing">
             <IP>132.228.36.36</IP>
             <USER>tst</USER>
             <PWD>tst!@#</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/Performance/DataFile</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_ping_dcn">
             <IP>132.228.166.233</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_ping_jyw">
             <IP>132.228.51.221</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_ping_lyg">
             <IP>132.228.36.197</IP>
             <USER>tst</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_ping_nanjing">
             <IP>132.228.36.34</IP>
             <USER>tst</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_ping_sz">
             <IP>132.228.36.66</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_ping_wx">
             <IP>132.228.36.6</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
         
         
@@ -200,14 +200,14 @@
             <IP>132.228.36.82</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_port_dcn">
             <IP>132.228.51.2</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/dcn_data/FluxManagerData/logs</DIR>
         </Client>
         
         
@@ -215,14 +215,14 @@
             <IP>132.228.5.75</IP>
             <USER>dkhtest</USER>
             <PWD>iposs123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_port_jyw">
             <IP>132.228.51.221</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
         </Client>
         
              
@@ -230,7 +230,7 @@
             <IP>132.228.36.197</IP>
             <USER>tst</USER>
             <PWD>1qaz@WSX</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_port_nj">
@@ -245,42 +245,44 @@
             <IP>132.228.36.114</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
         </Client>
         
-        <Client  KEYNAME="ftp_port_onu_sz">
-            <IP>132.228.36.66</IP>
-            <USER>taisitong</USER>
-            <PWD>Telecom@123</PWD>
-            <DIR></DIR>
-        </Client>
-        
-        <Client  KEYNAME="ftp_port_onu_wx">
-            <IP>132.228.36.5</IP>
-            <USER>taisitong</USER>
-            <PWD>Telecom@123</PWD>
-            <DIR></DIR>
-        </Client>
+      
         
         <Client  KEYNAME="ftp_port_sz">
             <IP>132.228.36.66</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_port_wx">
             <IP>132.228.36.5</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs/IQDATA</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_port_xz">
             <IP>132.228.36.147</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR></DIR>
+            <DIR>/export/home/processSJZ/FluxManager/logs</DIR>
+        </Client>
+        
+        <Client  KEYNAME="ftp_port_onu_sz">
+            <IP>132.228.36.66</IP>
+            <USER>taisitong</USER>
+            <PWD>Telecom@123</PWD>
+            <DIR>/export/home/processSJZ/FTTHAccountingData/DATAFILE</DIR>
+        </Client>
+        
+        <Client  KEYNAME="ftp_port_onu_wx">
+            <IP>132.228.36.5</IP>
+            <USER>taisitong</USER>
+            <PWD>Telecom@123</PWD>
+            <DIR>/export/home/processSJZ/FTTHAccountingData/DATAFILE</DIR>
         </Client>
         
     </CONFIG>
