@@ -35,15 +35,15 @@ public class main extends Thread {
     public void run() {
         if (db.ini(log, _csnms)) {
             //while (true) {
-                System.out.println("开始运行");
-                try {
-                    //主程序
-                    doing_main();
-                    //Thread.sleep(1000 * 60);//60秒
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-           // }
+            System.out.println("开始运行");
+            try {
+                //主程序
+                doing_main();
+                //Thread.sleep(1000 * 60);//60秒
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // }
         }
     }
 
@@ -51,14 +51,21 @@ public class main extends Thread {
      * 主程序
      */
     public void doing_main() {
+//
+        String fileurl_old = "";
+        String fileurl_new = "";
+        fileurl_old = "表1：VPN和ATM电路核查表-全省2月10日_bk.xls";
+        fileurl_new = "表1：VPN和ATM电路核查表-全省2月10日.xls";
 
-        String fileurl = "表1：VPN和ATM电路核查表-全省2月10日.xls";        
         File directory = new File("");// 设定为当前文件夹
         try {
-            String _url = directory.getCanonicalPath().toString() + "/file/excel/VPN和ATM电路核查表/" + fileurl;//全路径
-            boolean bs1 = fun.loadfile(_url, "VPN电路");//加载文件成功
-            if (bs1) {
-                fun.jc_data(_csnms);
+            boolean bs = fun.copy_file(fileurl_old, fileurl_new);
+            if (bs) {
+                String _url = directory.getCanonicalPath().toString() + "/file/excel/VPN和ATM电路核查表/" + fileurl_new;//全路径
+                boolean bs1 = fun.loadfile(_url, "VPN电路");//加载文件成功
+                if (bs1) {
+                    fun.jc_data(_csnms);
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

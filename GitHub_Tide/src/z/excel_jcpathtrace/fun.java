@@ -69,8 +69,8 @@ public class fun {
 
             for (int i = 1; i < rows; i++) {
                 System.out.println("读取数据：" + (i) + "/" + (rows - 1));
-                String pathname1 = get_value(0, i).trim().toString();
-                String pathname2 = get_value(13, i).trim().toString();
+                String pathname1 = get_value(0, i).trim().toString().trim();
+                String pathname2 = get_value(13, i).trim().toString().trim();
                 System.out.println(pathname1 + "#" + pathname2);
 
                 if (!pathname1.equals(pathname2)) {
