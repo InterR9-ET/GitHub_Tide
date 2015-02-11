@@ -182,6 +182,10 @@ public class xml extends files {
                 while ((length = inStream.read(buffer)) != -1) {
                     fs.write(buffer, 0, length);
                 } //字节数 文件大小 
+
+                inStream.close();
+                fs.flush();
+                fs.close();
                 _bs = true;
             }
         } catch (Exception e) {
