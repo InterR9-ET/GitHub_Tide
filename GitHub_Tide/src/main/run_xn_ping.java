@@ -8,6 +8,7 @@ package main;
 /**
  *
  * @author Administrator
+ * @author ping性能数据采集
  */
 public class run_xn_ping {
     public static void main(String [] args){

@@ -8,6 +8,10 @@ package main;
 /**
  *
  * @author Administrator
+ *
+ * @author excel中 a列 z列 数据作为电路编号，
+ * @author 验证a列 z列的数据 在系统中是否有电路，是否有路由
+ *
  */
 public class run_excel_jcpathtarce {
 

@@ -8,8 +8,10 @@ package main;
 /**
  *
  * @author Administrator
+ * @author atm性能同步程序
  */
 public class run_xn_atm {
+
     public static void main(String[] args) {
         z.xn_atm.main Main = new z.xn_atm.main();
         try {

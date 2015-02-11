@@ -8,6 +8,7 @@ package main;
 /**
  *
  * @author yangzhen
+ * @author 转发告警程序
  */
 public class run_sendalarm {
 

@@ -8,6 +8,9 @@ package main;
 /**
  *
  * @author yangzhen
+ * 
+ * @author 动环阀值  操作程序
+ * 
  */
 public class run_donghuanfazhi {
 

@@ -8,12 +8,14 @@ package main;
 /**
  *
  * @author yangzhen
+ * @author 短信发送单例测试程序
+ *
  */
-public class run_test {
+public class run_sendsms_test {
 
     public static void main(String[] args) {
         z.send_sms.test _do1 = new z.send_sms.test();
-        _do1.run();   
+        _do1.run();
     }
 
 }

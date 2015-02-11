@@ -3,6 +3,7 @@ package main;
 /**
  *
  * @author yangzhen
+ * @author 动环设备信息  操作程序
  * 
  */
 public class run_donghuancommand {
