@@ -555,7 +555,7 @@ public class db {
                 fun.mysql_path _datal = new fun.mysql_path();
                 _datal = (fun.mysql_path) _data.get(i);
                 count_s = count_s + 1;
-                String str_sql = "insert into path2(name, network_id, path_id,  aEndPort) values "
+                String str_sql = "insert into path(name, network_id, path_id,  aEndPort) values "
                         + "('" + _datal.name + "'," + _datal.network_id + "," + _datal.path_id + ","
                         + _datal.aendport + ")";//5
                 System.out.println(str_sql);
@@ -577,7 +577,7 @@ public class db {
                 fun.mysql_path _datal = new fun.mysql_path();
                 _datal = (fun.mysql_path) _data.get(i);
                 count_s = count_s + 1;
-                String str_sql = "update path2 set "
+                String str_sql = "update path set "
                         + "servicetype=" + _datal.servicetype + ","
                         + "connectstatus=" + _datal.connectstatus + ","
                         + "bandwidth=" + _datal.bandwidth + ","
