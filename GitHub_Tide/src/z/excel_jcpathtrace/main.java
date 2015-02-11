@@ -20,6 +20,7 @@ public class main extends Thread {
 
     //-------------------------------------日志---------------------------------------// 
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(main.class.getName()); //获得logger
+
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_excel_jcpathtrace.config");
     }
@@ -33,16 +34,16 @@ public class main extends Thread {
      */
     public void run() {
         if (db.ini(log, _csnms)) {
-            while (true) {
+            //while (true) {
                 System.out.println("开始运行");
                 try {
                     //主程序
                     doing_main();
-                    Thread.sleep(1000 * 5);//60秒
+                    //Thread.sleep(1000 * 60);//60秒
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
+           // }
         }
     }
 
@@ -51,5 +52,16 @@ public class main extends Thread {
      */
     public void doing_main() {
 
+        String fileurl = "表1：VPN和ATM电路核查表-全省2月10日.xls";        
+        File directory = new File("");// 设定为当前文件夹
+        try {
+            String _url = directory.getCanonicalPath().toString() + "/file/excel/VPN和ATM电路核查表/" + fileurl;//全路径
+            boolean bs1 = fun.loadfile(_url, "VPN电路");//加载文件成功
+            if (bs1) {
+                fun.jc_data(_csnms);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
