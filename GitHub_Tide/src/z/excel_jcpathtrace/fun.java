@@ -73,6 +73,10 @@ public class fun {
                 String pathname2 = get_value(13, i).trim().toString();
                 System.out.println(pathname1 + "#" + pathname2);
 
+                if (!pathname1.equals(pathname2)) {
+                    set_value(25, i, "A列N列名称不一致");
+                }
+
                 if (pathname1.length() > 0) {
                     List _list = db.haspath(_csnms, pathname1);
                     if (_list.size() > 0) {
