@@ -32,5 +32,17 @@ public class socket {
         _client.ini("socketc_alarmserver");
     }
 
+    public static void test1() {
+        util.GetSocket.socketclient _client = new util.GetSocket.socketclient();
+        _client.set_SOCKET_IP("132.228.5.56");
+        _client.set_SOCKET_PORT("9005");
+        _client.ini();
+    }
+
+    public static void test2() {
+        util.GetSocket.socketclient _client = new util.GetSocket.socketclient();
+        _client.ini("socketc_alarmserver");
+    }
+
 
 }
