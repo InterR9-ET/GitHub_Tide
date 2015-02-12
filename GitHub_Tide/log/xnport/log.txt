@@ -1768,3 +1768,63 @@ INFO  2015-02-05 16:09:02 22782 main (db.java:171)
  - Copy成功：E:\Working\Workspace_NetBeans\GitHub_Tide\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
 INFO  2015-02-05 16:09:02 22784 main (db.java:223)
  - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:51 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-11 09:48:52 703  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-11 09:48:52 844  main (db.java:180)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-11 09:48:52 844  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-11 09:48:52 1250 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:52 1328 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:52 1406 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-11 09:48:53 1484 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:53 1672 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-11 09:48:53 1672 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:56 5313 main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-11 09:48:57 5875 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-11 09:48:57 5938 main (db.java:180)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-11 09:48:57 5953 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-11 09:48:57 6391 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:57 6438 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:58 6484 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-11 09:48:58 6516 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-11 09:48:58 6828 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-11 09:48:58 6828 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-11 09:49:02 10750 main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-11 09:49:02 11344 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-11 09:49:02 11391 main (db.java:180)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong_nantong
+INFO  2015-02-11 09:49:02 11391 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.nantong.3.bulk_nantong_nantong
+INFO  2015-02-11 09:49:03 11875 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-11 09:49:03 11891 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-11 09:49:03 11984 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-11 09:49:03 11984 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.1.bulk_wuxi_wuxi
+INFO  2015-02-11 09:49:03 12234 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-11 09:49:03 12234 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
