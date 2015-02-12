@@ -1,5 +1,6 @@
 package z.xn_jason;
 
+import java.io.File;
 import z.xn_transper.*;
 import z.xn_port.*;
 import z.send_sms.*;
@@ -25,6 +26,7 @@ import java.lang.Thread;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Properties;
 
 import javax.xml.rpc.ServiceException;
 
@@ -49,9 +51,11 @@ public class main extends Thread {
 
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
     private static util.GetThread.thread _thread = new util.GetThread.thread(2);
+    private static util.GetFile.A_example _file = new util.GetFile.A_example();
+    private static util.GetFtp.ftpclient _ftp = new util.GetFtp.ftpclient();
 
     public void run() {
-        if (db.ini(log, _csnms)) {
+        if (_ftp.ini()) {
             while (true) {
                 try {
                     doing_main();
@@ -66,25 +70,19 @@ public class main extends Thread {
     }
 
     public void doing_main() {
-        try {
-            datas _datas = new datas();
-            //加载数据的文件
-            boolean _bs = _datas.downFile(_file);
-            if (_bs) {
-                //处理数据文件
-                boolean _bs2 = _datas.read_file(_file, _csnms, _tools);
-                if (_bs2) {
-                    log.info("处理完成");
-                } else {
-                    log.info("处理失败");
+        String localPath;
+        Properties prop = new Properties();
+        localPath = "" + prop.getProperty("localpath");
+        if (_ftp.createDir(localPath)) {
+            try {
+                File directory = new File("");// 设定为当前文件夹
+                String _url = directory.getCanonicalPath().toString() + "/" + localPath;
+                if (_ftp.downloadFile(_file.toString(), _url)) {
+                    
                 }
-            } else {
-                log.info("下载文件失败");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-
 }

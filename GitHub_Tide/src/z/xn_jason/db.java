@@ -25,17 +25,5 @@ public class db {
 
     private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
 
-    public static boolean ini(org.apache.log4j.Logger log, util.GetSql.csnms _csnms) {
-        boolean _bs = false;
-        if (_csnms.load()) {
-            if (_csnms.open()) {
-                _bs = true;
-            } else {
-                log.info("csnms打开出错");
-            }
-        } else {
-            log.info("csnms加载出错");
-        }
-        return _bs;
-    }
+   
 }
