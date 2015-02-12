@@ -31,4 +31,6 @@ public class socket {
         util.GetSocket.socketclient _client = new util.GetSocket.socketclient();
         _client.ini("socketc_alarmserver");
     }
+
+
 }
