@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util.GetFtp;
+package util.Test;
 
 /**
  *
@@ -415,8 +415,7 @@ public class bk {
         }
         return list;
     }
-
-    /*
+    /**
      public static void main(String[] args) throws IOException {
      String tempFolder = "tmp";
      File file = new File(curFolder + "/" + tempFolder);

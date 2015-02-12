@@ -29,18 +29,24 @@ import util.AbstractClass.ftp;
 /**
  * ftp上传，下载
  *
- * @author why 2009-07-30
+ * @author yangzhen
+ *
+ * @author ini() ：初始化 传值类型的
+ * @author ini(String) ：初始化 conf类型的
  *
  */
-public class ping_wx extends ftp {
+public class ftpclient extends ftp {
 
-    private String FTP_IP = "132.228.36.6";
-    private String FTP_USERNAME = "taisitong";
-    private String FTP_PWD = "Telecom@123";
+    private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
+
+    private String FTP_NAME = "";
+    private String FTP_IP = "";
+    private String FTP_USERNAME = "";
+    private String FTP_PWD = "";
+    private String FTP_DIR = "";
     private int FTP_PORT = -1;
 
     private FtpClient FTP_CLIENT = null;
-    private String FTP_PATH = "";
     private OutputStream os = null;
     private FileInputStream is = null;
 
@@ -85,12 +91,52 @@ public class ping_wx extends ftp {
     }
 
     @Override
-    public boolean load() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean ini() {
+        boolean _bs = false;
+        if (open()) {
+            _bs = true;
+        }
+        if (!_bs) {
+            System.out.println("FtpClient ini error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
+        return _bs;
     }
 
-    @Override
-    public boolean open() {
+//------------------------------传入FTP文件名加载FTP连接-----------------------------
+    public boolean ini(String ftp_name) {
+        boolean _bs = false;
+        this.FTP_NAME = ftp_name;
+        if (load()) {
+            if (open()) {
+                _bs = true;
+            }
+        }
+        if (!_bs) {
+            System.out.println("FtpClient ini error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
+        return _bs;
+    }
+//------------------------------加载文件----------------------------------------
+    private boolean load() {
+        boolean _bs = false;
+        try {
+            FTP_IP = _xmlconf.getvalue(FTP_NAME, "IP");
+            FTP_USERNAME = _xmlconf.getvalue(FTP_NAME, "USER");
+            FTP_PWD = _xmlconf.getvalue(FTP_NAME, "PWD");
+            FTP_DIR = _xmlconf.getvalue(FTP_NAME, "DIR");
+            _bs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (!_bs) {
+            System.out.println("FtpClient load error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
+        return _bs;
+    }
+
+//------------------------------打开FTP连接----------------------------------------
+    private boolean open() {
         boolean _bs = false;
         FTP_CLIENT = new FtpClient();
         try {
@@ -100,8 +146,8 @@ public class ping_wx extends ftp {
                 FTP_CLIENT.openServer(this.FTP_IP);
             }
             FTP_CLIENT.login(this.FTP_USERNAME, this.FTP_PWD);
-            if (this.FTP_PATH.length() != 0) {
-                FTP_CLIENT.cd(this.FTP_PATH);// path是ftp服务下主目录的子目录
+            if (this.FTP_DIR.length() != 0) {
+                FTP_CLIENT.cd(this.FTP_DIR);// path是ftp服务下主目录的子目录
             }
             FTP_CLIENT.binary();// 用2进制上传、下载
             System.out.println("FTP 已登录到\"" + FTP_CLIENT.pwd() + "\"目录");
@@ -109,9 +155,14 @@ public class ping_wx extends ftp {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (!_bs) {
+            System.out.println("FtpClient open error:" + FTP_NAME + "#" + FTP_IP + "#" + FTP_USERNAME + "#" + FTP_PWD + "#" + FTP_DIR);
+        }
         return _bs;
     }
 
+//------------------------------关闭FTP连接----------------------------------------
     @Override
     public boolean close() {
         boolean _bs = false;
@@ -137,6 +188,12 @@ public class ping_wx extends ftp {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+//------------------------------判断文件手否存在----------------------------------------
+    /**
+     * 
+     * @param full_dir
+     * @return 
+     */
     @Override
     public boolean isDirExist(String full_dir) {
         boolean _bs = false;
@@ -167,6 +224,12 @@ public class ping_wx extends ftp {
         return _bs;
     }
 
+//------------------------------创建文件夹----------------------------------------
+    /**
+     * 
+     * @param full_dir 
+     * @return 
+     */
     @Override
     public boolean createDir(String full_dir) {
         try {
@@ -195,6 +258,12 @@ public class ping_wx extends ftp {
         }
     }
 
+//------------------------------得到所有文件----------------------------------------
+    /**
+     * 
+     * @param full_dir
+     * @return 
+     */
     @Override
     public List getDirFileList(String full_dir) {
         List list = new ArrayList();
@@ -213,6 +282,13 @@ public class ping_wx extends ftp {
         return list;
     }
 
+//------------------------------下载文件----------------------------------------
+    /**
+     * 
+     * @param full_filedir        文件所在的目录 
+     * @param full_filedir_new    文件下载的目录
+     * @return 
+     */
     @Override
     public boolean downloadFile(String full_filedir, String full_filedir_new) {
         boolean _bs = false;

@@ -12,50 +12,75 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import org.jdom.Element;
+import util.AbstractClass.socket;
 
 /**
  *
  * @author yangzhen
+ *
+ * @author ini() ：初始化 传值类型的
+ * @author ini(String) ：初始化 conf类型的
+ *
  */
-public class socketclient {
+public class socketclient extends socket {
 
     private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
 
     private Socket remote_socket = null;
     private PrintWriter out = null;
     private BufferedReader in = null;
-    private String socket_name = "Alarmserver";
-    private String socket_ip = null;
-    private String socket_port = null;
+    private String SOCKET_NAME = "";
+    private String SOCKET_IP = "";
+    private String SOCKET_PORT = "";
 
-    public boolean load() {
-        boolean _bs = false;
-        try {
-            socket_ip = _xmlconf.getvalue(socket_name, "IP");
-            socket_port = _xmlconf.getvalue(socket_name, "PORT");  
-            _bs = true;
-        } catch (Exception e) {
-            System.out.println("load config.xml error:" + socket_name);
-        }
-        return _bs;
-
+    @Override
+    public void set_SOCKET_IP(String SOCKET_IP) {
+        this.SOCKET_IP = SOCKET_IP;
     }
 
-    public boolean open() {
+    @Override
+    public void set_SOCKET_PORT(String SOCKET_PORT) {
+        this.SOCKET_PORT = SOCKET_PORT;
+    }
+
+    @Override
+    public String get_SOCKET_IP() {
+        return SOCKET_IP.toString();
+    }
+
+    @Override
+    public String get_SOCKET_PORT() {
+        return SOCKET_PORT.toString();
+    }
+
+    private boolean load() {
+        boolean _bs = false;
+        try {
+            SOCKET_IP = _xmlconf.getvalue(SOCKET_NAME, "IP");
+            SOCKET_PORT = _xmlconf.getvalue(SOCKET_NAME, "PORT");
+            _bs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (!_bs) {
+            System.out.println("SocketClient load error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
+        }
+        return _bs;
+    }
+
+    private boolean open() {
         boolean _bs = false;
         try {
             if (remote_socket == null || remote_socket.isClosed()) {
                 //新建连接
-                remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
-                System.out.println("Connection access:" + socket_ip + ":" + socket_port + ".");
+                remote_socket = new Socket(SOCKET_IP, Integer.parseInt(SOCKET_PORT));
                 //发送空字符串  验证状态
                 try {
                     remote_socket.sendUrgentData(0xFF);
                     _bs = true;
                 } catch (Exception ex) {
                     //重新连接
-                    remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
-                    System.out.println("Connection access:" + socket_ip + ":" + socket_port + ".");
+                    remote_socket = new Socket(SOCKET_IP, Integer.parseInt(SOCKET_PORT));
                     System.out.println("对端断开,已重连");
                     _bs = true;
                 }
@@ -66,8 +91,7 @@ public class socketclient {
                     _bs = true;
                 } catch (Exception ex) {
                     //重新连接
-                    remote_socket = new Socket(socket_ip, Integer.parseInt(socket_port));
-                    System.out.println("Connection access:" + socket_ip + ":" + socket_port + ".");
+                    remote_socket = new Socket(SOCKET_IP, Integer.parseInt(SOCKET_PORT));
                     System.out.println("对端断开,已重连");
                     _bs = true;
                 }
@@ -77,27 +101,45 @@ public class socketclient {
             ex.printStackTrace();
         }
 
+        if (!_bs) {
+            System.out.println("SocketClient open error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
+        }
+
         return _bs;
     }
 
+    @Override
     public boolean ini() {
         boolean _bs = false;
-        if (load()) {
-            if (open()) {
-                _bs = true;
-            } else {
-                System.out.println("Socket 连接失败....");
-            }
-        } else {
-            System.out.println("配置文件读取错误....");
+        if (open()) {
+            _bs = true;
+        }
+        if (!_bs) {
+            System.out.println("SocketClient ini error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
         }
         return _bs;
     }
 
-    public boolean sendmessage(String mes, org.apache.log4j.Logger log) {
+    @Override
+    public boolean ini(String SOCKET_NAME) {
+        boolean _bs = false;
+        this.SOCKET_NAME = SOCKET_NAME;
+        if (load()) {
+            if (open()) {
+                _bs = true;
+            }
+        }
+        if (!_bs) {
+            System.out.println("SocketClient ini error:" + SOCKET_NAME + "#" + SOCKET_IP + "#" + SOCKET_PORT);
+        }
+        return _bs;
+    }
+
+    @Override
+    public boolean sendmessage(String mes) {
         boolean _bs = false;
         try {
-            if (mes.length() > 0 && ini()) {
+            if (mes.length() > 0) {
                 socketclient _socketclient = new socketclient();
                 // socketclient.out = new PrintWriter(socketclient.remote_socket.getOutputStream(),"UTF-8");
                 _socketclient.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(remote_socket.getOutputStream(), "GBK")), true);
@@ -106,9 +148,9 @@ public class socketclient {
                 _socketclient.out.flush();
                 System.out.println("Send access:" + mes1);
                 _bs = true;
-                //remote_socket.close();
-                //记录告警
-                log.info(mes);
+                //remote_socket.close();              
+            } else {
+                System.out.println("Send mes:is null");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -123,4 +165,5 @@ public class socketclient {
         }
         return _bs;
     }
+
 }

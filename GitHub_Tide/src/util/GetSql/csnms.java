@@ -30,7 +30,7 @@ import org.jdom.input.SAXBuilder;
 
 public class csnms extends databases {
 
-    private String db_name = "csnms";
+    private String db_name = "db_csnms";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;
@@ -218,10 +218,8 @@ public class csnms extends databases {
         try {
             //保持常连接
             if (rush()) {
-
                 //构建预处理
                 ps = db_conn.prepareStatement(sql);
-
                 if (objs != null) {
                     // 遍历objs数组，给ps对象赋值
                     for (int i = 0; i < objs.length; i++) {

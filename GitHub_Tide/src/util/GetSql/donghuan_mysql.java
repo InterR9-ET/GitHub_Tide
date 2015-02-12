@@ -31,7 +31,7 @@ import org.jdom.input.SAXBuilder;
 
 public class donghuan_mysql extends databases {
 
-    private String db_name = "donghuan_sms";
+    private String db_name = "db_donghuan_sms";
     private String db_driver = null;
     private String db_url = null;
     private String db_user = null;

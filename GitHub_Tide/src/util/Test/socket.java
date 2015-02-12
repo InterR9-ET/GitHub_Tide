@@ -16,7 +16,19 @@ import java.util.List;
 public class socket {
 
     public static void main(String[] args) {
+        test1();
+        //test2();
+    }
+
+    public static void test1() {
         util.GetSocket.socketclient _socket = new util.GetSocket.socketclient();
+        _socket.set_SOCKET_IP("132.228.5.56");
+        _socket.set_SOCKET_PORT("9005");
         _socket.ini();
+    }
+
+    public static void test2() {
+        util.GetSocket.socketclient _socket = new util.GetSocket.socketclient();
+        _socket.ini("socketc_alarmserver");
     }
 }
