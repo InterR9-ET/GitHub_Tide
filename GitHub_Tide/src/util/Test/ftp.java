@@ -13,7 +13,7 @@ import java.util.List;
  * @author yangzhen
  */
 //import Utils.getSql2;
-public class socket {
+public class ftp {
 
     public static void main(String[] args) {
         test1();
@@ -21,16 +21,15 @@ public class socket {
     }
 
     public static void test1() {
-        util.GetSocket.socketclient _client = new util.GetSocket.socketclient();
-        _client.set_SOCKET_IP("132.228.5.56");
-        _client.set_SOCKET_PORT("9005");
+        util.GetFtp.ftpclient _client = new util.GetFtp.ftpclient();
+        _client.set_FTP_IP("132.228.36.66");
+        _client.set_FTP_USERNAME("taisitong");
+        _client.set_FTP_PWD("Telecom@123");
         _client.ini();
     }
 
     public static void test2() {
-        util.GetSocket.socketclient _client = new util.GetSocket.socketclient();
-        _client.ini("socketc_alarmserver");
+        util.GetFtp.ftpclient _client = new util.GetFtp.ftpclient();
+        _client.ini("ftp_ping_sz");
     }
-
-
 }

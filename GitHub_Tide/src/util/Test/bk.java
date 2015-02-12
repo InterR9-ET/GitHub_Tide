@@ -415,7 +415,8 @@ public class bk {
         }
         return list;
     }
-    /**
+
+    /*
      public static void main(String[] args) throws IOException {
      String tempFolder = "tmp";
      File file = new File(curFolder + "/" + tempFolder);
