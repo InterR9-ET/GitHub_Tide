@@ -8,6 +8,9 @@ package main;
 /**
  *
  * @author yangzhen
+ * @author 检测数据库连接数，并发数
+ * 
+ * 
  */
 public class run_searchconncount {
 

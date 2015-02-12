@@ -8,14 +8,16 @@ package main;
 /**
  *
  * @author Administrator
- * @author atm性能同步程序
+ * @author 流量性能数据采集
+ *
  */
-public class run_xn_atm {
+
+public class run_alarm_hecha {
 
     public static void main(String[] args) {
-        z.xn_atm.main Main = new z.xn_atm.main();
+        z.alarm_hecha.main _main = new z.alarm_hecha.main();
         try {
-            Main.run();
+           _main.run();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -80,7 +80,7 @@ public class db {
         String str_sql = "";
         str_sql = "select s.id as ID,s.phone as PHONE,s.description as DEC,s.cityid as CITYID,s.LINKNAME as LINKNAME ,s.ALARM_ID as ALARM_ID "
                 + " from sendmessage s where s.serialnum is NULL and (s.HASDH='-1' or s.HASDH is null) "
-                + " and (to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') - to_date(to_char(s.createtime,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') )*24*60*60<60";
+                + " and (to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') - to_date(to_char(s.createtime,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') )*24*60*60<300";
 
         List lst = new ArrayList();
         Object[] objs = new Object[]{};

@@ -162,12 +162,12 @@ public class excel extends files {
     }
 
     @Override
-    public String read_file(String file_url,String str_content) {
+    public String read_file(String file_url, String str_content) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void write_file(String file_url,String str_content) {
+    public void write_file(String file_url, String str_content) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -262,7 +262,12 @@ public class excel extends files {
                 int length;
                 while ((length = inStream.read(buffer)) != -1) {
                     fs.write(buffer, 0, length);
-                } //字节数 文件大小 
+                } //字节数 文件大小
+
+                inStream.close();
+                fs.flush();
+                fs.close();
+
                 _bs = true;
             }
         } catch (Exception e) {

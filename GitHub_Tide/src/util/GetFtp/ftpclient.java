@@ -102,7 +102,6 @@ public class ftpclient extends ftp {
         return _bs;
     }
 
-//------------------------------传入FTP文件名加载FTP连接-----------------------------
     public boolean ini(String ftp_name) {
         boolean _bs = false;
         this.FTP_NAME = ftp_name;
@@ -116,7 +115,7 @@ public class ftpclient extends ftp {
         }
         return _bs;
     }
-//------------------------------加载文件----------------------------------------
+
     private boolean load() {
         boolean _bs = false;
         try {
@@ -135,7 +134,6 @@ public class ftpclient extends ftp {
         return _bs;
     }
 
-//------------------------------打开FTP连接----------------------------------------
     private boolean open() {
         boolean _bs = false;
         FTP_CLIENT = new FtpClient();
@@ -162,7 +160,6 @@ public class ftpclient extends ftp {
         return _bs;
     }
 
-//------------------------------关闭FTP连接----------------------------------------
     @Override
     public boolean close() {
         boolean _bs = false;
@@ -188,12 +185,6 @@ public class ftpclient extends ftp {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//------------------------------判断文件手否存在----------------------------------------
-    /**
-     * 
-     * @param full_dir
-     * @return 
-     */
     @Override
     public boolean isDirExist(String full_dir) {
         boolean _bs = false;
@@ -224,12 +215,6 @@ public class ftpclient extends ftp {
         return _bs;
     }
 
-//------------------------------创建文件夹----------------------------------------
-    /**
-     * 
-     * @param full_dir 
-     * @return 
-     */
     @Override
     public boolean createDir(String full_dir) {
         try {
@@ -258,12 +243,6 @@ public class ftpclient extends ftp {
         }
     }
 
-//------------------------------得到所有文件----------------------------------------
-    /**
-     * 
-     * @param full_dir
-     * @return 
-     */
     @Override
     public List getDirFileList(String full_dir) {
         List list = new ArrayList();
@@ -282,13 +261,6 @@ public class ftpclient extends ftp {
         return list;
     }
 
-//------------------------------下载文件----------------------------------------
-    /**
-     * 
-     * @param full_filedir        文件所在的目录 
-     * @param full_filedir_new    文件下载的目录
-     * @return 
-     */
     @Override
     public boolean downloadFile(String full_filedir, String full_filedir_new) {
         boolean _bs = false;
