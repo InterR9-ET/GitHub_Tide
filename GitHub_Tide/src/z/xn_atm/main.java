@@ -1,33 +1,9 @@
 package z.xn_atm;
 
-import z.xn_transperwbs.*;
-import z.xn_transper.*;
-import z.xn_port.*;
-import z.send_sms.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
 
-import java.rmi.RemoteException;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-import org.xml.sax.InputSource;
-import java.lang.Thread;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Hashtable;
 
-import javax.xml.rpc.ServiceException;
+
 
 /**
  *

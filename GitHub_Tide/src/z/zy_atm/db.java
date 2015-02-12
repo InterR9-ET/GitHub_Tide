@@ -1,5 +1,6 @@
 package z.zy_atm;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,7 @@ public class db {
     }
 
     //------------------------------获取mysql上的path数据--------------------------------------------
-    public static List get_xn_atm(util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) {
+    public static List get_xn_atm(util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql ,String filename) throws IOException {
 
         List _data_list = new ArrayList();
         List _data = new ArrayList();
@@ -54,6 +55,7 @@ public class db {
                 + "sync_result,p.sync_result_info as sync_result_info,p.sync_time as sync_time ,p.aEndPort as aendport "
                 + "from  path  p;";
         try {
+            fun.xieru(str_sql, filename);
             _data = _mysql.getdata(str_sql, null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -539,7 +541,7 @@ public class db {
                 } else {
                     _path.path_alias = "";
                 }
-
+                fun.xieru(_path.toString(),filename);
                 _data_list.add(_path);
             }
         }
@@ -547,7 +549,7 @@ public class db {
     }
 
     //------------------------------添加oracle上的path数据--------------------------------------------
-    public static void tb_in_up(util.GetSql.csnms _csnms, List _data) {
+    public static void tb_in_up(util.GetSql.csnms _csnms, List _data,String filename) {
         //构造预处理
         try {
             int count_s = 0;
@@ -555,12 +557,14 @@ public class db {
                 fun.mysql_path _datal = new fun.mysql_path();
                 _datal = (fun.mysql_path) _data.get(i);
                 count_s = count_s + 1;
-                String str_sql = "insert into path(name, network_id, path_id,  aEndPort) values "
+                String str_sql = "insert into path2(name, network_id, path_id,  aEndPort) values "
                         + "('" + _datal.name + "'," + _datal.network_id + "," + _datal.path_id + ","
                         + _datal.aendport + ")";//5
-                System.out.println(str_sql);
+                fun.xieru(str_sql, filename);
                 int execute = _csnms.execute(str_sql, null);
-                System.out.println(execute + "是否成功？？？");
+                if(execute>0){
+                fun.xieru("--------------插入成功---------------------", filename);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -569,7 +573,7 @@ public class db {
 
     
     //------------------------------更新oracle上的path数据--------------------------------------------
-    public static void update_path(util.GetSql.csnms _csnms, List _data) {
+    public static void update_path(util.GetSql.csnms _csnms, List _data,String filename) {
         //构造预处理
         try {
             int count_s = 0;
@@ -577,7 +581,7 @@ public class db {
                 fun.mysql_path _datal = new fun.mysql_path();
                 _datal = (fun.mysql_path) _data.get(i);
                 count_s = count_s + 1;
-                String str_sql = "update path set "
+                String str_sql = "update path2 set "
                         + "servicetype=" + _datal.servicetype + ","
                         + "connectstatus=" + _datal.connectstatus + ","
                         + "bandwidth=" + _datal.bandwidth + ","
@@ -672,12 +676,12 @@ public class db {
                         + "sortid=" + _datal.sortid + ","
                         + "main_circuit_terminal=" + _datal.main_circuit_terminal + ","
                         + "path_alias='" + _datal.path_alias + "'where path_id=" + _datal.path_id;//5
-                System.out.println(str_sql);
+                fun.xieru(str_sql, filename);
                 int execute = _csnms.execute(str_sql, null);
                 if (execute!=0) {
-                    System.out.println("更新成功！！！");
+                   fun.xieru("------------更新成功！！！------------------",filename);
                 }else{
-                    System.out.println("更新失败。。。");
+                    fun.xieru("------------更新失败。。。-----------------",filename);
                 }
             }
         } catch (Exception e) {

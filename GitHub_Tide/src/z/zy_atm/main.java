@@ -5,6 +5,7 @@
  */
 package z.zy_atm;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,9 +30,15 @@ public class main {
         if (db.ini(log, _csnms, _mysql)) {
             while (true) {
                 try {
-                    System.out.println("***********数据库打开成功，主程序开始执行*************");
-                    doing_main();
-                    Thread.sleep(1000 * 30);//30秒
+                    String filename=fun.log_path();
+                    if(filename.length()>0){
+                    System.out.println("-------------日志文件创建成功-------------");
+                    }else{
+                    System.out.println("*************日志文件创建失败*************");
+                    }
+                    System.out.println("---------数据库打开成功，主程序开始执行-----------");
+                    doing_main(filename);
+                    Thread.sleep(1000 * 60*60*6);//6个小时
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -41,11 +48,15 @@ public class main {
         }
     }
 
-    public void doing_main() {
-        List mysql_path = db.get_xn_atm(_csnms, _mysql);
+    public void doing_main(String filename) throws IOException {
+        //取数据
+        List mysql_path = db.get_xn_atm(_csnms, _mysql,filename);
+        //判断是否取到数据
         if (mysql_path.size() > 0) {
-            db.tb_in_up(_csnms, mysql_path);
-            db.update_path(_csnms, mysql_path);
+            //添加数据
+            db.tb_in_up(_csnms, mysql_path,filename);
+            //更新数据
+            db.update_path(_csnms, mysql_path,filename);
         }
         System.out.println("*************线程执行完一次***************");
     }
