@@ -18,38 +18,7 @@ import java.util.List;
  * @author Administrator
  */
 public class fun {
-
-    //-----------------------------调用添加信息的方法-------------------------------------------------
-    public static void insert_csnms(util.GetSql.csnms _csnms, List _list,String filename) {
-
-        //tb_SWITCH_REPORT_OUT does = new tb_SWITCH_REPORT_OUT();
-        //_tb_in.insert_SWITCH_REPORT_OUTs(_list);
-        db.tb_in_up(_csnms, _list,filename);
-    }
-
-    //-----------------------------写日志-------------------------------------------------
-    public static String  log_path() throws IOException {
-        File directory = new File("");
-        String _url = directory.getCanonicalPath();
-        String file_url = _url + "/zy_atm_log";
-        Date date = new Date();
-        SimpleDateFormat geshi = new SimpleDateFormat("yyyyMMdd HHmmss");
-        String wenjianm = geshi.format(date);
-        boolean _bs = false;
-        File _file = new File(file_url, wenjianm+".txt");
-        String filename=wenjianm+".txt";
-        if (!_file.exists()) {
-            try {
-                _file.createNewFile();
-                _bs = true;
-            } catch (Exception ex) {
-                System.out.println("文件创建失败" + ex.getMessage().toString());
-            }
-        }
-        return filename;
-    }
-
-    public static void xieru(String pathlog, String filePath) throws FileNotFoundException, IOException {
+    /**public static void xieru(String pathlog, String filePath) throws FileNotFoundException, IOException {
         File _file = new File(filePath);
         if (!_file.exists()) {
             System.out.println("+++++++++++++++++++++++++++++++++"+ filePath);
@@ -59,7 +28,10 @@ public class fun {
         fos.write(s.getBytes());
         fos.close();
     }
-
+**/
+    public static class oracle_path{
+    public long path_id;//               NUMBER(18) default '0' not null,
+}
     public static class mysql_path {
 
         public String name;

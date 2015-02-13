@@ -6,42 +6,37 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
- * @author Administrator
+ *数据库的操作
+ * @author Liujintai
  */
 public class db {
 
     private static util.GetTools.tools _datas = new util.GetTools.tools();
-
     //--------------------------------加载数据库------------------------------------------
     public static boolean ini(org.apache.log4j.Logger log, util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) {
         boolean _bs = false;
         boolean _bs1 = false;
         boolean _bs2 = false;
-
         if (_mysql.load()) {
             if (_mysql.open()) {
                 _bs1 = true;
             }
         }
-
         if (_csnms.load()) {
             if (_csnms.open()) {
                 _bs2 = true;
             }
         }
-
         if (_bs1) {
             if (_bs2) {
                 _bs = true;
             }
         }
-
         return _bs;
     }
 
     //------------------------------获取mysql上的path数据--------------------------------------------
-    public static List get_xn_atm(util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql ,String filename) throws IOException {
+    public static List _pathdata(org.apache.log4j.Logger log,util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) throws IOException {
 
         List _data_list = new ArrayList();
         List _data = new ArrayList();
@@ -53,9 +48,8 @@ public class db {
                 + "p.zEndNode as zendnode,p.zEndSlot as zendslot ,p.zEndPort as zendport,p.pathLevel as pathLevel ,"
                 + "p.maxHdlc as maxhdlc,p.tbwidth as tbwidth,p.aAtmIf as aatmif,p.zAtmIf as zatmif,p.sync_result as "
                 + "sync_result,p.sync_result_info as sync_result_info,p.sync_time as sync_time ,p.aEndPort as aendport "
-                + "from  path  p;";
+                + "from  path  p order by path_id desc;";
         try {
-            fun.xieru(str_sql, filename);
             _data = _mysql.getdata(str_sql, null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -541,46 +535,49 @@ public class db {
                 } else {
                     _path.path_alias = "";
                 }
-                fun.xieru(_path.toString(),filename);
+                //fun.xieru(_path.toString());
                 _data_list.add(_path);
             }
         }
         return _data_list;
     }
 
+    //--------------------------------数据库中查找是否有此条数据-----------------------------------------
+    public static boolean _pathoracle(org.apache.log4j.Logger log,util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql, long path) {
+        List _data = new ArrayList();
+        boolean result = false;
+        String _strsql = "select p.path_id from path2 p where p.path_id=" + path;
+        try {
+            //fun.xieru(_strsql, filename);
+            _data = _csnms.getdata(_strsql, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (_data.size() > 0) {
+            result = true;
+        }
+        return result;
+    }
+
     //------------------------------添加oracle上的path数据--------------------------------------------
-    public static void tb_in_up(util.GetSql.csnms _csnms, List _data,String filename) {
+    public static void tb_in_up(util.GetSql.csnms _csnms, List path) {
         //构造预处理
         try {
-            int count_s = 0;
-            for (int i = 0, m = _data.size(); i < m; i++) {
-                fun.mysql_path _datal = new fun.mysql_path();
-                _datal = (fun.mysql_path) _data.get(i);
-                count_s = count_s + 1;
-                String str_sql = "insert into path2(name, network_id, path_id,  aEndPort) values "
-                        + "('" + _datal.name + "'," + _datal.network_id + "," + _datal.path_id + ","
-                        + _datal.aendport + ")";//5
-                fun.xieru(str_sql, filename);
-                int execute = _csnms.execute(str_sql, null);
-                if(execute>0){
-                fun.xieru("--------------插入成功---------------------", filename);
-                }
+            String str_sql = "insert into path2 (name, network_id, path_id,  aEndPort) values "
+                    + "('" + path.get(0).toString() + "'," + Long.parseLong(path.get(1).toString()) + "," + Long.parseLong(path.get(2).toString()) + ","
+                    + Long.parseLong(path.get(3).toString()) + ")";//5
+            int execute = _csnms.execute(str_sql, null);
+            if (execute > 0) {
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    
     //------------------------------更新oracle上的path数据--------------------------------------------
-    public static void update_path(util.GetSql.csnms _csnms, List _data,String filename) {
+    public static void update_path(util.GetSql.csnms _csnms,fun.mysql_path _datal) {
         //构造预处理
         try {
-            int count_s = 0;
-            for (int i = 0, m = _data.size(); i < m; i++) {
-                fun.mysql_path _datal = new fun.mysql_path();
-                _datal = (fun.mysql_path) _data.get(i);
-                count_s = count_s + 1;
                 String str_sql = "update path2 set "
                         + "servicetype=" + _datal.servicetype + ","
                         + "connectstatus=" + _datal.connectstatus + ","
@@ -588,43 +585,43 @@ public class db {
                         + "isfree=" + _datal.isfree + ","
                         + "type_str='" + _datal.type_str + "',"
                         + "acustomer_id =" + _datal.acustomer_id + ","
-                        + "agroup_id=" + _datal.agroup_id + ","
-                        + "zgroup_id=" + _datal.zgroup_id + ","
-                        + "zcustomer_id =" + _datal.zcustomer_id + ","
+                        + "agroup_id=" + _datal.zgroup_id + ","
+                        + "zgroup_id=" + _datal.agroup_id + ","
+                        + "zcustomer_id =" + _datal.acustomer_id + ","
                         + "slacontractid =" + _datal.slacontractid + ","
                         + "parentid=" + _datal.parentid + ","
                         + "serial=" + _datal.serial + ","
                         + "ems_type=" + _datal.ems_type + ","
-                        + "aendvpi=" + _datal.aendvpi + ","
-                        + "aendvci=" + _datal.aendvci + ","
-                        + "aenddlci=" + _datal.aenddlci + ","
-                        + "zendvpi=" + _datal.zendvpi + ","
-                        + "zendvci=" + _datal.zendvci + ","
-                        + "zenddlci=" + _datal.zenddlci + ","
+                        + "aendvpi=" + _datal.zendvpi + ","
+                        + "aendvci=" + _datal.zendvci + ","
+                        + "aenddlci=" + _datal.zenddlci + ","
+                        + "zendvpi=" + _datal.aendvpi + ","
+                        + "zendvci=" + _datal.aendvci + ","
+                        + "zenddlci=" + _datal.aenddlci + ","
                         + "pcr=" + _datal.pcr + ","
                         + "mbs=" + _datal.mbs + ","
                         + "cdvt=" + _datal.cdvt + ","
                         + "rsr=" + _datal.rsr + ","
                         + "atmservicetype='" + _datal.atmservicetype + "',"
-                        + "aendnode=" + _datal.aendnode + ","
-                        + "aendshelf=" + _datal.aendshelf + ","
-                        + "aendslot=" + _datal.aendslot + ","
-                        + "aendport=" + _datal.aendport + ","
-                        + "aendtimeslot=" + _datal.aendtimeslot + ","
-                        + "zendnode=" + _datal.zendnode + ","
-                        + "zendshelf=" + _datal.zendshelf + ","
-                        + "zendslot=" + _datal.zendslot + ","
-                        + "zendport=" + _datal.zendport + ","
-                        + "zendtimeslot=" + _datal.zendtimeslot + ","
+                        + "aendnode=" + _datal.zendnode + "003,"
+                        + "aendshelf=" + _datal.zendshelf + ","
+                        + "aendslot=" + _datal.zendslot + ","
+                        + "aendport=" + _datal.zendport + ","
+                        + "aendtimeslot=" + _datal.zendtimeslot + ","
+                        + "zendnode=" + _datal.aendnode + "0003,"
+                        + "zendshelf=" + _datal.aendshelf + ","
+                        + "zendslot=" + _datal.aendslot + ","
+                        + "zendport=" + _datal.aendport + ","
+                        + "zendtimeslot=" + _datal.aendtimeslot + ","
                         + "owner_id =" + _datal.owner_id + ","
                         + "ownergroup_id =" + _datal.ownergroup_id + ","
                         + "ownerheadoffice_id=" + _datal.ownerheadoffice_id + ","
-                        + "aendinput='" + _datal.aendinput + "',"
-                        + "zendinput='" + _datal.zendinput + "',"
-                        + "aendalcatel='" + _datal.aendalcatel + "',"
-                        + "zendalcatel='" + _datal.zendalcatel + "',"
-                        + "aendlineno='" + _datal.aendlineno + "',"
-                        + "zendlineno='" + _datal.zendlineno + "',"
+                        + "aendinput='" + _datal.zendinput + "',"
+                        + "zendinput='" + _datal.aendinput + "',"
+                        + "aendalcatel='" + _datal.zendalcatel + "',"
+                        + "zendalcatel='" + _datal.aendalcatel + "',"
+                        + "aendlineno='" + _datal.zendlineno + "',"
+                        + "zendlineno='" + _datal.aendlineno + "',"
                         + "manageno='" + _datal.manageno + "',"
                         + "pathlevel='" + _datal.pathlevel + "',"
                         + "priority=" + _datal.priority + ","
@@ -647,43 +644,42 @@ public class db {
                         + "nmpathno='" + _datal.nmpathno + "',"
                         + "customeridinnm =" + _datal.customeridinnm + ","
                         + "vendor='" + _datal.vendor + "',"
-                        + "aendname='" + _datal.aendname + "',"
-                        + "zendname='" + _datal.zendname + "',"
+                        + "aendname='" + _datal.zendname + "',"
+                        + "zendname='" + _datal.aendname + "',"
                         + "datasource='" + _datal.datasource + "',"
                         + "nmsync=" + _datal.nmsync + ","
-                        + "aendaddressabbr='" + _datal.aendaddressabbr + "',"
-                        + "aendcontactor='" + _datal.aendcontactor + "',"
-                        + "aendtel ='" + _datal.aendtel + "',"
-                        + "zendaddressabbr='" + _datal.zendaddressabbr + "',"
-                        + "zendcontactor='" + _datal.zendcontactor + "',"
-                        + "zendtel='" + _datal.zendtel + "',"
-                        + "aendportinnm=" + _datal.aendportinnm + ","
-                        + "zendportinnm=" + _datal.zendportinnm + ","
+                        + "aendaddressabbr='" + _datal.zendaddressabbr + "',"
+                        + "aendcontactor='" + _datal.zendcontactor + "',"
+                        + "aendtel ='" + _datal.zendtel + "',"
+                        + "zendaddressabbr='" + _datal.aendaddressabbr + "',"
+                        + "zendcontactor='" + _datal.aendcontactor + "',"
+                        + "zendtel='" + _datal.aendtel + "',"
+                        + "aendportinnm=" + _datal.zendportinnm + ","
+                        + "zendportinnm=" + _datal.aendportinnm + ","
                         + "idinnm=" + _datal.idinnm + ","
                         + "description ='" + _datal.description + "',"
                         + "starttime='" + _datal.starttime + "',"
                         + "endtime='" + _datal.endtime + "',"
                         + "isimportance='" + _datal.isimportance + "',"
-                        + "aendpathid=" + _datal.aendpathid + ","
-                        + "zendpathid=" + _datal.zendpathid + ","
+                        + "aendpathid=" + _datal.zendpathid + ","
+                        + "zendpathid=" + _datal.aendpathid + ","
                         + "backuppathid=" + _datal.backuppathid + ","
                         + "remarksite='" + _datal.remarksite + "',"
-                        + "aatmif='" + _datal.aatmif + "',"
-                        + "zatmif='" + _datal.zatmif + "',"
+                        + "aatmif='" + _datal.zatmif + "',"
+                        + "zatmif='" + _datal.aatmif + "',"
                         + "sync_result=" + _datal.sync_result + ","
                         + "sync_result_info='" + _datal.sync_result_info + "',"
                         + "sync_time='" + _datal.sync_time + "',"
                         + "sortid=" + _datal.sortid + ","
                         + "main_circuit_terminal=" + _datal.main_circuit_terminal + ","
                         + "path_alias='" + _datal.path_alias + "'where path_id=" + _datal.path_id;//5
-                fun.xieru(str_sql, filename);
+                //fun.xieru(str_sql, filename);
                 int execute = _csnms.execute(str_sql, null);
-                if (execute!=0) {
-                   fun.xieru("------------更新成功！！！------------------",filename);
-                }else{
-                    fun.xieru("------------更新失败。。。-----------------",filename);
+                if (execute != 0) {
+                    //fun.xieru("------------更新成功！！！------------------", filename);
+                } else {
+                    //fun.xieru("------------更新失败。。。-----------------", filename);
                 }
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
