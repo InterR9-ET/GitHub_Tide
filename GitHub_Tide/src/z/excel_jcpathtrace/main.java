@@ -51,11 +51,15 @@ public class main extends Thread {
      * 主程序
      */
     public void doing_main() {
-//
+        //doing_main_12
+        doing_main_13();
+    }
+
+    public void doing_main_12() {
         String fileurl_old = "";
         String fileurl_new = "";
-        fileurl_old = "表1：VPN和ATM电路核查表-全省2月10日_bk.xls";
-        fileurl_new = "表1：VPN和ATM电路核查表-全省2月10日.xls";
+        fileurl_old = "表1：VPN和ATM电路核查表-全省2月12日_bk.xls";
+        fileurl_new = "表1：VPN和ATM电路核查表-全省2月12日.xls";
 
         File directory = new File("");// 设定为当前文件夹
         try {
@@ -71,4 +75,26 @@ public class main extends Thread {
             ex.printStackTrace();
         }
     }
+
+    public void doing_main_13() {
+        String fileurl_old = "";
+        String fileurl_new = "";
+        fileurl_old = "表1：VPN和ATM电路核查表-全省2月13日_bk.xls";
+        fileurl_new = "表1：VPN和ATM电路核查表-全省2月13日.xls";
+
+        File directory = new File("");// 设定为当前文件夹
+        try {
+            boolean bs = fun.copy_file(fileurl_old, fileurl_new);
+            if (bs) {
+                String _url = directory.getCanonicalPath().toString() + "/file/excel/VPN和ATM电路核查表/" + fileurl_new;//全路径
+                boolean bs1 = fun.loadfile(_url, "VPN电路");//加载文件成功
+                if (bs1) {
+                    fun.jc_data(_csnms);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
