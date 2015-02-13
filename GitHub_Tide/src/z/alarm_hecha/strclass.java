@@ -7,13 +7,11 @@ package z.alarm_hecha;
 
 /**
  *
- * @author zhen
- *
- *
+ * @author Administrator
  */
 public class strclass {
+     public static class ALARM_MES {
 
-    public static class  ALARM_MES {
         public String SE_ALARM_ID = "";
         public String SE_PATH_NAME = "";
         public String SE_ALARM_SER_ID = "";
@@ -35,5 +33,15 @@ public class strclass {
         public String SLOT_MES = "未核查";
         public String PORT_MES = "未核查";
     }
+     
+     
+      public static class ALARM_MES2 {
 
+        String STARTTIME = "";
+        String UPDATETIME = "";
+        String TYPE = "";
+        String WGNAME = "";
+        String DESCRIPTION = "";
+        String FILENAME = "";
+    }
 }

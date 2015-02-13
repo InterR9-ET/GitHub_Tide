@@ -5,14 +5,16 @@
  */
 package z.alarm_hecha;
 
+import static z.alarm_hecha.fun.com_dake;
+import static z.alarm_hecha.db.get_alarm;
+import static z.alarm_hecha.db.ini;
+
 /**
  *
  * @author zhen
  *
  */
 public class main extends Thread {
-    
-    
     private static util.GetSql.csnms _csnms = new  util.GetSql.csnms();
     private static  util.GetSql.zhizhen _zhizhen = new  util.GetSql.zhizhen();
     private static  util.GetSql.ess _ess = new  util.GetSql.ess();
@@ -21,35 +23,46 @@ public class main extends Thread {
 
     public  void run() {
         
+        //核查电路
+        String SE_PATH_NAME="互联通(竹辉托管)-国产实业混凝土/30N0001NP";
+        //main.Duqpath(SE_PATH_NAME);
         
-        
-        
-        
-        
-        
+        //筛选log信息
+        String message = "木渎";
+        main.Shaixxx(message);
+       
+    }
+    //----------------------------核查电路--------------------------------------
+    public static void Duqpath(String SE_PATH_NAME){
         strclass.ALARM_MES _mes = new strclass.ALARM_MES();
         _mes.SE_ALARM_ID = "";
-        _mes.SE_PATH_NAME = "广州苏州ETN0001NP";
+        _mes.SE_PATH_NAME = SE_PATH_NAME;
         _mes.SE_ALARM_SER_ID = "";
-        _mes.SE_ALARM_MONTH = "1";
+        _mes.SE_ALARM_MONTH = "";
         _mes.SE_VERDOR = "";
-       jcziyuan _do = new jcziyuan();
+        //jcziyuan _do = new jcziyuan();
         _mes.SE_PATH_NAME = _mes.SE_PATH_NAME.toString().trim();
-        _do.run(_mes);
-
+        //加载数据库
+         if (ini(_csnms,_zhizhen,_ess)) {
+            //加载告警信息
+            if (_mes.SE_ALARM_ID.length() > 0) {
+                _mes = get_alarm(_mes,_csnms);
+            }
+            //比对数据问题            
+            com_dake(_mes,_csnms,_zhizhen,_ess);
+        } else {
+            System.out.println("数据库连接失败");
+        }
         
-        //读取log
-        String message = "";
+    }
+    //--------------------------筛选log信息-------------------------------------
+    public static void Shaixxx(String message){
         String wg = "";
-
-        message = "木渎";
         //wg="南京";
         int _day =9;
-        alarm.getdata_to_excel _do2 = new alarm.getdata_to_excel();  //写入Excel       
+        fun _do2 = new fun();  //写入Excel   
+        //message筛选条件       _day文件路径
        _do2.run(message,wg,_day);
-
-        //写入数据库
-        //alarm.getdata_to_database _do = new alarm.getdata_to_database();
     }
 
 }
