@@ -31,7 +31,7 @@ import jxl.write.WritableWorkbook;
 public class fun {
     
     
-    private static GetFile.excel _excel = new GetFile.excel();
+    private static util.GetFile.excel _excel = new util.GetFile.excel();
     private static util.GetFile.txt _txt = new util.GetFile.txt();
     
     
