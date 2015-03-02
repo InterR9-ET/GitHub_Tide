@@ -16,7 +16,7 @@ public class main {
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(z.xn_atm.main.class.getName()); //获得logger
 
     static {
-        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_xnatm.config");
+        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_zyatm.config");
     }
     private util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//
@@ -30,6 +30,7 @@ public class main {
         } else {
             while (true) {
                 try {
+                    log.info("开始写日志");
                     doing_main();
                     Thread.sleep(1000 * 60 * 60 * 1);//6个小时
                 } catch (Exception e) {
