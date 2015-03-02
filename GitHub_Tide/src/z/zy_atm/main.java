@@ -30,8 +30,9 @@ public class main {
         } else {
             while (true) {
                 try {
-                    log.info("开始写日志");
+                    log.info("开始程序运行");
                     doing_main();
+                    log.info("程序完成");
                     Thread.sleep(1000 * 60 * 60 * 1);//6个小时
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -68,7 +69,7 @@ public class main {
                 if (re) {
                     //根据pathid更新数据
                     db.update_path(_csnms, pathid_datal);
-                    System.out.println("****************存在数据，已完成更新***************");
+                    log.info("[存在数据]:已完成更新 path id :"+pathid_datal.path_id);
                 } 
                     //如果oracle里面没有，添加之后在更新
                 else {
@@ -76,12 +77,9 @@ public class main {
                     db.intsert_oraclepath(_csnms, insert);
                     //更新数据
                     db.update_path(_csnms, pathid_datal);
-                    System.out.println("****************新数据，已完成插入***************");
+                    log.info("[新数据]:已完成更新 path id :"+pathid_datal.path_id);
                 }
             }
         }
-        int i=0;
-        i+=1;
-        System.out.println("*************线程执行完  "+i+"  次***************");
     }
 }
