@@ -7,11 +7,14 @@ import java.util.List;
 
 /**
  *数据库的操作
+ * ini----------------------------------------------------------------加载数据库
+ * _pathdata----------------------------------------------------------获取mysql上的path数据
+ * _pathoracle--------------------------------------------------------数据库中查找是否有此条数据
+ * tb_in_up-----------------------------------------------------------添加oracle上的path数据
+ * update_path--------------------------------------------------------更新oracle上的path数据
  * @author Liujintai
  */
 public class db {
-
-    private static util.GetTools.tools _datas = new util.GetTools.tools();
     //--------------------------------加载数据库------------------------------------------
     public static boolean ini(org.apache.log4j.Logger log, util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) {
         boolean _bs = false;
@@ -125,8 +128,8 @@ public class db {
                 } else {
                     _path.serial = 0;
                 }
-                if (map.get("serial") != null) {
-                    _path.ems_type = Long.parseLong(map.get("serial").toString());
+                if (map.get("ems_type") != null) {
+                    _path.ems_type = Long.parseLong(map.get("ems_type").toString());
                 } else {
                     _path.ems_type = 0;
                 }
@@ -560,7 +563,7 @@ public class db {
     }
 
     //------------------------------添加oracle上的path数据--------------------------------------------
-    public static void tb_in_up(util.GetSql.csnms _csnms, List path) {
+    public static void intsert_oraclepath(util.GetSql.csnms _csnms, List path) {
         //构造预处理
         try {
             String str_sql = "insert into path2 (name, network_id, path_id,  aEndPort) values "
@@ -579,6 +582,7 @@ public class db {
         //构造预处理
         try {
                 String str_sql = "update path2 set "
+                        +"network_id="+_datal.network_id+","
                         + "servicetype=" + _datal.servicetype + ","
                         + "connectstatus=" + _datal.connectstatus + ","
                         + "bandwidth=" + _datal.bandwidth + ","

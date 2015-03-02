@@ -5,33 +5,16 @@
  */
 package z.zy_atm;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author Administrator
  */
 public class fun {
-    /**public static void xieru(String pathlog, String filePath) throws FileNotFoundException, IOException {
-        File _file = new File(filePath);
-        if (!_file.exists()) {
-            System.out.println("+++++++++++++++++++++++++++++++++"+ filePath);
-        }
-        FileOutputStream fos = new FileOutputStream(filePath, true);
-        String s = pathlog;
-        fos.write(s.getBytes());
-        fos.close();
-    }
-**/
+    //----------------------oracle数据映射----------------------
     public static class oracle_path{
     public long path_id;//               NUMBER(18) default '0' not null,
 }
+    //----------------------mysql数据映射----------------------
     public static class mysql_path {
 
         public String name;
