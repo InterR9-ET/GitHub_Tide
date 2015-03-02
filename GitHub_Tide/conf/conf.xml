@@ -129,7 +129,7 @@
             <IP>132.228.166.233</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR>/mnt/szx/pdsn_data/PmeeData/DataFile</DIR>
+            <DIR>/export/home/processSJZ/Performance/DataFile/</DIR>
         </Client>
         
         <Client  KEYNAME="ftp_node_hb">
