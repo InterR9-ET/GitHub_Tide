@@ -202,6 +202,7 @@ public class excel extends files {
     public WritableWorkbook excel_W_Workbook(String str_filename) {
         WritableWorkbook W_workbook = null;
         try {
+            //打开文件
             Workbook R_workbook = Workbook.getWorkbook(new File(str_filename));
             W_workbook = Workbook.createWorkbook(new File(str_filename), R_workbook);
         } catch (Exception e) {
