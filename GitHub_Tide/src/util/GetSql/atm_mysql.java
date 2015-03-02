@@ -247,7 +247,6 @@ public class atm_mysql extends databases {
         List lst = new ArrayList();
         // 声明一个PreparedStatement对象
         PreparedStatement ps = null;
-
         ResultSet rs = null;
         ResultSetMetaData rsd = null;
         Map map = null;

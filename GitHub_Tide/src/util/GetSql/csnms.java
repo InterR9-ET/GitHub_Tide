@@ -305,10 +305,10 @@ public class csnms extends databases {
                 if (rs != null) {
                     rsd = rs.getMetaData();
                     while (rs.next()) {
-                        int columnCount = rsd.getColumnCount();
+                        int columnCount = rsd.getColumnCount();//------查出的得到行数
                         map = new HashMap();
                         for (int i = 1; i <= columnCount; i++) {
-                            map.put(rsd.getColumnName(i), rs.getObject(i));
+                            map.put(rsd.getColumnName(i), rs.getObject(i));//-----rsd.getColumnName(i):列名   rs.getObject(i)：对应的内容
                         }
                         lst.add(map);
                     }
