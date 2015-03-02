@@ -6,16 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *数据库的操作
+ * 数据库的操作
  * ini----------------------------------------------------------------加载数据库
  * _pathdata----------------------------------------------------------获取mysql上的path数据
  * _pathoracle--------------------------------------------------------数据库中查找是否有此条数据
  * tb_in_up-----------------------------------------------------------添加oracle上的path数据
  * update_path--------------------------------------------------------更新oracle上的path数据
+ *
  * @author Liujintai
  */
 public class db {
+
     //--------------------------------加载数据库------------------------------------------
+
     public static boolean ini(org.apache.log4j.Logger log, util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) {
         boolean _bs = false;
         boolean _bs1 = false;
@@ -39,7 +42,7 @@ public class db {
     }
 
     //------------------------------获取mysql上的path数据--------------------------------------------
-    public static List _pathdata(org.apache.log4j.Logger log,util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) throws IOException {
+    public static List _pathdata(org.apache.log4j.Logger log, util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql) throws IOException {
 
         List _data_list = new ArrayList();
         List _data = new ArrayList();
@@ -216,7 +219,7 @@ public class db {
                 if (map.get("zendnode") != null) {
                     _path.zendnode = Integer.parseInt(map.get("zendnode").toString());
                 } else {
-                    _path.zendnode = 0;
+                    _path.zendnode = -1;
                 }
                 if (map.get("zendshelf") != null) {
                     _path.zendshelf = Integer.parseInt(map.get("zendshelf").toString());
@@ -546,7 +549,7 @@ public class db {
     }
 
     //--------------------------------数据库中查找是否有此条数据-----------------------------------------
-    public static boolean _pathoracle(org.apache.log4j.Logger log,util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql, long path) {
+    public static boolean _pathoracle(org.apache.log4j.Logger log, util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql, long path) {
         List _data = new ArrayList();
         boolean result = false;
         String _strsql = "select p.path_id from path2 p where p.path_id=" + path;
@@ -563,129 +566,137 @@ public class db {
     }
 
     //------------------------------添加oracle上的path数据--------------------------------------------
-    public static void intsert_oraclepath(util.GetSql.csnms _csnms, List path) {
+    public static int  intsert_oraclepath(util.GetSql.csnms _csnms, List path) {
+        int execute=0;
         //构造预处理
         try {
             String str_sql = "insert into path2 (name, network_id, path_id,  aEndPort) values "
                     + "('" + path.get(0).toString() + "'," + Long.parseLong(path.get(1).toString()) + "," + Long.parseLong(path.get(2).toString()) + ","
                     + Long.parseLong(path.get(3).toString()) + ")";//5
-            int execute = _csnms.execute(str_sql, null);
-            if (execute > 0) {
-            }
+            execute = _csnms.execute(str_sql, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return execute;
     }
 
     //------------------------------更新oracle上的path数据--------------------------------------------
-    public static void update_path(util.GetSql.csnms _csnms,fun.mysql_path _datal) {
+    public static int update_path(util.GetSql.csnms _csnms, fun.mysql_path _datal) {
+        int execute=0;
         //构造预处理
         try {
-                String str_sql = "update path2 set "
-                        +"network_id="+_datal.network_id+","
-                        + "servicetype=" + _datal.servicetype + ","
-                        + "connectstatus=" + _datal.connectstatus + ","
-                        + "bandwidth=" + _datal.bandwidth + ","
-                        + "isfree=" + _datal.isfree + ","
-                        + "type_str='" + _datal.type_str + "',"
-                        + "acustomer_id =" + _datal.acustomer_id + ","
-                        + "agroup_id=" + _datal.zgroup_id + ","
-                        + "zgroup_id=" + _datal.agroup_id + ","
-                        + "zcustomer_id =" + _datal.acustomer_id + ","
-                        + "slacontractid =" + _datal.slacontractid + ","
-                        + "parentid=" + _datal.parentid + ","
-                        + "serial=" + _datal.serial + ","
-                        + "ems_type=" + _datal.ems_type + ","
-                        + "aendvpi=" + _datal.zendvpi + ","
-                        + "aendvci=" + _datal.zendvci + ","
-                        + "aenddlci=" + _datal.zenddlci + ","
-                        + "zendvpi=" + _datal.aendvpi + ","
-                        + "zendvci=" + _datal.aendvci + ","
-                        + "zenddlci=" + _datal.aenddlci + ","
-                        + "pcr=" + _datal.pcr + ","
-                        + "mbs=" + _datal.mbs + ","
-                        + "cdvt=" + _datal.cdvt + ","
-                        + "rsr=" + _datal.rsr + ","
-                        + "atmservicetype='" + _datal.atmservicetype + "',"
-                        + "aendnode=" + _datal.zendnode + "003,"
-                        + "aendshelf=" + _datal.zendshelf + ","
-                        + "aendslot=" + _datal.zendslot + ","
-                        + "aendport=" + _datal.zendport + ","
-                        + "aendtimeslot=" + _datal.zendtimeslot + ","
-                        + "zendnode=" + _datal.aendnode + "0003,"
-                        + "zendshelf=" + _datal.aendshelf + ","
-                        + "zendslot=" + _datal.aendslot + ","
-                        + "zendport=" + _datal.aendport + ","
-                        + "zendtimeslot=" + _datal.aendtimeslot + ","
-                        + "owner_id =" + _datal.owner_id + ","
-                        + "ownergroup_id =" + _datal.ownergroup_id + ","
-                        + "ownerheadoffice_id=" + _datal.ownerheadoffice_id + ","
-                        + "aendinput='" + _datal.zendinput + "',"
-                        + "zendinput='" + _datal.aendinput + "',"
-                        + "aendalcatel='" + _datal.zendalcatel + "',"
-                        + "zendalcatel='" + _datal.aendalcatel + "',"
-                        + "aendlineno='" + _datal.zendlineno + "',"
-                        + "zendlineno='" + _datal.aendlineno + "',"
-                        + "manageno='" + _datal.manageno + "',"
-                        + "pathlevel='" + _datal.pathlevel + "',"
-                        + "priority=" + _datal.priority + ","
-                        + "recovery =" + _datal.recovery + ","
-                        + "ismultiple =" + _datal.ismultiple + ","
-                        + "subrate=" + _datal.subrate + ","
-                        + "rate =" + _datal.rate + ","
-                        + "speed=" + _datal.speed + ","
-                        + "dataoctets=" + _datal.dataoctets + ","
-                        + "buffertime=" + _datal.buffertime + ","
-                        + "hdlc =" + _datal.hdlc + ","
-                        + "maxhdlc=" + _datal.maxhdlc + ","
-                        + "tbwidth =" + _datal.tbwidth + ","
-                        + "bumping =" + _datal.bumping + ","
-                        + "longdistance=" + _datal.longdistance + ","
-                        + "filterid=" + _datal.filterid + ","
-                        + "scr=" + _datal.scr + ","
-                        + "isloop=" + _datal.isloop + ","
-                        + "code='" + _datal.code + "',"
-                        + "nmpathno='" + _datal.nmpathno + "',"
-                        + "customeridinnm =" + _datal.customeridinnm + ","
-                        + "vendor='" + _datal.vendor + "',"
-                        + "aendname='" + _datal.zendname + "',"
-                        + "zendname='" + _datal.aendname + "',"
-                        + "datasource='" + _datal.datasource + "',"
-                        + "nmsync=" + _datal.nmsync + ","
-                        + "aendaddressabbr='" + _datal.zendaddressabbr + "',"
-                        + "aendcontactor='" + _datal.zendcontactor + "',"
-                        + "aendtel ='" + _datal.zendtel + "',"
-                        + "zendaddressabbr='" + _datal.aendaddressabbr + "',"
-                        + "zendcontactor='" + _datal.aendcontactor + "',"
-                        + "zendtel='" + _datal.aendtel + "',"
-                        + "aendportinnm=" + _datal.zendportinnm + ","
-                        + "zendportinnm=" + _datal.aendportinnm + ","
-                        + "idinnm=" + _datal.idinnm + ","
-                        + "description ='" + _datal.description + "',"
-                        + "starttime='" + _datal.starttime + "',"
-                        + "endtime='" + _datal.endtime + "',"
-                        + "isimportance='" + _datal.isimportance + "',"
-                        + "aendpathid=" + _datal.zendpathid + ","
-                        + "zendpathid=" + _datal.aendpathid + ","
-                        + "backuppathid=" + _datal.backuppathid + ","
-                        + "remarksite='" + _datal.remarksite + "',"
-                        + "aatmif='" + _datal.zatmif + "',"
-                        + "zatmif='" + _datal.aatmif + "',"
-                        + "sync_result=" + _datal.sync_result + ","
-                        + "sync_result_info='" + _datal.sync_result_info + "',"
-                        + "sync_time='" + _datal.sync_time + "',"
-                        + "sortid=" + _datal.sortid + ","
-                        + "main_circuit_terminal=" + _datal.main_circuit_terminal + ","
-                        + "path_alias='" + _datal.path_alias + "'where path_id=" + _datal.path_id;//5
-                //fun.xieru(str_sql, filename);
-                int execute = _csnms.execute(str_sql, null);
-                if (execute != 0) {
-                    //fun.xieru("------------更新成功！！！------------------", filename);
-                } else {
-                    //fun.xieru("------------更新失败。。。-----------------", filename);
-                }
+            String str_sql = "update path2 set "
+                    + "network_id=" + _datal.network_id + ","
+                    + "servicetype=" + _datal.servicetype + ","
+                    + "connectstatus=" + _datal.connectstatus + ","
+                    + "bandwidth=" + _datal.bandwidth + ","
+                    + "isfree=" + _datal.isfree + ","
+                    + "type_str='" + _datal.type_str + "',"
+                    + "acustomer_id =" + _datal.acustomer_id + ","
+                    + "agroup_id=" + _datal.zgroup_id + ","
+                    + "zgroup_id=" + _datal.agroup_id + ","
+                    + "zcustomer_id =" + _datal.acustomer_id + ","
+                    + "slacontractid =" + _datal.slacontractid + ","
+                    + "parentid=" + _datal.parentid + ","
+                    + "serial=" + _datal.serial + ","
+                    + "ems_type=" + _datal.ems_type + ","
+                    + "aendvpi=" + _datal.zendvpi + ","
+                    + "aendvci=" + _datal.zendvci + ","
+                    + "aenddlci=" + _datal.zenddlci + ","
+                    + "zendvpi=" + _datal.aendvpi + ","
+                    + "zendvci=" + _datal.aendvci + ","
+                    + "zenddlci=" + _datal.aenddlci + ","
+                    + "pcr=" + _datal.pcr + ","
+                    + "mbs=" + _datal.mbs + ","
+                    + "cdvt=" + _datal.cdvt + ","
+                    + "rsr=" + _datal.rsr + ","
+                    + "atmservicetype='" + _datal.atmservicetype + "',"
+                    + "aendshelf=" + _datal.zendshelf + ","
+                    + "aendslot=" + _datal.zendslot + ","
+                    + "aendport=" + _datal.zendport + ","
+                    + "aendtimeslot=" + _datal.zendtimeslot + ","
+                    + "zendshelf=" + _datal.aendshelf + ","
+                    + "zendslot=" + _datal.aendslot + ","
+                    + "zendport=" + _datal.aendport + ","
+                    + "zendtimeslot=" + _datal.aendtimeslot + ","
+                    + "owner_id =" + _datal.owner_id + ","
+                    + "ownergroup_id =" + _datal.ownergroup_id + ","
+                    + "ownerheadoffice_id=" + _datal.ownerheadoffice_id + ","
+                    + "aendinput='" + _datal.zendinput + "',"
+                    + "zendinput='" + _datal.aendinput + "',"
+                    + "aendalcatel='" + _datal.zendalcatel + "',"
+                    + "zendalcatel='" + _datal.aendalcatel + "',"
+                    + "aendlineno='" + _datal.zendlineno + "',"
+                    + "zendlineno='" + _datal.aendlineno + "',"
+                    + "manageno='" + _datal.manageno + "',"
+                    + "pathlevel='" + _datal.pathlevel + "',"
+                    + "priority=" + _datal.priority + ","
+                    + "recovery =" + _datal.recovery + ","
+                    + "ismultiple =" + _datal.ismultiple + ","
+                    + "subrate=" + _datal.subrate + ","
+                    + "rate =" + _datal.rate + ","
+                    + "speed=" + _datal.speed + ","
+                    + "dataoctets=" + _datal.dataoctets + ","
+                    + "buffertime=" + _datal.buffertime + ","
+                    + "hdlc =" + _datal.hdlc + ","
+                    + "maxhdlc=" + _datal.maxhdlc + ","
+                    + "tbwidth =" + _datal.tbwidth + ","
+                    + "bumping =" + _datal.bumping + ","
+                    + "longdistance=" + _datal.longdistance + ","
+                    + "filterid=" + _datal.filterid + ","
+                    + "scr=" + _datal.scr + ","
+                    + "isloop=" + _datal.isloop + ","
+                    + "code='" + _datal.code + "',"
+                    + "nmpathno='" + _datal.nmpathno + "',"
+                    + "customeridinnm =" + _datal.customeridinnm + ","
+                    + "vendor='" + _datal.vendor + "',"
+                    + "aendname='" + _datal.zendname + "',"
+                    + "zendname='" + _datal.aendname + "',"
+                    + "datasource='" + _datal.datasource + "',"
+                    + "nmsync=" + _datal.nmsync + ","
+                    + "aendaddressabbr='" + _datal.zendaddressabbr + "',"
+                    + "aendcontactor='" + _datal.zendcontactor + "',"
+                    + "aendtel ='" + _datal.zendtel + "',"
+                    + "zendaddressabbr='" + _datal.aendaddressabbr + "',"
+                    + "zendcontactor='" + _datal.aendcontactor + "',"
+                    + "zendtel='" + _datal.aendtel + "',"
+                    + "aendportinnm=" + _datal.zendportinnm + ","
+                    + "zendportinnm=" + _datal.aendportinnm + ","
+                    + "idinnm=" + _datal.idinnm + ","
+                    + "description ='" + _datal.description + "',"
+                    + "starttime='" + _datal.starttime + "',"
+                    + "endtime='" + _datal.endtime + "',"
+                    + "isimportance='" + _datal.isimportance + "',"
+                    + "aendpathid=" + _datal.zendpathid + ","
+                    + "zendpathid=" + _datal.aendpathid + ","
+                    + "backuppathid=" + _datal.backuppathid + ","
+                    + "remarksite='" + _datal.remarksite + "',"
+                    + "aatmif='" + _datal.zatmif + "',"
+                    + "zatmif='" + _datal.aatmif + "',"
+                    + "sync_result=" + _datal.sync_result + ","
+                    + "sync_result_info='" + _datal.sync_result_info + "',"
+                    + "sync_time='" + _datal.sync_time + "',"
+                    + "sortid=" + _datal.sortid + ","
+                    + "main_circuit_terminal=" + _datal.main_circuit_terminal + ","
+                    + "path_alias='" + _datal.path_alias + "',";
+
+            String zn, an;
+            if (_datal.zendnode == -1) {
+                zn = "aendnode=" + _datal.zendnode+",";
+            } else {
+                zn = "aendnode=" + _datal.zendnode + "0003,";
+            }
+            if (_datal.aendnode == -1) {
+                an = "zendnode=" + _datal.aendnode+"";
+            } else {
+                an = "zendnode=" + _datal.aendnode + "0003";
+            }
+            str_sql=str_sql+zn+an+" where path_id=" + _datal.path_id;//5
+            System.out.println(str_sql);
+            execute = _csnms.execute(str_sql, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return execute;
     }
 }

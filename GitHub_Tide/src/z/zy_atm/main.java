@@ -18,12 +18,11 @@ public class main {
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_zyatm.config");
     }
-    private util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//
     private util.GetSql.atm_mysql _mysql = new util.GetSql.atm_mysql();
     private util.GetSql.csnms _csnms = new util.GetSql.csnms();
+    
 //------------------------------数据库加载--------------------------------------
-
     public void run() {
         if (!db.ini(log, _csnms, _mysql)) {
             log.info("加载数据库失败");
@@ -46,7 +45,7 @@ public class main {
         //取数据mysql的数据
         List mysql_path = db._pathdata(log,_csnms, _mysql);
         //判断是否取到数据
-        if (mysql_path.size() > 0) {
+        if (mysql_path.size() > 0){
             for (int i = 0, m = mysql_path.size(); i < m; i++) {
                 
                 // 逐条取出所有信息
@@ -76,8 +75,12 @@ public class main {
                     //添加数据
                     db.intsert_oraclepath(_csnms, insert);
                     //更新数据
-                    db.update_path(_csnms, pathid_datal);
-                    log.info("[新数据]:已完成更新 path id :"+pathid_datal.path_id);
+                    int res= db.update_path(_csnms, pathid_datal);
+                    if(res>0){
+                        log.info("[存在数据]:已完成更新 path id :"+pathid_datal.path_id);
+                    }else{
+                        log.info("【更新失败】"+pathid_datal.path_id);
+                    }
                 }
             }
         }
