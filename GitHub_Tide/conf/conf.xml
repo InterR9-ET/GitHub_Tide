@@ -195,11 +195,11 @@
             <DIR>/export/home/processSJZ/VrfCEPing/PingDate</DIR>
         </Client>
 
-		  <Client  KEYNAME="ftp_ping_wx2">
+        <Client  KEYNAME="ftp_ping_wx2">
             <IP>132.228.36.5</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR>/export/home/process_epon/TelnetPingImd/PingDate</DIR>
+            <DIR>/export/home/process_epon/TelnetPingImd/PingDate/logs</DIR>
         </Client>
         
         
