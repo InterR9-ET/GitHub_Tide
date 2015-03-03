@@ -552,7 +552,7 @@ public class db {
     public static boolean _pathoracle(org.apache.log4j.Logger log, util.GetSql.csnms _csnms, util.GetSql.atm_mysql _mysql, long path) {
         List _data = new ArrayList();
         boolean result = false;
-        String _strsql = "select p.path_id from path2 p where p.path_id=" + path;
+        String _strsql = "select p.path_id from path p where p.path_id=" + path;
         try {
             //fun.xieru(_strsql, filename);
             _data = _csnms.getdata(_strsql, null);
@@ -570,7 +570,7 @@ public class db {
         int execute=0;
         //构造预处理
         try {
-            String str_sql = "insert into path2 (name, network_id, path_id,  aEndPort) values "
+            String str_sql = "insert into path (name, network_id, path_id,  aEndPort) values "
                     + "('" + path.get(0).toString() + "'," + Long.parseLong(path.get(1).toString()) + "," + Long.parseLong(path.get(2).toString()) + ","
                     + Long.parseLong(path.get(3).toString()) + ")";//5
             execute = _csnms.execute(str_sql, null);
@@ -585,7 +585,7 @@ public class db {
         int execute=0;
         //构造预处理
         try {
-            String str_sql = "update path2 set "
+            String str_sql = "update path set "
                     + "network_id=" + _datal.network_id + ","
                     + "servicetype=" + _datal.servicetype + ","
                     + "connectstatus=" + _datal.connectstatus + ","
