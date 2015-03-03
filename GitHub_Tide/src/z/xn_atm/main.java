@@ -44,6 +44,7 @@ public class main extends Thread {
     }
 
     public void doing_main() {
+        log.info("[程序开始执行]");
         try {
             log.info("开始获取atmif_performance(56)性能数据");
             List _SWITCH_REPORT_OUT = db.get_xn_atm(_csnms, _mysql);             //获取性能信息
@@ -52,7 +53,7 @@ public class main extends Thread {
 
             if (_SWITCH_REPORT_OUT.size() > 0) {
                 log.info("开始补全atmif_performance(oracle)数据");
-                fun.insert_csnms(_csnms, _atmif_performance);
+                fun.insert_csnms(_csnms, _atmif_performance,log);
                 log.info("补全数据完成");
 
                 log.info("开始加载atmif_performance(oracle)数据");
@@ -64,7 +65,7 @@ public class main extends Thread {
                 log.info("数据运算完成");
 
                 log.info("开始同步性能数据");
-                fun.insert_csnms(_csnms, _atm_data2);
+                fun.insert_csnms(_csnms, _atm_data2,log);
                 log.info("同步数据完成");
 
                 log.info("开始更新atmif_performance数据");
@@ -74,7 +75,10 @@ public class main extends Thread {
                 log.info("删除历史数据");
                 db._del_xn_atm(_mysql, _atmif_performance);
                 log.info("删除数据完成");
+            }else{
+                log.info("[mysql中未查找到数据]");
             }
+            log.info("[程序执行完成]");
         } catch (Exception e) {
             e.printStackTrace();
         }
