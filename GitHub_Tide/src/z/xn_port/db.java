@@ -347,7 +347,7 @@ public class db {
                 if (_list_obj.size() > 0) {
                     String str_sql = "";
                     try {
-                        str_sql = "insert into switch_report_out2("
+                        str_sql = "insert into switch_report_out("
                                 + "DATETIME,"
                                 + "DEVICEID,"
                                 + "PORTINFO,"

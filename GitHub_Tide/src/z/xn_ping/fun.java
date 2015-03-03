@@ -16,44 +16,50 @@ import java.util.*;
  *
  */
 public class fun {
-    
+
     private static util.GetFile.excel _excel = new util.GetFile.excel();
-       /**
-     * 获取下载好的信息
-     *返回List文件名
+
+    /**
+     * 获取下载好的信息 返回List文件名
+     *
      * @param file1 文件路径
      * @return
      * @throws java.io.IOException
      */
     public List huoqwuwenjian(File file1) throws IOException {
         List File_list = new ArrayList();
-        //加载文件
-        File[] files1 = file1.listFiles();
-        if (files1 != null) {
-            if (files1.length > 0) {
-                Arrays.sort(files1);//排序
-                for (int kk = 0; kk < files1.length; kk++) {
-                    if (!files1[kk].isDirectory()) {
-                        if (files1[kk].toString().indexOf("ping_data") != -1) {
-                            String fil = files1[kk].toString();
-                            File_list.add(fil);
+        if (file1.isDirectory()) {
+            //加载文件
+            File[] files1 = file1.listFiles();
+            if (files1 != null) {
+                if (files1.length > 0) {
+                    Arrays.sort(files1);//排序
+                    for (int kk = 0; kk < files1.length; kk++) {
+                        if (!files1[kk].isDirectory()) {
+                            if (files1[kk].toString().indexOf("ping_data") != -1) {
+                                String fil = files1[kk].toString();
+                                File_list.add(fil);
+                            }
                         }
                     }
                 }
             }
+        }else{
+            System.out.println("不存在文件路径！！");
         }
-            return File_list;
+        return File_list;
     }
+
     //------------------------------------------------------------------------------
     /**
-     * 
+     *
      * @param log--------------日志
      * @param File_list--------文件名
      * @param _csnms-----------数据连接
      */
-    public void chulwj(org.apache.log4j.Logger log ,List File_list,util.GetSql.csnms _csnms){
-        String bfpath="/file/xingneng/ping/";
-        try{
+    public void chulwj(org.apache.log4j.Logger log, List File_list, util.GetSql.csnms _csnms) {
+        String bfpath = "/file/xingneng/ping/";
+        try {
             List list_in = new ArrayList();
             //文件数量大于0
             if (File_list.size() > 0) {
@@ -61,11 +67,10 @@ public class fun {
                 for (int i = 0; i < File_list.size(); i++) {
                     _csnms.rush();
                     String fil = File_list.get(i).toString(); //取出文件名
-                    System.out.println(fil+"2222222222222222222222222222222222222222222");
-                    List list = PingList(fil);                  //传入文件名，调用筛选信息的方法，得到想要字段的信息
+                    List list = PingList(fil,log);                  //传入文件名，调用筛选信息的方法，得到想要字段的信息
                     //处理数据
-                    db DB=new db();                              //调用方法，将信息写入数据库
-                    if (DB.ycl(_csnms,list,log)) {
+                    db DB = new db();                              //调用方法，将信息写入数据库
+                    if (DB.ycl(_csnms, list, log)) {
                         //删除文件
                         File ff = new File(fil);                  //string将文件名转换成File
                         //---------copy文件----------------//
@@ -74,13 +79,14 @@ public class fun {
                         if (fil.contains("pingper/sz/")) {        //文件名包含指定的信息
                             file_name = file_name + "_sz";        //修改文件名称
                             String _url = directory.getCanonicalPath() + bfpath + file_name;//得到文件路径
-                            // System.out.println(fil+"\r\n"+_url);
+                             System.out.println(fil+"*********************************************************"+_url);
                             boolean _bs_c = _excel.copy_file(fil, _url);        //拷贝文件
                             if (_bs_c) {
                                 log.info("Copy成功：" + _url);
                             }
                             del_files("_sz");//删除多余文件
-                        } else if (fil.contains("pingper/jyw/")) {
+                        }
+                        else if (fil.contains("pingper/jyw/")) {
                             file_name = file_name + "_jyw";
                             String _url = directory.getCanonicalPath() + bfpath + file_name;
                             // System.out.println(fil+"\r\n"+_url);
@@ -137,15 +143,17 @@ public class fun {
                 }
             }
             log.info("运行结束");
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     //------------------------------------------------------------------------------------------------------------------------
     /**
      * 删除多余文件
-     * @param str_type 
+     *
+     * @param str_type
      */
     public void del_files(String str_type) {
         //str_type   _sz   _jyw   _lyg   _wx  _dcn   _nj
@@ -166,6 +174,7 @@ public class fun {
                             return -1;
                         }
                     }
+
                     public boolean equals(Object obj) {
                         return true;
                     }
@@ -195,16 +204,15 @@ public class fun {
             }
         }
     }
-    
-    //------------------------------传入文件名，读取文件信息，返回得到字段的信息--------------------------------------------
 
+    //------------------------------传入文件名，读取文件信息，返回得到字段的信息--------------------------------------------
     /**
      *
      * @param filename
      * @return
      * @throws IOException
      */
-        public  List PingList(String filename) throws IOException {
+    public List PingList(String filename,org.apache.log4j.Logger log) throws IOException {
         //File path=new File("");
         //filename= path.getCanonicalPath()+"/"+filename;
         //处理ping文件  58.213.239.80   58.213.14.1  58.213.14.4  1.000000  1390705234
@@ -212,6 +220,8 @@ public class fun {
         try {
             FileReader fw = new FileReader(filename);
             BufferedReader reader = new BufferedReader(fw);
+            
+                log.info("[处理文件]"+filename);
             String str = null;
             int row = 1;
             String pms[] = null;
@@ -260,7 +270,8 @@ public class fun {
         }
         return list;
     }
-     //-------------------------------------------------------------------------
+
+    //-------------------------------------------------------------------------
     public static class ping {
 
         public String str1 = "";
@@ -270,13 +281,14 @@ public class fun {
         public String str5 = "";
 
     }
-    
+
     //--------------------------------------------------------------------------
     public static class node {
+
         public String str1 = "";
         public String str2 = "";
         public String str3 = "";
         public String str4 = "";
     }
-    
+
 }

@@ -5,7 +5,6 @@
  */
 package z.xn_ping;
 
-import java.io.File;
 import java.util.*;
 
 /**
@@ -38,7 +37,6 @@ public class db {
     //--------------------------------------------------------------------------
     public boolean ycl(util.GetSql.csnms _csnms, List _list_date, org.apache.log4j.Logger log) {
         boolean _bs = false;
-        int result = 0;
         try {
             List _list_obj = new ArrayList();
             for (int i = 0, m = _list_date.size(); i < m; i++) {
@@ -47,7 +45,6 @@ public class db {
                 //提取数据
                 fun.ping _ping = new fun.ping();
                 _ping = (fun.ping) _list_date.get(i);
-
                 Object[] objs = new Object[]{
                     _ping.str1.toString(),
                     _ping.str2.toString(),
@@ -58,22 +55,20 @@ public class db {
                 _list_obj.add(objs);
             }
             if (_list_obj.size() > 0) {
-                String str_sql = "insert into SWITCH_PING2("
+                String str_sql = "insert into SWITCH_PING("
                         + "STARTIP,"
                         + "PORTIP,"
                         + "CENTERIP,"
                         + "TIME,"
                         + "PINGTIME"
                         + ") values (?,?,?,?,?)";
-                result = _csnms.execute_listobj(str_sql, _list_obj);              //加判断
+                _csnms.execute_listobj(str_sql, _list_obj);              //加判断
             }
+             _bs = true;
         } catch (Exception ex) {
             ex.printStackTrace();
             log.info("Ping处理异常：" + ex.getMessage().toString());
-        }
-        if (result > 0) {
-            _bs = true;
-        }                                                             //_bs = true; return _bs;
+        }                                                       //_bs = true; return _bs;
         return _bs;
     }
 
