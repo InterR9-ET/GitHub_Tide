@@ -32,8 +32,8 @@ public class fun {
     public static Hashtable keyHash = new Hashtable();
     public static Hashtable keyHash2 = new Hashtable();
 
-    private static GetFile.excel _excel = new GetFile.excel();
-    private static GetTools.tools _tools = new GetTools.tools();
+    private static util.GetFile.excel _excel = new util.GetFile.excel();
+    private static util.GetTools.tools _tools = new util.GetTools.tools();
 
     /**
      * @param fil-----------------------------------------------------文件名
