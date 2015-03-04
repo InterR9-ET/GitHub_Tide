@@ -66,7 +66,7 @@ public class main extends Thread {
             boolean bs = fun.copy_file(fileurl_old, fileurl_new);
             if (bs) {
                 String _url = directory.getCanonicalPath().toString() + "/file/excel/VPN和ATM电路核查表/" + fileurl_new;//全路径
-                boolean bs1 = fun.loadfile(_url, "VPN电路");//加载文件成功
+                boolean bs1 = fun.loadfile(_url, "");//加载文件成功
                 if (bs1) {
                     fun.jc_data(_csnms,dlbh,bdzxh,message_start);
                 }
