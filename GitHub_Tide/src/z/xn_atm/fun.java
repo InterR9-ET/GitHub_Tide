@@ -19,10 +19,11 @@ import java.util.List;
  *
  */
 public class fun {
-    private static util.GetTools.tools _datas =new util.GetTools.tools();
-    
+
+    private static util.GetTools.tools _datas = new util.GetTools.tools();
+
     //-------------------------------------------------------------------------
-        public static void insert_csnms2(util.GetSql.csnms _csnms,List _list) {//type=0  默认不启用   type=1启动update
+    public static void insert_csnms2(util.GetSql.csnms _csnms, List _list) {//type=0  默认不启用   type=1启动update
 
         List _List_in = new ArrayList();
         List _List_up = new ArrayList();
@@ -33,7 +34,7 @@ public class fun {
 
                 System.out.println("进度：" + (i + 1) + "/" + m);
                 _xn = (fun.atmif_performance) _list.get(i);
-                boolean _bs = db.seach_has_data12_csnms(_csnms,_xn);
+                boolean _bs = db.seach_has_data12_csnms(_csnms, _xn);
                 String str_sql = "";
                 if (!_bs) {
                     _List_in.add(_xn);
@@ -44,19 +45,21 @@ public class fun {
 
             if (_List_in.size() > 0) {
                 tb_atmif_performance does = new tb_atmif_performance();
-                db.tb_in_up(_csnms,"in", _List_in);
+                db.tb_in_up(_csnms, "in", _List_in);
 
             }
 
             if (_List_up.size() > 0) {
                 tb_atmif_performance does = new tb_atmif_performance();
-                db.tb_in_up(_csnms,"up", _List_up);
+                db.tb_in_up(_csnms, "up", _List_up);
 
             }
         }
     }
+
     //-------------------------------------------------------------------------
-     public static String return_value(String value1, String value2) {
+
+    public static String return_value(String value1, String value2) {
         String mes = "";
         long _d1 = Long.parseLong(value1);
         long _d2 = Long.parseLong(value2);
@@ -70,8 +73,10 @@ public class fun {
         }
         return mes;
     }
+
     //-------------------------------------------------------------------------
-        public static List get_xn_csnms2(List _SWITCH_REPORT_OUT, List _atm_data) {
+
+    public static List get_xn_csnms2(List _SWITCH_REPORT_OUT, List _atm_data) {
         List _list_data = new ArrayList();
 
         atm _atm = new atm();
@@ -173,180 +178,27 @@ public class fun {
 
         return _list_data;
     }
-    
-    
+
     //--------------------------------------------------------------------------
     public static long string2Timestamp(String dateString) throws ParseException {
         Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateString);
         long temp = date1.getTime();//JAVA的时间戳长度是13位     
         return temp;
     }
-    
+
 //-----------------------------调用添加信息的方法-------------------------------------------------
-    public static void insert_csnms(util.GetSql.csnms _csnms,List _list) {
+    public static void insert_csnms(util.GetSql.csnms _csnms, List _list,org.apache.log4j.Logger log) {
 
         tb_SWITCH_REPORT_OUT does = new tb_SWITCH_REPORT_OUT();
         //_tb_in.insert_SWITCH_REPORT_OUTs(_list);
-       db.tb_in_up(_csnms,"in", _list);
+        if (_list.size() > 0) {
+            db.tb_in_up(_csnms, "in", _list);
+        }else{
+            log.info("[oracle没有数据]");
+        }
     }
-    
+
 //------------------------------------------------------------------------------
-        public static class atmif_performance {
-
-        public String DATETIME = "";
-        public String DEVICEID = "";
-        public String PORTINFO = "";
-        public String GETWAY = "";
-        public String IFINOCTETS = "0";
-        public String IFOUTOCTETS = "0";
-        public String IFINERRORS = "0";
-        public String IFOUTERRORS = "0";
-        public String IFINDISCARDS = "0";
-        public String IFOUTDISCARDS = "0";
-        public String IFINUCASTPKTS = "0";
-        public String IFOUTUCASTPKTS = "0";
-        public String IFINNUCASTPKTS = "0";
-        public String IFOUTNUCASTPKTS = "0";
-        public String IFINUNKNOWNPROTOS = "0";
-        public String IFOUTQLEN = "0";
-        public String IFINOCTETSBPS = "0";
-        public String IFOUTOCTETSBPS = "0";
-        public String IFINERRORSPPS = "0";
-        public String IFOUTERRORSPPS = "0";
-        public String IFINDISCARDSPPS = "0";
-        public String IFOUTDISCARDSPPS = "0";
-        public String IFINUCASTPKTSPPS = "0";
-        public String IFOUTUCASTPKTSPPS = "0";
-        public String IFINNUCASTPKTSPPS = "0";
-        public String IFOUTNUCASTPKTSPPS = "0";
-        public String IFINUNKNOWNPROTOSPPS = "0";
-        public String IFOUTQLENPPS = "0";
-        public String DELTATIME = "0";
-
-        public String NODEID = "";
-        public String ATMIF = "";
-        public String VCI = "";
-        public String VPI = "";
-
-    }
-   //---------------------------------------------------------------------------
-        public static class _SWITCH_REPORT_OUT {
-        public String DATETIME = "";
-        public String DEVICEID = "";
-        public String PORTINFO = "";
-        public String GETWAY = "3";
-        public String IFINOCTETS = "0";
-        public String IFOUTOCTETS = "0";
-        public String IFINERRORS = "0";
-        public String IFOUTERRORS = "0";
-        public String IFINDISCARDS = "0";
-        public String IFOUTDISCARDS = "0";
-        public String IFINUCASTPKTS = "0";
-        public String IFOUTUCASTPKTS = "0";
-        public String IFINNUCASTPKTS = "0";
-        public String IFOUTNUCASTPKTS = "0";
-        public String IFINUNKNOWNPROTOS = "0";
-        public String IFOUTQLEN = "0";
-        public String IFINOCTETSBPS = "0";
-        public String IFOUTOCTETSBPS = "0";
-        public String IFINERRORSPPS = "0";
-        public String IFOUTERRORSPPS = "0";
-        public String IFINDISCARDSPPS = "0";
-        public String IFOUTDISCARDSPPS = "0";
-        public String IFINUCASTPKTSPPS = "0";
-        public String IFOUTUCASTPKTSPPS = "0";
-        public String IFINNUCASTPKTSPPS = "0";
-        public String IFOUTNUCASTPKTSPPS = "0";
-        public String IFINUNKNOWNPROTOSPPS = "0";
-        public String IFOUTQLENPPS = "0";
-        public String DELTATIME = "0";
-
-        public String NODEID = "";
-        public String ATMIF = "";
-        public String VCI = "";
-        public String VPI = "";
-
-    }
-    //--------------------------------------------------------------------------
-        public static class atm {
-
-        public String nodeid = "";
-        public String NODEID = "";
-        public String ATMIF = "";
-        public String VPI = "";
-        public String VCI = "";
-        public String TXCELL = "";
-        public String TXCELLDISCARD = "";
-        public String RXCELL = "";
-        public String RXCELLDISCARD = "";
-        public String RXAAL5FRAMEERROR = "";
-        public String UPDATETIME = "";
-    }
-
-}
-class tb_SWITCH_REPORT_OUT {
-/*
-    public static Connection conn = null;
-    public static PreparedStatement pst = null;
-    public static Hashtable lst_p2 = new Hashtable();*/
-//----------------------------------------------------------------
-    public static class _SWITCH_REPORT_OUT {
-
-        public String DATETIME = "";
-        public String DEVICEID = "";
-        public String PORTINFO = "";
-        public String GETWAY = "3";
-        public String IFINOCTETS = "0";
-        public String IFOUTOCTETS = "0";
-        public String IFINERRORS = "0";
-        public String IFOUTERRORS = "0";
-        public String IFINDISCARDS = "0";
-        public String IFOUTDISCARDS = "0";
-        public String IFINUCASTPKTS = "0";
-        public String IFOUTUCASTPKTS = "0";
-        public String IFINNUCASTPKTS = "0";
-        public String IFOUTNUCASTPKTS = "0";
-        public String IFINUNKNOWNPROTOS = "0";
-        public String IFOUTQLEN = "0";
-        public String IFINOCTETSBPS = "0";
-        public String IFOUTOCTETSBPS = "0";
-        public String IFINERRORSPPS = "0";
-        public String IFOUTERRORSPPS = "0";
-        public String IFINDISCARDSPPS = "0";
-        public String IFOUTDISCARDSPPS = "0";
-        public String IFINUCASTPKTSPPS = "0";
-        public String IFOUTUCASTPKTSPPS = "0";
-        public String IFINNUCASTPKTSPPS = "0";
-        public String IFOUTNUCASTPKTSPPS = "0";
-        public String IFINUNKNOWNPROTOSPPS = "0";
-        public String IFOUTQLENPPS = "0";
-        public String DELTATIME = "0";
-
-        public String NODEID = "";
-        public String ATMIF = "";
-        public String VCI = "";
-        public String VPI = "";
-
-    }
-}
-class tb_atmif_performance {
-
-    public static class atm {
-
-        public String nodeid = "";
-        public String NODEID = "";
-        public String ATMIF = "";
-        public String VPI = "";
-        public String VCI = "";
-        public String TXCELL = "";
-        public String TXCELLDISCARD = "";
-        public String RXCELL = "";
-        public String RXCELLDISCARD = "";
-        public String RXAAL5FRAMEERROR = "";
-        public String UPDATETIME = "";
-
-    }
-//---------------------------------------------------------------------
     public static class atmif_performance {
 
         public String DATETIME = "";
@@ -386,6 +238,169 @@ class tb_atmif_performance {
 
     }
 
-   
+    //---------------------------------------------------------------------------
+
+    public static class _SWITCH_REPORT_OUT {
+
+        public String DATETIME = "";
+        public String DEVICEID = "";
+        public String PORTINFO = "";
+        public String GETWAY = "3";
+        public String IFINOCTETS = "0";
+        public String IFOUTOCTETS = "0";
+        public String IFINERRORS = "0";
+        public String IFOUTERRORS = "0";
+        public String IFINDISCARDS = "0";
+        public String IFOUTDISCARDS = "0";
+        public String IFINUCASTPKTS = "0";
+        public String IFOUTUCASTPKTS = "0";
+        public String IFINNUCASTPKTS = "0";
+        public String IFOUTNUCASTPKTS = "0";
+        public String IFINUNKNOWNPROTOS = "0";
+        public String IFOUTQLEN = "0";
+        public String IFINOCTETSBPS = "0";
+        public String IFOUTOCTETSBPS = "0";
+        public String IFINERRORSPPS = "0";
+        public String IFOUTERRORSPPS = "0";
+        public String IFINDISCARDSPPS = "0";
+        public String IFOUTDISCARDSPPS = "0";
+        public String IFINUCASTPKTSPPS = "0";
+        public String IFOUTUCASTPKTSPPS = "0";
+        public String IFINNUCASTPKTSPPS = "0";
+        public String IFOUTNUCASTPKTSPPS = "0";
+        public String IFINUNKNOWNPROTOSPPS = "0";
+        public String IFOUTQLENPPS = "0";
+        public String DELTATIME = "0";
+
+        public String NODEID = "";
+        public String ATMIF = "";
+        public String VCI = "";
+        public String VPI = "";
+
+    }
+
+    //--------------------------------------------------------------------------
+
+    public static class atm {
+
+        public String nodeid = "";
+        public String NODEID = "";
+        public String ATMIF = "";
+        public String VPI = "";
+        public String VCI = "";
+        public String TXCELL = "";
+        public String TXCELLDISCARD = "";
+        public String RXCELL = "";
+        public String RXCELLDISCARD = "";
+        public String RXAAL5FRAMEERROR = "";
+        public String UPDATETIME = "";
+    }
+
+}
+
+class tb_SWITCH_REPORT_OUT {
+    /*
+     public static Connection conn = null;
+     public static PreparedStatement pst = null;
+     public static Hashtable lst_p2 = new Hashtable();*/
+//----------------------------------------------------------------
+
+    public static class _SWITCH_REPORT_OUT {
+
+        public String DATETIME = "";
+        public String DEVICEID = "";
+        public String PORTINFO = "";
+        public String GETWAY = "3";
+        public String IFINOCTETS = "0";
+        public String IFOUTOCTETS = "0";
+        public String IFINERRORS = "0";
+        public String IFOUTERRORS = "0";
+        public String IFINDISCARDS = "0";
+        public String IFOUTDISCARDS = "0";
+        public String IFINUCASTPKTS = "0";
+        public String IFOUTUCASTPKTS = "0";
+        public String IFINNUCASTPKTS = "0";
+        public String IFOUTNUCASTPKTS = "0";
+        public String IFINUNKNOWNPROTOS = "0";
+        public String IFOUTQLEN = "0";
+        public String IFINOCTETSBPS = "0";
+        public String IFOUTOCTETSBPS = "0";
+        public String IFINERRORSPPS = "0";
+        public String IFOUTERRORSPPS = "0";
+        public String IFINDISCARDSPPS = "0";
+        public String IFOUTDISCARDSPPS = "0";
+        public String IFINUCASTPKTSPPS = "0";
+        public String IFOUTUCASTPKTSPPS = "0";
+        public String IFINNUCASTPKTSPPS = "0";
+        public String IFOUTNUCASTPKTSPPS = "0";
+        public String IFINUNKNOWNPROTOSPPS = "0";
+        public String IFOUTQLENPPS = "0";
+        public String DELTATIME = "0";
+
+        public String NODEID = "";
+        public String ATMIF = "";
+        public String VCI = "";
+        public String VPI = "";
+
+    }
+}
+
+class tb_atmif_performance {
+
+    public static class atm {
+
+        public String nodeid = "";
+        public String NODEID = "";
+        public String ATMIF = "";
+        public String VPI = "";
+        public String VCI = "";
+        public String TXCELL = "";
+        public String TXCELLDISCARD = "";
+        public String RXCELL = "";
+        public String RXCELLDISCARD = "";
+        public String RXAAL5FRAMEERROR = "";
+        public String UPDATETIME = "";
+
+    }
+//---------------------------------------------------------------------
+
+    public static class atmif_performance {
+
+        public String DATETIME = "";
+        public String DEVICEID = "";
+        public String PORTINFO = "";
+        public String GETWAY = "";
+        public String IFINOCTETS = "0";
+        public String IFOUTOCTETS = "0";
+        public String IFINERRORS = "0";
+        public String IFOUTERRORS = "0";
+        public String IFINDISCARDS = "0";
+        public String IFOUTDISCARDS = "0";
+        public String IFINUCASTPKTS = "0";
+        public String IFOUTUCASTPKTS = "0";
+        public String IFINNUCASTPKTS = "0";
+        public String IFOUTNUCASTPKTS = "0";
+        public String IFINUNKNOWNPROTOS = "0";
+        public String IFOUTQLEN = "0";
+        public String IFINOCTETSBPS = "0";
+        public String IFOUTOCTETSBPS = "0";
+        public String IFINERRORSPPS = "0";
+        public String IFOUTERRORSPPS = "0";
+        public String IFINDISCARDSPPS = "0";
+        public String IFOUTDISCARDSPPS = "0";
+        public String IFINUCASTPKTSPPS = "0";
+        public String IFOUTUCASTPKTSPPS = "0";
+        public String IFINNUCASTPKTSPPS = "0";
+        public String IFOUTNUCASTPKTSPPS = "0";
+        public String IFINUNKNOWNPROTOSPPS = "0";
+        public String IFOUTQLENPPS = "0";
+        public String DELTATIME = "0";
+
+        public String NODEID = "";
+        public String ATMIF = "";
+        public String VCI = "";
+        public String VPI = "";
+
+    }
 
 }
