@@ -108,7 +108,7 @@ public class fun {
                         }
 
                     } else {
-                        set_value(message_start + 1, i, "电路代号,No Path");
+                        set_value(message_start + 1, i, "电路代号,没有电路");
                     }
 
                     List _list2 = db.haspath(_csnms, pathname2);
@@ -136,7 +136,7 @@ public class fun {
                             set_value(message_start + 2, i, "本地专线号,无路由数据");
                         }
                     } else {
-                        set_value(message_start + 2, i, "本地专线号,No path");
+                        set_value(message_start + 2, i, "本地专线号,没有电路");
                     }
                 }
 
