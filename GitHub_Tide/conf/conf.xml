@@ -199,7 +199,7 @@
             <IP>132.228.36.5</IP>
             <USER>taisitong</USER>
             <PWD>Telecom@123</PWD>
-            <DIR>/export/home/process_epon/TelnetPingImd/PingDate/logs</DIR>
+            <DIR>/export/home/process_epon/TelnetPingImd/PingDate</DIR>
         </Client>
         
         
