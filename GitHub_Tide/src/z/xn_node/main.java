@@ -18,7 +18,7 @@ public class main extends Thread {
     private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//
 
-    private static GetThread.thread _thread = new GetThread.thread(1);
+    private static util.GetThread.thread _thread = new util.GetThread.thread(1);
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
 
 //-----------------------------------加载数据库-------------------------------------------
@@ -26,7 +26,7 @@ public class main extends Thread {
         if (db.ini(_csnms)) {
             while (true) {
                 try {
-                    _thread = new GetThread.thread(10);
+                    _thread = new util.GetThread.thread(10);
                     doing_main();
                     Thread.sleep(1000 * 30);//60秒
                 } catch (Exception e) {
