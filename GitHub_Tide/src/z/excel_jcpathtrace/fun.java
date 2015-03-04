@@ -52,7 +52,11 @@ public class fun {
         boolean bs = false;
         try {
             W_book = _excel.excel_W_Workbook(fileurl);
-            W_sheet = W_book.getSheet(sheetname);
+            if (sheetname == null || sheetname.length() == 0) {
+                W_sheet = W_book.getSheet(0);
+            } else {
+                W_sheet = W_book.getSheet(sheetname);
+            }
             bs = true;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -60,7 +64,7 @@ public class fun {
         return bs;
     }
 
-    public static boolean jc_data(util.GetSql.csnms _csnms,int dlbh,int bdzxh,int message_start) {
+    public static boolean jc_data(util.GetSql.csnms _csnms, int dlbh, int bdzxh, int message_start) {
         boolean bs = false;
         try {
 
@@ -98,13 +102,13 @@ public class fun {
                         }
 
                         if (_bs3) {
-                            set_value(message_start+1, i, "电路代号,有路由数据");
+                            set_value(message_start + 1, i, "电路代号,有路由数据");
                         } else {
-                            set_value(message_start+1, i, "电路代号,无路由数据");
+                            set_value(message_start + 1, i, "电路代号,无路由数据");
                         }
 
                     } else {
-                        set_value(message_start+1, i, "电路代号,No Path");
+                        set_value(message_start + 1, i, "电路代号,No Path");
                     }
 
                     List _list2 = db.haspath(_csnms, pathname2);
@@ -127,12 +131,12 @@ public class fun {
                         }
 
                         if (_bs3) {
-                            set_value(message_start+2, i, "本地专线号,有路由数据");
+                            set_value(message_start + 2, i, "本地专线号,有路由数据");
                         } else {
-                            set_value(message_start+2, i, "本地专线号,无路由数据");
+                            set_value(message_start + 2, i, "本地专线号,无路由数据");
                         }
                     } else {
-                        set_value(message_start+2, i, "本地专线号,No path");
+                        set_value(message_start + 2, i, "本地专线号,No path");
                     }
                 }
 
