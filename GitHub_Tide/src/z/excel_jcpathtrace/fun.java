@@ -60,7 +60,7 @@ public class fun {
         return bs;
     }
 
-    public static boolean jc_data(util.GetSql.csnms _csnms) {
+    public static boolean jc_data(util.GetSql.csnms _csnms,int dlbh,int bdzxh,int message_start) {
         boolean bs = false;
         try {
 
@@ -69,12 +69,12 @@ public class fun {
 
             for (int i = 1; i < rows; i++) {
                 System.out.println("读取数据：" + (i) + "/" + (rows - 1));
-                String pathname1 = get_value(0, i).trim().toString().trim();
-                String pathname2 = get_value(13, i).trim().toString().trim();
+                String pathname1 = get_value(dlbh, i).trim().toString().trim();
+                String pathname2 = get_value(bdzxh, i).trim().toString().trim();
                 System.out.println(pathname1 + "#" + pathname2);
 
                 if (!pathname1.equals(pathname2)) {
-                    set_value(25, i, "A列N列名称不一致");
+                    set_value(message_start, i, "电路编号&本地专线号:不一致");
                 }
 
                 if (pathname1.length() > 0) {
@@ -98,13 +98,13 @@ public class fun {
                         }
 
                         if (_bs3) {
-                            set_value(23, i, "A列电路代号,有路由数据");
+                            set_value(message_start+1, i, "电路代号,有路由数据");
                         } else {
-                            set_value(23, i, "A列电路代号,无路由数据");
+                            set_value(message_start+1, i, "电路代号,无路由数据");
                         }
 
                     } else {
-                        set_value(23, i, "A列电路代号,No Path");
+                        set_value(message_start+1, i, "电路代号,No Path");
                     }
 
                     List _list2 = db.haspath(_csnms, pathname2);
@@ -127,12 +127,12 @@ public class fun {
                         }
 
                         if (_bs3) {
-                            set_value(24, i, "N列本地专线号,有路由数据");
+                            set_value(message_start+2, i, "本地专线号,有路由数据");
                         } else {
-                            set_value(24, i, "N列本地专线号,无路由数据");
+                            set_value(message_start+2, i, "本地专线号,无路由数据");
                         }
                     } else {
-                        set_value(24, i, "N列本地专线号,No path");
+                        set_value(message_start+2, i, "本地专线号,No path");
                     }
                 }
 
