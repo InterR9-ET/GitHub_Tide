@@ -13,6 +13,7 @@ public class run_pro {
     public static void main(String [] args){
         try{
             z.pro.main Main=new z.pro.main();
+            Main.run();
         }catch(Exception e){
             e.printStackTrace();
         }
