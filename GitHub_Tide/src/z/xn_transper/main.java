@@ -19,6 +19,7 @@ public class main extends Thread {
     public static Hashtable keyHash = new Hashtable();
     public static List list_perfinstance = new ArrayList();
 
+    private static util.GetFile.excel _excel = new util.GetFile.excel();
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
 
     public void run() {
@@ -82,8 +83,19 @@ public class main extends Thread {
                             fun.indata2(_list, log, _csnms);//执行写入   
                         }
                         Thread.sleep(1000 * 1);//2秒
-                        //解析完成之后删除文件
+                        
+                        
+                        //解析完成之后拷贝文件
+                        File directory = new File("");
+                        String bfpath = "/file/xingneng/transper";
+                        String _url = directory.getCanonicalPath() + bfpath;
                         File file2 = new File(fil);
+                        boolean _bs_c = _excel.copy_file(fil, _url);
+                            if (_bs_c) {
+                                log.info("Copy成功：" + _url);
+                            }
+                            
+                        //解析完成之后删除文件
                         file2.delete();
                         log.info("删除文件:" + fil);
                         Thread.sleep(1000 * 1);//2秒
