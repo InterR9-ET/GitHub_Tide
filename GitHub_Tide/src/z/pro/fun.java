@@ -6,12 +6,8 @@
 package z.pro;
 
 import java.io.File;
-import z.xn_atm.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +24,7 @@ public class fun {
     private static util.GetThread.thread _thread = new util.GetThread.thread(6);
     private static util.GetTools.getPro _pro = new util.GetTools.getPro();
     private static util.GetTools.tools _tools = new util.GetTools.tools();
-    private static GetSql.donghuan_mysql _donghuan_mysql = new GetSql.donghuan_mysql();
+    private static util.GetSql.donghuan_mysql _donghuan_mysql = new util.GetSql.donghuan_mysql();
 
     public static String str_sms = "";
     public static String str_file_url = "";
@@ -42,12 +38,7 @@ public class fun {
             // 加载启动文件
             List sh_file_list = load_sh_file();
             // --------------------------添加任务------------------------//
-            _thread.execute(task_15_min(sh_file_list, log));// 2分钟轮询任务
-            //_thread.execute(task_5_min(sh_file_list, log));// 5分钟轮询任务
-           // _thread.execute(task_10_min(sh_file_list, log));// 5分钟轮询任务
-            //_thread.execute(task_60_min(sh_file_list, log));// 1小时轮询任务
-            //_thread.execute(task_ds_45_min());// 定时监控任务
-            //_thread.execute(task_ds_00_min());// 定时监控任务
+            _thread.execute(task_15_min(sh_file_list, log));// 15分钟轮询任务
             // --------------------------添加任务------------------------//
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,14 +90,6 @@ public class fun {
                 while (true) {
                     int _time = 15;
                     log.info("######" + _time + "分钟任务begin");
-
-                    // 检查转发告警
-                    /**
-                     * try { log.info("--------检查转发告警");
-                     * jc_alarm_mes(sh_file_list); log.info("--------完成"); }
-                     * catch (Exception e) { e.printStackTrace();
-                     * log.info("检查转发告警:ERROR:" + e.getMessage()); }*
-                     */
                     // 检查atm性能采集
                     try {
                         log.info("--------检查atm性能采集");
@@ -115,24 +98,6 @@ public class fun {
                     } catch (Exception e) {
                         e.printStackTrace();
                         log.info("检查atm性能采集:ERROR:" + e.getMessage());
-                    }
-                    
-                    
-                    // 检查命令发送
-                    try {
-                        log.info("--------检查命令发送");
-                        // jc_command_send(sh_file_list);
-                        log.info("--------完成");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        log.info("检查命令发送:ERROR:" + e.getMessage());
-                    }
-
-                    try {
-                        log.info("######" + _time + "分钟任务end");
-                        Thread.sleep(1000 * 60 * _time);// 延时
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                     
                     
@@ -169,87 +134,17 @@ public class fun {
                     }
                     
                     
-                    
                     try {
                         log.info("######" + _time + "分钟任务end");
                         Thread.sleep(1000 * 60 * _time);// 延时
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    
-                    
                 }
             }
         };
     }
 
-   /** private static Runnable task_5_min(final List sh_file_list, final org.apache.log4j.Logger log) {
-        return new Runnable() {
-            public void run() {
-
-                while (true) {
-                    int _time = 5;
-                    log.info("######" + _time + "分钟任务begin");
-
-                    // 检查命令发送
-                    try {
-                        log.info("--------检查命令发送");
-                        // jc_command_send(sh_file_list);
-                        log.info("--------完成");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        log.info("检查命令发送:ERROR:" + e.getMessage());
-                    }
-
-                    try {
-                        log.info("######" + _time + "分钟任务end");
-                        Thread.sleep(1000 * 60 * _time);// 延时
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        };
-    }**/
-
-    /**private static Runnable task_10_min(final List sh_file_list, final org.apache.log4j.Logger log) {
-        return new Runnable() {
-            public void run() {
-                while (true) {
-                    int _time = 10;
-                    log.info("######" + _time + "分钟任务begin");
-
-                    // 检测PING性能文件
-                    try {
-                        log.info("--------检测PING性能文件");
-                        jc_ping_file(sh_file_list, log);//++++ ++++ +++
-                        log.info("--------完成");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        log.info("检测PING性能文件:ERROR:" + e.getMessage());
-                    }
-
-                    // 检测PORT性能文件
-                    try {
-                        log.info("--------检测PORT性能文件");
-                        jc_port_file(sh_file_list, log);
-                        log.info("--------完成");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        log.info("检测PORT性能文件:ERROR:" + e.getMessage());
-                    }
-
-                    try {
-                        log.info("######" + _time + "分钟任务end");
-                        Thread.sleep(1000 * 60 * _time);// 延时
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-    }**/
 
     public static void jc_ping_file(List sh_file_list, org.apache.log4j.Logger log) {
         // 总文件
@@ -356,14 +251,16 @@ public class fun {
             if (File_list.size() > 50) {
                 if (str_sms.trim().length() > 0) {
                     str_sms = str_sms + "," + "[PINGPER]中文件积压";
+                    log.info(str_sms);
                 } else {
                     str_sms = str_sms + "[PINGPER]中文件积压";
+                    log.info(str_sms);
                 }
             }
             // 重启进程
             if (return_sh_file("ping.sh", sh_file_list, log)) {
                 String _url = str_file_url + "/" + "ping.sh" + " &";
-                log.info("run :" + _url);
+                log.info("重启进程，run :" + _url);
                 _pro.Pro_Start(_url);
             }
         }
@@ -373,9 +270,8 @@ public class fun {
     public static boolean return_sh_file(String str_file, List sh_file_list, org.apache.log4j.Logger log) {
         boolean _bs = false;
         for (int i = 0, m = sh_file_list.size(); i < m; i++) {
-            String _file1 = sh_file_list.get(i).toString().replaceAll("./", "");
-            String _file2 = str_file;
-            if (_file1.equals(_file2)) {
+            String _file1 = sh_file_list.get(i).toString();       
+            if (_file1.indexOf(str_file)>-1) {
                 _bs = true;
                 break;
             }
@@ -403,14 +299,15 @@ public class fun {
                         if (files1[kk].toString().indexOf("flux_data") != -1) {
                             String fil = files1[kk].toString();
                             File_list.add(fil);
+                            System.out.println(File_list.size());
                         }
                     }
                 }
             }
         }
 
-        if (File_list.size() > 40) {
-            if (File_list.size() > 60) {
+        if (File_list.size() > 5) {
+            if (File_list.size() > 6) {
                 if (str_sms.trim().length() > 0) {
                     str_sms = str_sms + "," + "[PORTPER]中文件积压";
                 } else {
@@ -418,7 +315,7 @@ public class fun {
                 }
             }
             // 重启进程
-            if (return_sh_file("portper.sh", sh_file_list, log)) {
+            if (return_sh_file("run_xn_port.sh", sh_file_list, log)) {
                 String _url = str_file_url + "/" + "portper.sh" + " &";
                 log.info("run :" + _url);
                 _pro.Pro_Start(_url);
@@ -426,54 +323,6 @@ public class fun {
         }
 
     }
-
-   /** private static Runnable task_60_min(final List sh_file_list, final org.apache.log4j.Logger log) {
-        return new Runnable() {
-            public void run() {
-
-                while (true) {
-                    int _time = 60;
-                    log.info("######" + _time + "分钟任务begin");
-
-                    // 检测NODE性能文件
-                    try {
-                        log.info("--------检测NODE性能文件");
-                        jc_node_file(sh_file_list, log);
-                        log.info("--------完成");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        log.info("检测NODE性能文件:ERROR:" + e.getMessage());
-                    }
-
-                    // 检测transper性能文件
-                    /**
-                     * try { log.info("--------检测transper性能文件");
-                     * jc_transper_file(sh_file_list); log.info("--------完成"); }
-                     * catch (Exception e) { e.printStackTrace();
-                     * log.info("检测transper性能文件:ERROR:" + e.getMessage()); }
-                     *
-                     * // 检测wbs_transper性能文件 try {
-                     * log.info("--------检测wbs_transper性能文件");
-                     * jc_wbs_transper(sh_file_list); log.info("--------完成"); }
-                     * catch (Exception e) { e.printStackTrace();
-                     * log.info("检测wbs_transper性能文件:ERROR:" + e.getMessage()); }
-                     *
-                     * // 检查jason性能采集 try { log.info("--------检查jason性能采集");
-                     * jc_jason(sh_file_list); log.info("--------完成"); } catch
-                     * (Exception e) { e.printStackTrace();
-                     * log.info("检查jason性能采集:ERROR:" + e.getMessage()); }*
-                     *
-                    try {
-                        log.info("######" + _time + "分钟任务end");
-                        Thread.sleep(1000 * 60 * _time);// 延时1小时
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        };
-    }**/
 
     public static void jc_node_file(List sh_file_list, org.apache.log4j.Logger log) {
         // 总文件
@@ -512,34 +361,6 @@ public class fun {
             }
         }
 
-    }
-
-    public static void out_result(org.apache.log4j.Logger log) {
-
-        if (str_sms.trim().length() > 0) {
-            log.info(str_sms);
-            for (int i = 0, m = people_list.size(); i < m; i++) {
-                strclass.peopleinfo _peo = new strclass.peopleinfo();
-                _peo = (strclass.peopleinfo) people_list
-                        .get(i);
-                _peo.MESSAGE = str_sms;
-                _peo.USERID = "xn";
-                String str_time = _tools.systime_prase_string("");
-                str_time = str_time.substring(str_time.length() - 8,
-                        str_time.length() - 6);
-
-                if (str_time.equals("01") || str_time.equals("02")
-                        || str_time.equals("03") || str_time.equals("04")
-                        || str_time.equals("05") || str_time.equals("06")
-                        || str_time.equals("07")) {
-                    break;
-                } else {
-                    //sms_sendtools.sendmessage.send_mess(_peo);
-                }
-            }
-        } else {
-
-        }
     }
 
     public static void jc_atm(List sh_file_list,org.apache.log4j.Logger log) {
