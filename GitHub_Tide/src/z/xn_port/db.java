@@ -302,11 +302,12 @@ public class db {
                     }                 
 
                     if (_port.DATETIME == null || _port.DATETIME.length() == 0) {
+                        System.out.println("*"+_port.DATETIME+"");
                         continue;
                     }
                     
                     String key = _port.DATETIME + "_" + _port.DEVICEID + "_" + _port.PORTINFO+"_"+_port.GETWAY.toString();
-                    //System.out.println(key);
+                    System.out.println(key);
 
                     
                     Object[] objs = new Object[]{
