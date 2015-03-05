@@ -1,63 +1,103 @@
 package z.xn_transper;
 
-import z.xn_port.*;
-import z.send_sms.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-
-import java.rmi.RemoteException;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-import org.xml.sax.InputSource;
-import java.lang.Thread;
-import java.net.URLEncoder;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
 
-import javax.xml.rpc.ServiceException;
-
-
-/**
- *
- * @author yangzhen
- * @author 功能：短信发送
- * @author 描述：
- * @author 系统内部短信发送，用于信息提醒。  电信走动环，移动联通走综调。  
- * @author 动环的需要等一段时间才有回执，综调可以立刻得到回执。   通过回执的状态判断短信的发送状态
- *
- */
 public class main extends Thread {
 
     //-------------------------------------日志---------------------------------------//
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(main.class.getName()); //获得logger
+
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_xntransper.config");
     }
-    private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//
 
-    private static util.GetSql.csnms _csnms = new util.GetSql.csnms(); 
-    private static util.GetThread.thread _thread = new util.GetThread.thread(2);
+    public static Hashtable keyHash = new Hashtable();
+    public static List list_perfinstance = new ArrayList();
 
-  
+    private static util.GetSql.csnms _csnms = new util.GetSql.csnms();
 
     public void run() {
-    
+        if (db.ini(log, _csnms)) {
+            while (true) {
+                try {
+                    doing_main();
+                    Thread.sleep(1000 * 30);//60秒
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void doing_main() {
-       
+        try {
+            log.info("[——程序开始执行——]");
+            keyHash.clear();
+            File file = new File("transper/");
+            File[] files = file.listFiles();
+            Arrays.sort(files);//文件进行排序
+
+            List _list = new ArrayList();
+            boolean _bhj = false;
+            System.out.println("==========文件列表==========");
+            for (int i = 0, len = files.length; i < len; i++) {
+                if (!files[i].isDirectory()) {
+                    //--------------------流量
+                    if (files[i].toString().indexOf("circuit_pm") != -1) {
+                        String fil = files[i].toString();
+                        System.out.println(fil);
+                        _bhj = true;
+                    }
+                }
+            }
+            System.out.println("==========文件列表==========");
+
+            if (_bhj) {
+                log.info("加载perfinstance");
+                list_perfinstance = db.load_perfinstance(_csnms);
+                log.info("perfinstance数据:" + list_perfinstance.size());
+            }
+
+            Thread.sleep(1000 * 1);//60秒
+
+            for (int i = 0, len = files.length; i < len; i++) {
+
+                if (!files[i].isDirectory()) {
+                    //--------------------流量
+                    if (files[i].toString().indexOf("circuit_pm") != -1) {
+                        //
+                        db.TRUNCATE(files[i], _csnms);
+                        System.out.println("历史数据清除");
+                        //开始解析获取数据 
+                        String fil = files[i].toString();
+                        _list = fun.jiexi2(fil);
+
+                        //将解析的数据写入数据库
+                        if (_list.size() > 0) {
+                            fun.indata2(_list, log, _csnms);//执行写入   
+                        }
+                        Thread.sleep(1000 * 1);//2秒
+                        //解析完成之后删除文件
+                        File file2 = new File(fil);
+                        file2.delete();
+                        log.info("删除文件:" + fil);
+                        Thread.sleep(1000 * 1);//2秒
+
+                        list_perfinstance.clear();
+                        fun.doing_main2(_csnms, log);
+                    }
+                }
+            }
+            _list.clear();
+            keyHash.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
