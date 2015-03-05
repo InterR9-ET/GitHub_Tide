@@ -36,7 +36,8 @@ public class strclass {
      
      
       public static class ALARM_MES2 {
-
+          
+        String CXyxsj="";
         String STARTTIME = "";
         String UPDATETIME = "";
         String TYPE = "";

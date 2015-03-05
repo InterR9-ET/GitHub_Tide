@@ -9,14 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import z.allprocess.*;
-import z.xn_transperwbs.*;
-import z.xn_transper.*;
-import z.xn_port.*;
-import z.send_sms.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -29,14 +22,10 @@ import jxl.write.WritableWorkbook;
  *
  */
 public class fun {
-    
-    
+
     private static util.GetFile.excel _excel = new util.GetFile.excel();
     private static util.GetFile.txt _txt = new util.GetFile.txt();
-    
-    
-  
-    
+
     public static WritableSheet get_sheet(String sheet_name, int i, WritableWorkbook W_book) {
         WritableSheet W_sheet = null;
         try {
@@ -47,16 +36,19 @@ public class fun {
         }
         return W_sheet;
     }
-    
-    
-    
 
+    /**
+     *
+     * @param _mes------------------------------------------查找的路由信息
+     * @param _csnms----------------------------------------数据库
+     * @param _zhizhen--------------------------------------数据库
+     * @param _ess------------------------------------------数据库
+     */
     public static void com_dake(strclass.ALARM_MES _mes, util.GetSql.csnms _csnms, util.GetSql.zhizhen _zhizhen, util.GetSql.ess _ess) {
 
         StringBuffer _str = new StringBuffer();
         _str.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append("\r\n");
         _str.append("<告警核查>").append("\r\n");
-
         _str.append("<告警信息>").append("\r\n");
         if (_mes.SE_ALARM_ID.length() > 0) {
             _str.append(get_alarmm_xml(_mes, _csnms));
@@ -90,11 +82,9 @@ public class fun {
 
     }
 
-    
-    
-    private static String get_zhizhen_xml(strclass.ALARM_MES _alarm,util.GetSql.zhizhen _zhizhen) {
+    private static String get_zhizhen_xml(strclass.ALARM_MES _alarm, util.GetSql.zhizhen _zhizhen) {
         StringBuffer _str = new StringBuffer();
-        List _list_dk = db.get_zhizhen_pathtrace(_alarm,_zhizhen);
+        List _list_dk = db.get_zhizhen_pathtrace(_alarm, _zhizhen);
         int m_dk = _list_dk.size();
         if (m_dk > 0) {
             _str.append("<路由>").append("\r\n");
@@ -173,15 +163,10 @@ public class fun {
         }
         return _str.toString();
     }
-    
-    
-    
-    
-    
-    
-    private static String get_ess_xml(strclass.ALARM_MES _alarm,util.GetSql.ess  _ess) {
+
+    private static String get_ess_xml(strclass.ALARM_MES _alarm, util.GetSql.ess _ess) {
         StringBuffer _str = new StringBuffer();
-        List _list_dk = db.get_ess_path(_alarm,_ess);
+        List _list_dk = db.get_ess_path(_alarm, _ess);
         int m_dk = _list_dk.size();
         if (m_dk > 0) {
             _str.append("<电路>").append("\r\n");
@@ -227,10 +212,15 @@ public class fun {
         }
         return _str.toString();
     }
-    
-    
-   private static String get_alarmm_xml(strclass.ALARM_MES _mes,util.GetSql.csnms _csnms ) {
+/**
+ * 
+ * @param _mes---------------------------------------------------要核查的路由信息
+ * @param _csnms-------------------------------------------------数据库
+ * @return 
+ */
+    private static String get_alarmm_xml(strclass.ALARM_MES _mes, util.GetSql.csnms _csnms) {
 
+        //与大客核查路由信息
         int node_count = db.seach_has_node(_csnms, _mes);
         if (node_count == 0) {
             _mes.NODE_MES = "大客无此设备";
@@ -284,8 +274,6 @@ public class fun {
         return _str.toString();
     }
 
-    
-
     private static String get_dk_xml(strclass.ALARM_MES _alarm, util.GetSql.csnms _csnms) {
         StringBuffer _str = new StringBuffer();
         List _list_dk = db.get_dk_pathtrace(_alarm, _csnms);
@@ -293,7 +281,7 @@ public class fun {
         if (m_dk > 0) {
             _str.append("<路由>").append("\r\n");
             for (int i = 0; i < m_dk; i++) {
-                HashMap map = (HashMap) _list_dk.get(i);
+                HashMap map = (HashMap) _list_dk.get(i);//-------遍历每条信息，放入hashmap
 
                 _str.append("<SERIA ");
                 _str.append(" 序号=\"");
@@ -414,7 +402,6 @@ public class fun {
         return _str.toString();
     }
 
-    
     private static String str_rel(String str_con) {
 
         boolean _bs = false;
@@ -444,31 +431,34 @@ public class fun {
         return str_con;
     }
 
-    
+    /**
+     * @param message---------------------------------------------查询的条件信息
+     * @param wg--------------------------------------------------地区
+     * @param _day -----------------------------------------------查询的日期
+     */
     //---------------------------------筛选log日志----------------------------------
     public void run(String message, String wg, int _day) {
-        String key = "";
+        String key = "";//--------------------------------------------------???
         if (message.length() > 0) {
             //判断是否有条件
             import_data2("file/alarmhecha/" + _day + "/", message + "_" + _day + ".xls", key, message, wg);
-        } else {
+        } else {//---------------------------------------------------------？？？
             import_data("file/alarm_log/", "data.xls", key);
         }
     }
-    
+
     //---------------------------------有筛选条件的筛选log日志----------------------------------
     /**
-     * 
      * @param _url------------------------------------------log日志的路径
      * @param _filename-------------------------------------查出信息的存放的文件
      * @param key-------------------------------------------
      * @param message---------------------------------------筛选条件
-     * @param wg -------------------------------------------
+     * @param wg -------------------------------------------地区
      */
     public static void import_data2(String _url, String _filename, String key, String message, String wg) {
         //信息写入的文件完整路径
         String file_full_url = _url + _filename;
-
+        //创建Excel
         boolean _bs = _excel.create_file(file_full_url);
         if (_bs) {
             try {
@@ -482,13 +472,16 @@ public class fun {
                  */
                 WritableSheet W_sheet_nj = null;
 
+                //打开文件
                 W_book = _excel.excel_W_Workbook(file_full_url);
                 int maxRowCount = 50000;//设置最大的行数
                 int sheet_count = 0;
 
+                //第一个工作表被命名为“合并”,从0开始，每个工作表限制5000行
                 W_sheet_nj = get_sheet("合并", sheet_count, W_book);
                 sheet_count = sheet_count + 1;
 
+                //行数
                 int W_sheet_nj_rows = 0;
 
                 //读取数据文件
@@ -501,7 +494,7 @@ public class fun {
                 for (int i = 0; i < files.length; i++) {
                     if (!files[i].isDirectory()) {                       //判断是否是一个目录
                         String _url2 = _url.replace("/", "\\");
-                        String _url3 = files[i].toString();
+                        //String _url3 = files[i].toString();
                         //System.out.println(_url2 + "##" + _url3);
                         String file_name = files[i].toString().replace(_url2, "");
                         if (!file_name.equals(_filename)) {             //将Excel文件去除
@@ -509,11 +502,18 @@ public class fun {
                             //解析log文件                       
                             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fil), "GBK"));
                             String str = null;
+                            String str1=null;
                             int count = 0;
                             System.out.println(fil + "####");
                             strclass.ALARM_MES2 _ALARM_MES = new strclass.ALARM_MES2();
                             //逐行读取
                             while ((str = br.readLine()) != null) {
+                                if(str.startsWith("INFO")&& str.contains("RelayServer (RelayServer.java:87)")){
+                                    StringBuilder str2 = new StringBuilder(str);
+                                    str2.replace(25, 83, "");
+                                    str2.replace(0, 6, "");
+                                    str1=str2.toString();
+                                }
                                 if (str.indexOf(">>收到告警") != -1) {
                                     str = str.toString().replace(" - --->>收到告警：", "");
                                     //System.out.println(str.toString());
@@ -525,6 +525,7 @@ public class fun {
                                     }
 
                                     _ALARM_MES = new strclass.ALARM_MES2();
+                                    _ALARM_MES.CXyxsj=str1.toString();
                                     _ALARM_MES.DESCRIPTION = str;
                                     _ALARM_MES.FILENAME = fil;
 
@@ -541,15 +542,17 @@ public class fun {
                                             continue;
                                         }
                                     }
-
+                                    //插完一条信息，行数加一
                                     W_sheet_nj_rows = W_sheet_nj_rows + 1;
+                                    //如果行数超过设置的数量，则自动加一页表
                                     if (W_sheet_nj_rows > maxRowCount) {
                                         sheet_count = sheet_count + 1;
                                         W_sheet_nj = get_sheet("合并" + sheet_count, sheet_count, W_book);
                                         W_sheet_nj_rows = 0;
                                         W_sheet_nj_rows = W_sheet_nj_rows + 1;
+                                        //调用插入数据的方法
                                         insert(W_sheet_nj, _ALARM_MES, W_sheet_nj_rows);
-                                    } else {
+                                    } else {//如果没有超过设置行数，直接插入
                                         insert(W_sheet_nj, _ALARM_MES, W_sheet_nj_rows);
                                     }
                                 }
@@ -579,9 +582,8 @@ public class fun {
             System.out.println("[" + file_full_url + "]创建失败");
         }
     }
-    
-    
-    
+
+    //---------------------------------没有筛选条件的筛选log日志----------------------------------
     public static void import_data(String _url, String _filename, String key) {
         String file_full_url = _url + _filename;
 
@@ -888,41 +890,43 @@ public class fun {
             System.out.println("[" + file_full_url + "]创建失败");
         }
     }
-    
-    
-    public static void insert(WritableSheet W_sheet,strclass.ALARM_MES2 _alarm, int count) {
-        //写数据
+
+    /**
+     * @param W_sheet----------------------------------------------表页数
+     * @param _alarm-----------------------------------------------要插入的信息
+     * @param count -----------------------------------------------信息插入的行数
+     */
+    //---------------------------------讲符合条件的信息写入Excel----------------------------------
+    public static void insert(WritableSheet W_sheet, strclass.ALARM_MES2 _alarm, int count) {
+        //写数据表头
         if (count == 1) {
-            _excel.excel_W_Cell(W_sheet, 0, 0, "START_TIME");
-            _excel.excel_W_Cell(W_sheet, 1, 0, "UPDATE_TIME");
-            _excel.excel_W_Cell(W_sheet, 2, 0, "网管名称");
-            _excel.excel_W_Cell(W_sheet, 3, 0, "告警状态");
-            _excel.excel_W_Cell(W_sheet, 4, 0, "所属文件");
-            _excel.excel_W_Cell(W_sheet, 5, 0, "高级内容");
+            _excel.excel_W_Cell(W_sheet, 0, 0, "程序运行时间");
+            _excel.excel_W_Cell(W_sheet, 1, 0, "START_TIME");
+            _excel.excel_W_Cell(W_sheet, 2, 0, "UPDATE_TIME");
+            _excel.excel_W_Cell(W_sheet, 3, 0, "网管名称");
+            _excel.excel_W_Cell(W_sheet, 4, 0, "告警状态");
+            _excel.excel_W_Cell(W_sheet, 5, 0, "所属文件");
+            _excel.excel_W_Cell(W_sheet, 6, 0, "高级内容");
 
         }
 
         //---------------------写数据-------------------------//
-        _excel.excel_W_Cell(W_sheet, 0, count, _alarm.STARTTIME);
-        _excel.excel_W_Cell(W_sheet, 1, count, _alarm.UPDATETIME);
-        _excel.excel_W_Cell(W_sheet, 2, count, _alarm.WGNAME);
+        _excel.excel_W_Cell(W_sheet, 0, count, _alarm.CXyxsj);
+        _excel.excel_W_Cell(W_sheet, 1, count, _alarm.STARTTIME);
+        _excel.excel_W_Cell(W_sheet, 2, count, _alarm.UPDATETIME);
+        _excel.excel_W_Cell(W_sheet, 3, count, _alarm.WGNAME);
         if (_alarm.TYPE.equals("1")) {
-            _excel.excel_W_Cell(W_sheet, 3, count, "恢复告警");
+            _excel.excel_W_Cell(W_sheet, 4, count, "恢复告警");
         } else if (_alarm.TYPE.equals("0")) {
-            _excel.excel_W_Cell(W_sheet, 3, count, "活动告警");
+            _excel.excel_W_Cell(W_sheet, 4, count, "活动告警");
         } else {
-            _excel.excel_W_Cell(W_sheet, 3, count, "异常未能识别：[" + _alarm.TYPE + "]");
+            _excel.excel_W_Cell(W_sheet, 4, count, "异常未能识别：[" + _alarm.TYPE + "]");
         }
 
         String _description = _alarm.DESCRIPTION.replace("\t", " ").replace("null", " ");
 
-        _excel.excel_W_Cell(W_sheet, 4, count, _alarm.FILENAME.toString());
-        _excel.excel_W_Cell(W_sheet, 5, count, _description.toString());
+        _excel.excel_W_Cell(W_sheet, 5, count, _alarm.FILENAME.toString());
+        _excel.excel_W_Cell(W_sheet, 6, count, _description.toString());
         //---------------------写数据-------------------------//
     }
-    
-    
-    
-    
-    
 }
