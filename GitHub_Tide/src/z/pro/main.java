@@ -23,8 +23,8 @@ public class main extends Thread {
     private util.GetTools.tools _tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//   
     private util.GetSql.csnms _csnms = new util.GetSql.csnms();
-    private util.GetThread.thread _thread = new util.GetThread.thread(2);
 
+    //-------------------------------------程序入口------------------------------------
     public void run() {
         if (db.ini(log,_csnms)) {
             doing_main();
@@ -33,6 +33,7 @@ public class main extends Thread {
         }
     }
 
+    //-------------------------------------主程序------------------------------------
     public void doing_main() {
 		try {
 			log.info("开始运行:" + _tools.systime_prase_string("")+ "---------------------------");

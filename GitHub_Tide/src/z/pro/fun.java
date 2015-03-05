@@ -19,11 +19,8 @@ import java.util.List;
  *
  */
 public class fun {
-
-    private static util.GetTools.tools _datas = new util.GetTools.tools();
     private static util.GetThread.thread _thread = new util.GetThread.thread(6);
     private static util.GetTools.getPro _pro = new util.GetTools.getPro();
-    private static util.GetTools.tools _tools = new util.GetTools.tools();
     private static util.GetSql.donghuan_mysql _donghuan_mysql = new util.GetSql.donghuan_mysql();
 
     public static String str_sms = "";
@@ -51,6 +48,7 @@ public class fun {
         }
     }
 
+    //-----------------------------加载文件---------------------------------------------
     public static List load_sh_file() {
         // 加载文件
         List sh_file_list = new ArrayList();
@@ -83,6 +81,7 @@ public class fun {
         return sh_file_list;
     }
 
+    //----------------------------任执行务---------------------------------------
     private static Runnable task_15_min(final List sh_file_list, final org.apache.log4j.Logger log) {
         return new Runnable() {
             public void run() {
@@ -93,14 +92,13 @@ public class fun {
                     // 检查atm性能采集
                     try {
                         log.info("--------检查atm性能采集");
-                        jc_atm(sh_file_list,log);
+                        jc_atm(sh_file_list, log);
                         log.info("--------完成");
                     } catch (Exception e) {
                         e.printStackTrace();
                         log.info("检查atm性能采集:ERROR:" + e.getMessage());
                     }
-                    
-                    
+
                     // 检测PING性能文件
                     try {
                         log.info("--------检测PING性能文件");
@@ -120,9 +118,7 @@ public class fun {
                         e.printStackTrace();
                         log.info("检测PORT性能文件:ERROR:" + e.getMessage());
                     }
-                    
-                    
-                    
+
                     // 检测NODE性能文件
                     try {
                         log.info("--------检测NODE性能文件");
@@ -132,8 +128,7 @@ public class fun {
                         e.printStackTrace();
                         log.info("检测NODE性能文件:ERROR:" + e.getMessage());
                     }
-                    
-                    
+
                     try {
                         log.info("######" + _time + "分钟任务end");
                         Thread.sleep(1000 * 60 * _time);// 延时
@@ -145,7 +140,7 @@ public class fun {
         };
     }
 
-
+    //----------------------------ping---------------------------------------
     public static void jc_ping_file(List sh_file_list, org.apache.log4j.Logger log) {
         // 总文件
         List File_list = new ArrayList();
@@ -267,11 +262,12 @@ public class fun {
 
     }
 
+    //----------------------------判断启动文件名是否正确---------------------------------------
     public static boolean return_sh_file(String str_file, List sh_file_list, org.apache.log4j.Logger log) {
         boolean _bs = false;
         for (int i = 0, m = sh_file_list.size(); i < m; i++) {
-            String _file1 = sh_file_list.get(i).toString();       
-            if (_file1.indexOf(str_file)>-1) {
+            String _file1 = sh_file_list.get(i).toString();
+            if (_file1.indexOf(str_file) > -1) {
                 _bs = true;
                 break;
             }
@@ -284,6 +280,7 @@ public class fun {
         return _bs;
     }
 
+    //----------------------------porter---------------------------------------
     public static void jc_port_file(List sh_file_list, org.apache.log4j.Logger log) {
         // 总文件
         List File_list = new ArrayList();
@@ -299,15 +296,16 @@ public class fun {
                         if (files1[kk].toString().indexOf("flux_data") != -1) {
                             String fil = files1[kk].toString();
                             File_list.add(fil);
-                            System.out.println(File_list.size());
                         }
                     }
                 }
             }
         }
 
-        if (File_list.size() > 5) {
-            if (File_list.size() > 6) {
+        System.out.println(File_list.size());
+        log.info("[porter总文件数：]"+File_list.size());
+        if (File_list.size() > 50) {
+            if (File_list.size() > 60) {
                 if (str_sms.trim().length() > 0) {
                     str_sms = str_sms + "," + "[PORTPER]中文件积压";
                 } else {
@@ -316,7 +314,7 @@ public class fun {
             }
             // 重启进程
             if (return_sh_file("run_xn_port.sh", sh_file_list, log)) {
-                String _url = str_file_url + "/" + "portper.sh" + " &";
+                String _url = str_file_url + "/" + "run_xn_port.sh" + " &";
                 log.info("run :" + _url);
                 _pro.Pro_Start(_url);
             }
@@ -324,6 +322,7 @@ public class fun {
 
     }
 
+    //----------------------------node---------------------------------------
     public static void jc_node_file(List sh_file_list, org.apache.log4j.Logger log) {
         // 总文件
         List File_list = new ArrayList();
@@ -363,7 +362,8 @@ public class fun {
 
     }
 
-    public static void jc_atm(List sh_file_list,org.apache.log4j.Logger log) {
+    //----------------------------atm---------------------------------------
+    public static void jc_atm(List sh_file_list, org.apache.log4j.Logger log) {
 
         String str_sql = "select  count(1) as MAX_COUNT from atmif_performance  s ";
 
@@ -391,7 +391,7 @@ public class fun {
                         }
 
                         // 重启进程
-                        if (return_sh_file("atm.sh", sh_file_list,log)) {
+                        if (return_sh_file("atm.sh", sh_file_list, log)) {
                             String _url = str_file_url + "/" + "atm.sh" + " &";
                             log.info("run :" + _url);
                             _pro.Pro_Start(_url);
