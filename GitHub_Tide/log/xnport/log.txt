@@ -4624,3 +4624,293 @@ INFO  2015-02-10 13:59:45 1747 main (db.java:171)
  - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
 INFO  2015-02-10 13:59:45 1825 main (db.java:223)
  - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-12 16:57:37 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-02-12 16:57:38 1012 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-02-12 16:57:38 1352 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi_wuxi
+INFO  2015-02-12 16:57:38 1395 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_2_3.10.5.wuxi.0.bulk_wuxi_wuxi
+INFO  2015-03-03 14:34:51 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-03 14:34:51 351  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_3.14.2.changzhou.2.bulk_changzhou
+INFO  2015-03-03 14:34:51 413  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_3.14.2.changzhou.0.bulk_changzhou
+INFO  2015-03-03 14:34:51 413  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_3.14.3.changzhou.0.bulk_changzhou
+INFO  2015-03-03 14:34:51 460  main (db.java:162)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_3.14.2.changzhou.0.bulk_changzhou_changzhou
+INFO  2015-03-03 14:34:51 476  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_3.14.2.changzhou.0.bulk_changzhou
+INFO  2015-03-03 14:34:51 476  main (db.java:162)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_3.14.3.changzhou.0.bulk_changzhou_changzhou
+INFO  2015-03-03 14:34:51 476  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_3.14.3.changzhou.0.bulk_changzhou
+INFO  2015-03-03 14:34:51 601  main (db.java:162)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_3.14.2.changzhou.2.bulk_changzhou_changzhou
+INFO  2015-03-03 14:34:51 601  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_3.14.2.changzhou.2.bulk_changzhou
+INFO  2015-03-04 15:52:26 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:52:31 5297 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:52:36 10614 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:52:42 16036 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:52:47 21435 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:52:52 26733 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:52:58 32052 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:03 37358 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:08 42652 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:14 48206 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:19 53483 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:24 58829 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:30 64317 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:35 69619 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:41 75134 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:46 80420 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:51 85792 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:53:57 91167 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:02 96483 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:08 102413 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:14 108423 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:19 113748 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:25 119081 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:30 124369 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:42 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 15:54:43 727  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 15:54:43 828  main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_4.9.6.wuxi.1.bulk_wuxi
+INFO  2015-03-04 15:54:43 833  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:00:26 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:00:27 564  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:00:27 647  main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_4.9.6.wuxi.1.bulk_wuxi
+INFO  2015-03-04 16:00:27 649  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:02:46 139765 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:02:47 140341 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:02:47 140391 main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_4.9.6.wuxi.1.bulk_wuxi
+INFO  2015-03-04 16:02:47 140394 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:03:31 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:03:31 554  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:03:31 638  main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_4.9.6.wuxi.1.bulk_wuxi
+INFO  2015-03-04 16:03:31 641  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:04:16 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:22 5358 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:27 10746 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:33 16557 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:38 21984 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:44 27342 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:49 32956 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:04:55 38256 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:05:00 43533 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:05:05 48823 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:05:11 54265 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:05:16 59558 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:06:43 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:06:44 799  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:06:49 5462 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:06:49 6032 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:06:54 10786 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:06:55 11231 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:07:00 16109 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:07:00 16569 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:07:05 21452 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:07:05 21894 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:07:25 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-04 16:07:25 565  main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-04 16:07:25 762  main (db.java:171)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_4.9.6.wuxi.1.bulk_wuxi
+INFO  2015-03-04 16:07:25 765  main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_4.9.6.wuxi.1.bulk
+INFO  2015-03-05 10:43:33 0    main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-05 10:43:34 1404 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.xuzhou.1.bulk
+INFO  2015-03-05 10:43:35 1482 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.xuzhou.0.bulk
+INFO  2015-03-05 10:43:35 1707 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.xuzhou.2.bulk
+INFO  2015-03-05 10:43:35 2210 main (db.java:117)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.xuzhou.0.bulk_xuzhou
+INFO  2015-03-05 10:43:35 2210 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.xuzhou.0.bulk
+INFO  2015-03-05 10:43:36 2490 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:36 2537 main (db.java:117)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.xuzhou.1.bulk_xuzhou
+INFO  2015-03-05 10:43:36 2553 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:36 2553 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.xuzhou.1.bulk
+INFO  2015-03-05 10:43:36 2693 main (db.java:117)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.xuzhou.2.bulk_xuzhou
+INFO  2015-03-05 10:43:36 2802 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.xuzhou.2.bulk
+INFO  2015-03-05 10:43:36 2849 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:43:36 2834 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:36 2912 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.xuzhou.3.bulk
+INFO  2015-03-05 10:43:37 3536 main (db.java:117)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.xuzhou.3.bulk_xuzhou
+INFO  2015-03-05 10:43:37 3582 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.xuzhou.3.bulk
+INFO  2015-03-05 10:43:39 5501 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-05 10:43:40 7384 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:41 7540 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:43:41 7867 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:41 7836 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:44 11408 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-05 10:43:45 12343 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:43:46 12437 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:50 16764 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-05 10:43:54 20480 main (db.java:126)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.nanjing.3.bulk_nanjing
+INFO  2015-03-05 10:43:54 20496 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:55 21510 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:55 22108 main (fun.java:53)
+ - 执行多线程
+INFO  2015-03-05 10:43:56 23234 main (db.java:126)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.nanjing.2.bulk_nanjing
+INFO  2015-03-05 10:43:56 23250 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:56 23265 main (fun.java:658)
+ - 出现异常：portper\flux_data_2015_3_5.9.5.nanjing.3.bulk (系统找不到指定的文件。)#portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:56 23265 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:56 23359 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:57 24201 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:43:57 24357 main (db.java:126)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.nanjing.1.bulk_nanjing
+INFO  2015-03-05 10:43:57 24404 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:58 24451 main (fun.java:658)
+ - 出现异常：portper\flux_data_2015_3_5.9.5.nanjing.1.bulk (系统找不到指定的文件。)#portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:58 24451 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:58 24451 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:43:58 24482 main (fun.java:658)
+ - 出现异常：portper\flux_data_2015_3_5.9.5.nanjing.2.bulk (系统找不到指定的文件。)#portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:58 24545 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:58 24545 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:43:58 24623 main (fun.java:658)
+ - 出现异常：portper\flux_data_2015_3_5.9.5.nanjing.3.bulk (系统找不到指定的文件。)#portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:58 24669 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:58 24669 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:43:59 25574 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:44:00 26495 main (db.java:126)
+ - Copy成功：D:\GitHub_Tide\GitHub_Tide/file/xingneng/liuliang/flux_data_2015_3_5.9.5.nanjing.0.bulk_nanjing
+INFO  2015-03-05 10:44:00 26510 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:44:00 26541 main (fun.java:658)
+ - 出现异常：portper\flux_data_2015_3_5.9.5.nanjing.1.bulk (系统找不到指定的文件。)#portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:44:00 26541 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:44:00 26573 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:44:00 26604 main (fun.java:658)
+ - 出现异常：portper\flux_data_2015_3_5.9.5.nanjing.2.bulk (系统找不到指定的文件。)#portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:44:00 26604 main (db.java:79)
+ - 开始处理文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:44:00 26644 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:44:05 31803 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:45:28 115213 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:46:07 153939 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.3.bulk
+INFO  2015-03-05 10:46:13 159730 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.2.bulk
+INFO  2015-03-05 10:47:00 207093 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.1.bulk
+INFO  2015-03-05 10:47:07 213889 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:47:07 213920 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:47:07 213951 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
+INFO  2015-03-05 10:47:07 213982 main (db.java:223)
+ - 删除文件:portper\flux_data_2015_3_5.9.5.nanjing.0.bulk
