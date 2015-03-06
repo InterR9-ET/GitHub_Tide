@@ -136,7 +136,7 @@ public class socketclient extends socket {
     }
 
     @Override
-    public boolean sendmessage(String mes) {
+    public  boolean sendmessage(String mes) {
         boolean _bs = false;
         try {
             if (mes.length() > 0) {

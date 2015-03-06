@@ -242,7 +242,11 @@ public class db {
         }
         return _list;
     }
-
+/**
+ * @param _csnms--------------------------------------------------数据库
+ * @param _mes----------------------------------------------------要查的路由信息
+ * @return 
+ */
     public static int seach_has_node(util.GetSql.csnms _csnms, strclass.ALARM_MES _mes) {
         int count = 0;
         if (_mes.NODE_ID.length() > 0) {
