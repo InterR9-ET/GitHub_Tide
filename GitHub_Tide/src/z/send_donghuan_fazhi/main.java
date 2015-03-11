@@ -47,7 +47,7 @@ public class main extends Thread {
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(z.send_donghuan_command.main.class.getName()); //获得logger
 
     static {
-        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_donghuanfazhi.config");
+        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_senddonghuanfazhi.config");
     }
     private static util.GetTools.tools _tools = new util.GetTools.tools();
     //-------------------------------日志-------------------------------------//
