@@ -15,7 +15,7 @@ package main;
 public class run_tools_searchconncount {
 
     public static void main(String[] args) {
-        z.search_conncount.main _do1 = new z.search_conncount.main();
+        z.tools_search_conncount.main _do1 = new z.tools_search_conncount.main();
         _do1.run();
     }
 

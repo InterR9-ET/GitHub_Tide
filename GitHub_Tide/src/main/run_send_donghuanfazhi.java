@@ -15,7 +15,7 @@ package main;
 public class run_send_donghuanfazhi {
 
     public static void main(String[] args) {
-        z.donghuan_fazhi.main _do1 = new z.donghuan_fazhi.main();
+        z.send_donghuan_fazhi.main _do1 = new z.send_donghuan_fazhi.main();
         _do1.run();      
     }
 

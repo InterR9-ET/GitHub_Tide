@@ -15,7 +15,7 @@ package main;
 public class run_tools_alarm_hecha {
 
     public static void main(String[] args) {
-        z.alarm_hecha.main _main = new z.alarm_hecha.main();
+        z.tools_alarm_hecha.main _main = new z.tools_alarm_hecha.main();
         try {
            _main.run();
         } catch (Exception e) {
