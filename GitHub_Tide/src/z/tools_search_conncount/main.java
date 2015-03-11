@@ -28,7 +28,7 @@ public class main extends Thread {
     private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
 
     static {
-        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_conncount.config");
+        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_tools_conncount.config");
     }
     //-------------------------------------日志---------------------------------------//
 
