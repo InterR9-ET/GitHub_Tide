@@ -1,4 +1,4 @@
-package z.excel_jcpathtrace;
+package z.tools_excel_jcpathtrace;
 
 import z.xn_port.*;
 import java.io.File;
@@ -22,7 +22,7 @@ public class main extends Thread {
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(main.class.getName()); //获得logger
 
     static {
-        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_excel_jcpathtrace.config");
+        org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_tools_excel_jcpathtrace.config");
     }
     private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
     //-------------------------------------日志---------------------------------------//

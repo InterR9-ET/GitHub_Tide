@@ -17,7 +17,9 @@ import java.util.List;
  * @author 数据库加载判断
  */
 public class db {
+
     private static util.GetTools.tools tools = new util.GetTools.tools();//声明工具类
+
     public static boolean ini(org.apache.log4j.Logger log, util.GetSql.csnms _csnms) {
         boolean _bs = false;
         if (_csnms.load()) {
@@ -78,9 +80,10 @@ public class db {
 
         List _msm_list = new ArrayList();
         String str_sql = "";
+
+        //根据HASDH='-1'判断是否是新数据
         str_sql = "select s.id as ID,s.phone as PHONE,s.description as DEC,s.cityid as CITYID,s.LINKNAME as LINKNAME ,s.ALARM_ID as ALARM_ID "
-                + " from sendmessage s where s.serialnum is NULL and (s.HASDH='-1' or s.HASDH is null) "
-                + " and (to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') - to_date(to_char(s.createtime,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') )*24*60*60<300";
+                + " from sendmessage s where s.serialnum is NULL and s.HASDH='-1'";
 
         List lst = new ArrayList();
         Object[] objs = new Object[]{};
@@ -153,28 +156,23 @@ public class db {
                             .append("\r\n");
                     _bs_1 = false;
                 }
-
                 if (map.get("ALARM_ID") != null) {
                     _sms.ALARM_ID = map.get("ALARM_ID").toString();
                     log_txt.append("ALARMID:").append(_sms.ALARM_ID)
                             .append("\r\n");
                 }
-
                 if (_bs_1) {
                     _msm_list.add(_sms);
-                    log.info(log_txt);
-                } else {
-                    log.info(log_txt);
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
-                log.info("ID#" + _sms.STR_ID + "#出现异常："
-                        + e.getMessage().toString());
+                log.info("ID#" + _sms.STR_ID + "#出现异常：" + e.getMessage().toString());
             }
         }
 
-        log.info("加载所有短信:" + _msm_list.size());
+        if (_msm_list.size() > 0) {
+            log.info("加载所有需要发送的短信:" + _msm_list.size());
+        }
         return _msm_list;
     }
 
@@ -191,9 +189,7 @@ public class db {
                 + " to_char(s.sendtime,'yyyy-mm-dd hh24:mi:ss')  as STIME"
                 + " from sendmessage s "
                 + " where "
-                + " s.HASDH='1' "
-                + " and (to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') - to_date(to_char(s.sendtime,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') )*24*60*60 <600" // 10分钟
-                + " and (to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') - to_date(to_char(s.sendtime,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') )*24*60*60 >30";// 30秒
+                + " s.HASDH='1'";
         List lst = new ArrayList();
         try {
             lst = _csnms.getdata(str_sql, null);
@@ -264,9 +260,6 @@ public class db {
 
                 if (_bs_1) {
                     _list.add(_sms);
-                    System.out.println(log_txt);
-                } else {
-                    System.out.println(log_txt);
                 }
 
             } catch (Exception e) {
@@ -318,7 +311,7 @@ public class db {
         return bs;
     }
 
-    public static boolean update_in_status_donghuan(util.GetSql.csnms _csnms, String STATUS, String ID) {
+    public static boolean update_in_status_donghuan(util.GetSql.csnms _csnms, String STATUS, String ID, org.apache.log4j.Logger log) {
         boolean bs = false;
         String sql = "";
         sql = "update  sendmessage  set  HASDH='"
@@ -327,7 +320,12 @@ public class db {
                 + ID;
 
         if (sql.length() > 0) {
-            int count = _csnms.execute(sql, null);
+            int count = 0;
+            try {
+                count = _csnms.execute(sql, null);
+            } catch (Exception ex) {
+                log.info("短信写入动环数据成功后，更新csnms中的状态发生异常：" + ex.getMessage() + "\r\n sql:" + sql);
+            }
             if (count > 0) {
                 bs = true;
             }
@@ -364,7 +362,7 @@ public class db {
         return bs;
     }
 
-    public static boolean insert_sms_donghuan(util.GetSql.donghuan_mysql _donghuan_mysql, z.allClass.sendsms_sendstr _sms) {
+    public static boolean insert_sms_donghuan(util.GetSql.donghuan_mysql _donghuan_mysql, z.allClass.sendsms_sendstr _sms, org.apache.log4j.Logger log) {
         boolean bs = false;
         String sql = "insert into command_send_csnms ("
                 + "rtuno,"
@@ -377,14 +375,20 @@ public class db {
                 + "'" + _sms.USERNAME.toString() + "'" + ","
                 + "'" + _sms.CONTENT + "'"
                 + ")";
-        int count = _donghuan_mysql.execute(sql, null);
+
+        int count = 0;
+        try {
+            count = _donghuan_mysql.execute(sql, null);
+        } catch (Exception ex) {
+            log.info("短信写入动环数据库异常：" + ex.getMessage() + "\r\n sql:" + sql);
+        }
         if (count > 0) {
             bs = true;
         }
         return bs;
     }
 
-    public static boolean update_alarm_info2(util.GetSql.csnms _csnms, z.allClass.sendsms_sendstr _sms, boolean _issucess) {
+    public static boolean update_alarm_info2(util.GetSql.csnms _csnms, z.allClass.sendsms_sendstr _sms, boolean _issucess, org.apache.log4j.Logger log) {
         boolean bs = false;
         if (_sms.ALARM_ID.toString().trim().length() > 0) {
             String status = "";
@@ -394,17 +398,14 @@ public class db {
                 status = "sendmessage_error";
             }
             if (status.length() > 0) {
-                String str_sql = "update  alarm  a   set a.info2='" + status + "'  where  a.id=" + _sms.ALARM_ID.toString();
-                int n = _csnms.execute(str_sql, null);
-                if (n == 0) {
-                    /*
-                     * for (int i = 1; i <= 12; i++) { String str_sql2 =
-                     * "update  historyalarm_" + i + "  a   set a.info2='" +
-                     * status + "'  where  a.id=" + _sms.ALARM_ID.toString();
-                     * int n2 = _csnms.execute(str_sql2, null); if (n2 > 0) {
-                     * break; } }
-                     */
-                } else {
+                String sql = "update  alarm  a   set a.info2='" + status + "'  where  a.id=" + _sms.ALARM_ID.toString();
+                int n = 0;
+                try {
+                    n = _csnms.execute(sql, null);
+                } catch (Exception ex) {
+                    log.info("更新活动告警的 短信发送状态异常：" + ex.getMessage() + "\r\n sql:" + sql);
+                }
+                if (n > 0) {
                     // 更新成功
                     bs = true;
                 }
@@ -413,17 +414,25 @@ public class db {
         return bs;
     }
 
-    public static List loaddonghuan_send(util.GetSql.donghuan_mysql _donghuan_mysql, String ID) {
+    public static List loaddonghuan_send(util.GetSql.donghuan_mysql _donghuan_mysql, String ID, org.apache.log4j.Logger log) {
         List _list = new ArrayList();
-        String str_sql = "select  status as STATUS from command_send_csnms  where msg_id='" + ID + "'";
-        _list = _donghuan_mysql.getdata(str_sql, null);
+        String sql = "select  status as STATUS from command_send_csnms  where msg_id='" + ID + "'";
+        try {
+            _list = _donghuan_mysql.getdata(sql, null);
+        } catch (Exception ex) {
+            log.info("加载动环的短信状态异常：" + ex.getMessage() + "\r\n sql:" + sql);
+        }
         return _list;
     }
 
-    public static List loaddonghuan_his(util.GetSql.donghuan_mysql _donghuan_mysql, String ID) {
+    public static List loaddonghuan_his(util.GetSql.donghuan_mysql _donghuan_mysql, String ID, org.apache.log4j.Logger log) {
         List _list = new ArrayList();
-        String str_sql = "select  status as STATUS from command_send_csnms_history  where msg_id='" + ID + "'";
-        _list = _donghuan_mysql.getdata(str_sql, null);
+        String sql = "select  status as STATUS from command_send_csnms_history  where msg_id='" + ID + "'";
+        try {
+            _list = _donghuan_mysql.getdata(sql, null);
+        } catch (Exception ex) {
+            log.info("加载动环的短信状态[历史表]异常：" + ex.getMessage() + "\r\n sql:" + sql);
+        }
         return _list;
     }
 

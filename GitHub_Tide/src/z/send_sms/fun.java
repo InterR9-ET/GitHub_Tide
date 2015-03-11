@@ -128,7 +128,6 @@ public class fun {
 
     public static List get_sms_boss(int type, List _msm_data, Hashtable headstr_yidong, Hashtable headstr_liantong, Hashtable headstr_dianxin, util.GetSql.csnms _csnms) {
         List _list = new ArrayList();
-
         //检测短信并分流数据   1电信    2联通移动
         for (int i = 0, m = _msm_data.size(); i < m; i++) {
             //声明实体并赋值
@@ -144,14 +143,13 @@ public class fun {
                 if (!db.update_description(_csnms, send_mess, _sms.STR_ID.toString())) {
                     System.out.println("[动环短信]添加退订短语失败 ");
                 }
-                //写入电信短信数组
+                //返回电信短信数组
                 _list.add(_sms);
-            } else {
-                //写入移动联通短信数组
+            } else if (type == 2) {
+                //返回移动联通短信数组
                 _list.add(_sms);
             }
         }
-
         return _list;
     }
 

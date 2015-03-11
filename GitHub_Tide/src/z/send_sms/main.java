@@ -25,20 +25,20 @@ import java.util.Hashtable;
 
 import javax.xml.rpc.ServiceException;
 
-
 /**
  *
  * @author yangzhen
  * @author 功能：短信发送
  * @author 描述：
- * @author 系统内部短信发送，用于信息提醒。  电信走动环，移动联通走综调。  
- * @author 动环的需要等一段时间才有回执，综调可以立刻得到回执。   通过回执的状态判断短信的发送状态
+ * @author 系统内部短信发送，用于信息提醒。 电信走动环，移动联通走综调。
+ * @author 动环的需要等一段时间才有回执，综调可以立刻得到回执。 通过回执的状态判断短信的发送状态
  *
  */
 public class main extends Thread {
 
     //-------------------------------------日志---------------------------------------//
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(main.class.getName()); //获得logger
+
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_sendsms.config");
     }
@@ -94,7 +94,7 @@ public class main extends Thread {
             public void run() {
                 while (true) {
                     try {
-                        send_sms_main();//短信处理方法
+                        send_sms_main();       //短信处理
                         Thread.sleep(1000 * 3);// 间隔轮询一次
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -108,8 +108,9 @@ public class main extends Thread {
                 List _dianxin = new ArrayList();//声明电信短信数组
                 List _yidong_liantong = new ArrayList();//声明移动联通短信数组
 
-                //数据分流
+                //数据分流   获取电信的短信
                 _dianxin = fun.get_sms_boss(1, _msm_data, headstr_yidong, headstr_liantong, headstr_dianxin, _csnms);
+                //数据分流   获取移动联通的短信
                 _yidong_liantong = fun.get_sms_boss(2, _msm_data, headstr_yidong, headstr_liantong, headstr_dianxin, _csnms);
 
                 //处理电信短信
@@ -202,10 +203,10 @@ public class main extends Thread {
                                         boolean bs = db.update_status_zongdiao(_csnms, str_o_SerialNum, _sms.STR_ID, true);
                                         if (bs) {
                                             // 更新当前告警状态,是否有短信发出                                            
-                                            db.update_alarm_info2(_csnms, _sms, true);
+                                            db.update_alarm_info2(_csnms, _sms, true,log);
                                         } else {
                                             // 更新当前告警状态,是否有短信发出       
-                                            db.update_alarm_info2(_csnms, _sms, false);
+                                            db.update_alarm_info2(_csnms, _sms, false,log);
                                         }
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -217,7 +218,7 @@ public class main extends Thread {
                                         boolean bs = db.update_status_zongdiao(_csnms, "-1", _sms.STR_ID, false);
                                         if (bs) {
                                             // 更新当前告警状态,是否有短信发出       
-                                            db.update_alarm_info2(_csnms, _sms, false);
+                                            db.update_alarm_info2(_csnms, _sms, false,log);
                                         }
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -246,7 +247,7 @@ public class main extends Thread {
                             _sms.CONTENT = _sms.CONTENT.replace("如不想再收到此端口下发的短信，请回复00000", "");
                             _sms.CONTENT = _sms.CONTENT.toString() + " 如不想再收到此端口下发的短信，请回复00000";
 
-                            boolean bs = db.insert_sms_donghuan(_donghuan_mysql, _sms);
+                            boolean bs = db.insert_sms_donghuan(_donghuan_mysql, _sms,log);
                             if (bs) {
                                 _sms.STATUS = "1";// 写入动环数据库成功
                                 log.info("[" + _sms.STR_ID.toString() + "]写入动环数据库成功");
@@ -263,13 +264,13 @@ public class main extends Thread {
                 }
 
                 if (_msm_list.size() > 0) {
-                    // 更新短信写入状态到CSNMS
+                    // 更新短信状态到CSNMS
                     for (int i = 0, m = _msm_list.size(); i < m; i++) {
                         String _jindu = "进度：" + i + "/" + m + "";
                         z.allClass.sendsms_sendstr _sms = new z.allClass.sendsms_sendstr();
                         _sms = (z.allClass.sendsms_sendstr) _msm_list.get(i);
                         try {
-                            boolean bs = db.update_in_status_donghuan(_csnms, _sms.STATUS, _sms.STR_ID);
+                            boolean bs = db.update_in_status_donghuan(_csnms, _sms.STATUS, _sms.STR_ID,log);
                             if (bs) {
                                 log.info("NO.ID#" + _jindu + "#" + _sms.STR_ID + " 更新状态[HASDH]成功");
                             } else {
@@ -326,7 +327,7 @@ public class main extends Thread {
 
                             //查询动环的短信发送表                         
                             List _list_data = new ArrayList();
-                            _list_data = db.loaddonghuan_send(_donghuan_mysql, _sms.STR_ID);
+                            _list_data = db.loaddonghuan_send(_donghuan_mysql, _sms.STR_ID,log);
                             //处理数据
                             if (_list_data.size() > 0) {
                                 HashMap map = (HashMap) _list_data.get(0);
@@ -343,7 +344,7 @@ public class main extends Thread {
                             } else {
                                 //查询历史表
                                 List _list_data2 = new ArrayList();
-                                _list_data2 = db.loaddonghuan_his(_donghuan_mysql, _sms.STR_ID);
+                                _list_data2 = db.loaddonghuan_his(_donghuan_mysql, _sms.STR_ID,log);
                                 if (_list_data2.size() > 0) {
                                     // 未查到数据------------------------------------------------------------------------------------
                                     _sms.STATUS = "0";// 成功 发送成功的会移到历史表
@@ -356,8 +357,7 @@ public class main extends Thread {
                         log.info("出现异常：\r\nERROR：" + ex.getMessage().toString());
                     } finally {
 
-                    }
-                    // System.out.println("检查短信状态完成");
+                    }                   
                 }
                 return _msm_list;
             }
@@ -377,7 +377,7 @@ public class main extends Thread {
                             boolean bs = db.update_status_donghuan(_csnms, _SERIALNUM, _sms.STR_ID, true);
                             if (bs) {
                                 // 更新当前告警短信发送状态
-                                db.update_alarm_info2(_csnms, _sms, true);
+                                db.update_alarm_info2(_csnms, _sms, true,log);
                                 log.info("NO.ID##" + _sms.STR_ID + " 更新状态[SERIALNUM]成功");
                             } else {
                                 log.info("NO.ID##" + _sms.STR_ID + " 更新状态[SERIALNUM]出错");
@@ -388,7 +388,7 @@ public class main extends Thread {
                             boolean bs = db.update_status_donghuan(_csnms, _SERIALNUM, _sms.STR_ID, false);
                             if (bs) {
                                 // 更新当前告警短信发送状态
-                                db.update_alarm_info2(_csnms, _sms, false);
+                                db.update_alarm_info2(_csnms, _sms, false,log);
                                 log.info("NO.ID##" + _sms.STR_ID + " 更新状态[SERIALNUM]成功");
                             } else {
                                 log.info("NO.ID##" + _sms.STR_ID + " 更新状态[SERIALNUM]出错");
