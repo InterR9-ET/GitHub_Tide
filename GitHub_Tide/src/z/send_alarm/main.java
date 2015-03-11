@@ -76,6 +76,7 @@ public class main extends Thread {
                         try {
                             Thread.sleep(1000 * 30);//中断30秒再执行
                         } catch (Exception e) {
+                            log.info("心跳发送异常："+e.getMessage().toString());
                             e.printStackTrace();
                         }
                     }
