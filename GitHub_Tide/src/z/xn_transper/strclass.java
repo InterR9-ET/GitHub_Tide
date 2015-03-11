@@ -13,9 +13,9 @@ import java.util.List;
  * @author Administrator
  */
 public class strclass {
-    
-    
+
     public static class Switch_circuit {
+
         public String str1 = null;
         public String str2 = null;
         public String str3 = null;
@@ -23,8 +23,7 @@ public class strclass {
         public String str5 = null;
         public String str6 = null;
     }
-    
-    
+
     public static class perfinstance {
 
         public String ID = "";
@@ -34,9 +33,7 @@ public class strclass {
         public String INFO = "";
         public String TYPE = "";
     }
-    
-    
-    
+
     public static class Jstranspathperf_detail {
 
         public String path_id = "";
@@ -57,18 +54,16 @@ public class strclass {
         public String severely = "0";
         public String groupid = "";
     }
-    
-    
-    
+
     public static class class_path {
+
         public String PATH_ID = "";
         public String NAME = "";
         public String GROUPID = "";
         public String PARENTID = "";
         public String EMS_TYPE = "";
     }
-    
-    
+
     public static class Switch_circuit_new {
 
         public String name = null;
@@ -78,9 +73,7 @@ public class strclass {
         public String value = null;
         public String gettime = null;
     }
-    
-    
-    
+
     public static class Jstranspathperf_detail_2 {
 
         public String PATH_ID = "";
@@ -89,33 +82,29 @@ public class strclass {
         public String GETTIME = "";
         public String NOTAVAILABLE2 = "";
     }
-    
-    
-    
-    
+
     public static class Alarm {
 
-        String alarm_id = "1";
-        String type = "0";
-        String alarm_type = "";
-        String alarm_status = "";
-        String event_name = "";
-        String node_id = "";
-        String node_name = "";
-        String path_id = "-1";
-        String shelf_id = "-1";
-        String slot_id = "-1";
-        String port_id = "-1";
-        String description = "";//<私网设备告警>设备名称:JS-NJ-ZYL-BS.DCN.C6509-2;设备IP:132.228.42.2;检测时间:2014-03-28 13:10:53;检测值:80;超过最大阀值:20,
-        String alm_Con = "";
-        String alarm_level = "";
-        String vendor_type = "";
-        String debug_alarm_time = "";
-        String alarm_update = "";
+        public String alarm_id = "1";
+        public String type = "0";
+        public String alarm_type = "";
+        public String alarm_status = "";
+        public String event_name = "";
+        public String node_id = "";
+        public String node_name = "";
+        public String path_id = "-1";
+        public String shelf_id = "-1";
+        public String slot_id = "-1";
+        public String port_id = "-1";
+        public String description = "";//<私网设备告警>设备名称:JS-NJ-ZYL-BS.DCN.C6509-2;设备IP:132.228.42.2;检测时间:2014-03-28 13:10:53;检测值:80;超过最大阀值:20,
+        public String alm_Con = "";
+        public String alarm_level = "";
+        public String vendor_type = "";
+        public String debug_alarm_time = "";
+        public String alarm_update = "";
 
     }
-    
-    
+
     public static List list_node_gl() {
         List _list = new ArrayList();
         _list.add("0082");
@@ -198,6 +187,4 @@ public class strclass {
         return _list;
     }
 
-    
-    
 }
