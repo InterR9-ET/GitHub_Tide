@@ -117,7 +117,10 @@ public class fun {
     }
 
 }
-
+/**
+ ******************************************************************************* 同步path
+ * @author Administrator
+ */
 class path implements Runnable {
 
     private org.apache.log4j.Logger log;
@@ -200,7 +203,10 @@ class path implements Runnable {
         }
     }
 }
-
+/**
+ * *****************************************************************************同步node
+ * @author Administrator
+ */
 class node implements Runnable {
 
     private org.apache.log4j.Logger log;
@@ -259,6 +265,10 @@ class node implements Runnable {
     }
     
 }
+/**
+ * *****************************************************************************同步pathtrace
+ * @author Administrator
+ */
   class pathtrca implements Runnable {
         
     private org.apache.log4j.Logger log;
