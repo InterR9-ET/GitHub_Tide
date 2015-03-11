@@ -1,19 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package z.zy_atm;
 
-/**
- *
- * @author Administrator
- */
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class fun {
+
     //----------------------oracle数据映射----------------------
-    public static class oracle_path{
-    public long path_id;//               NUMBER(18) default '0' not null,
-}
+    public static class oracle_path {
+
+        public long path_id;//               NUMBER(18) default '0' not null,
+    }
+
     //----------------------mysql数据映射----------------------
     public static class mysql_path {
 
@@ -115,4 +115,203 @@ public class fun {
         public int main_circuit_terminal;//NUMBER default 0,
         public String path_alias;//            VARCHAR2(1000)
     }
+
 }
+
+class path implements Runnable {
+
+    private org.apache.log4j.Logger log;
+    private util.GetSql.csnms _csnms;
+    private util.GetSql.atm_mysql _mysql;
+
+    /**
+     * @param log the log to set
+     */
+    public void setLog(org.apache.log4j.Logger log) {
+        this.log = log;
+    }
+
+    /**
+     * @param _csnms the _csnms to set
+     */
+    public void setCsnms(util.GetSql.csnms _csnms) {
+        this._csnms = _csnms;
+    }
+
+    /**
+     * @param _mysql the _mysql to set
+     */
+    public void setMysql(util.GetSql.atm_mysql _mysql) {
+        this._mysql = _mysql;
+    }
+
+    @Override
+    public void run() {
+        //取数据mysql的数据
+
+        try {
+            List mysql_path = db._pathdata(log, _csnms, _mysql);
+            //判断是否取到数据
+            if (mysql_path.size() > 0) {
+                for (int i = 0, m = mysql_path.size(); i < m; i++) {
+
+                    // 逐条取出所有信息
+                    fun.mysql_path pathid_datal = (fun.mysql_path) mysql_path.get(i);
+                    //***************添信息**************************
+                    List insert = new ArrayList();
+                    String name = pathid_datal.name;
+                    int network = pathid_datal.network_id;
+                    int aendport = pathid_datal.aendport;   //aEndPort
+                    long path = pathid_datal.path_id;
+                    insert.add(name);
+                    insert.add(network);
+                    insert.add(path);
+                    insert.add(aendport);
+
+                    //拿mysql的pathid到oracle里去匹配
+                    boolean re = db._pathoracle(log, _csnms, _mysql, path);
+
+                    //如果oracle里面有，更新数据
+                    if (re) {
+                        //根据pathid更新数据
+                        db.update_path(_csnms, pathid_datal);
+                        log.info("[path_存在数据]:已完成更新 path id :" + pathid_datal.path_id);
+                    } //如果oracle里面没有，添加之后在更新
+                    else {
+                        //添加数据
+                        db.intsert_oraclepath(_csnms, insert);
+                        //更新数据
+                        try {
+                            int res = db.update_path(_csnms, pathid_datal);
+                            if (res > 0) {
+                                log.info("[path_存在数据]:已完成更新 path id :" + pathid_datal.path_id);
+                            } else {
+                                log.info("【更新失败】" + pathid_datal.path_id);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            log.info("[path_同步完成！！！]");
+        } catch (IOException ex) {
+            Logger.getLogger(path.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+
+class node implements Runnable {
+
+    private org.apache.log4j.Logger log;
+    private util.GetSql.csnms _csnms;
+    private util.GetSql.atm_mysql _mysql;
+
+    /**
+     * @param log the log to set
+     */
+    public void setLog(org.apache.log4j.Logger log) {
+        this.log = log;
+    }
+
+    /**
+     * @param _csnms the _csnms to set
+     */
+    public void setCsnms(util.GetSql.csnms _csnms) {
+        this._csnms = _csnms;
+    }
+
+    /**
+     * @param _mysql the _mysql to set
+     */
+    public void setMysql(util.GetSql.atm_mysql _mysql) {
+        this._mysql = _mysql;
+    }
+
+    @Override
+    public void run() {
+        try {
+            //------------------------------------------------------------------取数据
+           List mysql_node = db._nodedata(log, _csnms, _mysql);
+            if (mysql_node.size() > 0) {
+                boolean re = false;
+                for (int i = 0, m = mysql_node.size(); i < m; i++) {
+                    strclass.node node_datal = (strclass.node) mysql_node.get(i);
+                    re = db._nodeoracle(log, _csnms, _mysql, node_datal);
+                    if (re) {
+                        ////----------------------------------------------------根据pathid更新数据
+                        db.update_node(_csnms, node_datal);
+                        log.info("[node_存在数据]:已完成更新 path id :" + node_datal.node_id);
+                    } else {
+                        //------------------------------------------------------添加数据
+                        int resu = db.intsert_oraclenode(_csnms, node_datal);
+                        if (resu > 0) {
+                            System.out.println("node_插入成功！！！");
+                        }
+                    }
+                }
+            }
+            
+            log.info("[node_同步完成！！！]");
+        } catch (IOException ex) {
+            Logger.getLogger(node.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+}
+  class pathtrca implements Runnable {
+        
+    private org.apache.log4j.Logger log;
+    private util.GetSql.csnms _csnms;
+    private util.GetSql.atm_mysql _mysql;
+
+    /**
+     * @param log the log to set
+     */
+    public void setLog(org.apache.log4j.Logger log) {
+        this.log = log;
+    }
+
+    /**
+     * @param _csnms the _csnms to set
+     */
+    public void setCsnms(util.GetSql.csnms _csnms) {
+        this._csnms = _csnms;
+    }
+
+    /**
+     * @param _mysql the _mysql to set
+     */
+    public void setMysql(util.GetSql.atm_mysql _mysql) {
+        this._mysql = _mysql;
+    }
+        
+        @Override
+        public void run() {
+            //-----------------------------取数据----------------------------------
+           List mysql_pathtrace = db._pathtrca(log, _csnms, _mysql);
+            if (mysql_pathtrace.size() > 0) {
+                boolean re = false;
+                for (int i = 0, m = mysql_pathtrace.size(); i < m; i++) {
+                    strclass.pathtrace pathtrace = (strclass.pathtrace) mysql_pathtrace.get(i);
+                    //----------------------------------------------------------查找数据
+                    re = db._pathtrcaoracle(log, _csnms, _mysql, pathtrace);
+                    if (re) {
+                        //------------------------------------------------------根据pathid更新数据
+                        db.update_pathtrace(_csnms, pathtrace);
+                        log.info("[pathtrace_存在数据]:已完成更新 path id :" + pathtrace.path_id);
+                    } else {
+                        //------------------------------------------------------添加数据
+                        int resu = db.intsert_oraclepathtrca(_csnms, pathtrace);
+                        if (resu > 0) {
+                            System.out.println("pathtrace_插入成功！！！");
+                        }
+                    }
+                }
+            }
+            log.info("[pathtrace同步完成！！！]");
+        }
+    
+    }
+    
+    
