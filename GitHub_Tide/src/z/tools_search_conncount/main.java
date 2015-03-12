@@ -30,6 +30,8 @@ public class main extends Thread {
     static {
         org.apache.log4j.PropertyConfigurator.configureAndWatch("conf/log4j_tools_conncount.config");
     }
+    
+  //  zhang,kehu,wamg,dian   
     //-------------------------------------日志---------------------------------------//
 
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms();   //声明数据库
