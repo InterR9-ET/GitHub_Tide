@@ -126,7 +126,7 @@ public class fun {
         return _boss;
     }
 
-    public static List get_sms_boss(int type, List _msm_data, Hashtable headstr_yidong, Hashtable headstr_liantong, Hashtable headstr_dianxin, util.GetSql.csnms _csnms) {
+    public static List get_sms_boss(int type, List _msm_data, Hashtable headstr_yidong, Hashtable headstr_liantong, Hashtable headstr_dianxin, util.GetSql.csnms _csnms,org.apache.log4j.Logger log) {
         List _list = new ArrayList();
         //检测短信并分流数据   1电信    2联通移动
         for (int i = 0, m = _msm_data.size(); i < m; i++) {
@@ -140,7 +140,7 @@ public class fun {
                 // 如果是电信的短信  添加退订短语                    
                 _sms.CONTENT = _sms.CONTENT.replace("如不想再收到此端口下发的短信，请回复00000", "");
                 String send_mess = _sms.CONTENT + " 如不想再收到此端口下发的短信，请回复00000";
-                if (!db.update_description(_csnms, send_mess, _sms.STR_ID.toString())) {
+                if (!db.update_description(_csnms, send_mess, _sms.STR_ID.toString(),log)) {
                     System.out.println("[动环短信]添加退订短语失败 ");
                 }
                 //返回电信短信数组

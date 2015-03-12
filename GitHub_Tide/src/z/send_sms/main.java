@@ -109,9 +109,9 @@ public class main extends Thread {
                 List _yidong_liantong = new ArrayList();//声明移动联通短信数组
 
                 //数据分流   获取电信的短信
-                _dianxin = fun.get_sms_boss(1, _msm_data, headstr_yidong, headstr_liantong, headstr_dianxin, _csnms);
+                _dianxin = fun.get_sms_boss(1, _msm_data, headstr_yidong, headstr_liantong, headstr_dianxin, _csnms,log);
                 //数据分流   获取移动联通的短信
-                _yidong_liantong = fun.get_sms_boss(2, _msm_data, headstr_yidong, headstr_liantong, headstr_dianxin, _csnms);
+                _yidong_liantong = fun.get_sms_boss(2, _msm_data, headstr_yidong, headstr_liantong, headstr_dianxin, _csnms,log);
 
                 //处理电信短信
                 if (_dianxin.size() > 0) {
@@ -200,7 +200,7 @@ public class main extends Thread {
                                 if (bsbs.booleanValue()) {//发送成功的
                                     try {
                                         //更新用综调接口发出的短信的状态
-                                        boolean bs = db.update_status_zongdiao(_csnms, str_o_SerialNum, _sms.STR_ID, true);
+                                        boolean bs = db.update_status_zongdiao(_csnms, str_o_SerialNum, _sms.STR_ID, true,log);
                                         if (bs) {
                                             // 更新当前告警状态,是否有短信发出                                            
                                             db.update_alarm_info2(_csnms, _sms, true,log);
@@ -215,7 +215,7 @@ public class main extends Thread {
 
                                 } else {//发送失败的      
                                     try {
-                                        boolean bs = db.update_status_zongdiao(_csnms, "-1", _sms.STR_ID, false);
+                                        boolean bs = db.update_status_zongdiao(_csnms, "-1", _sms.STR_ID, false,log);
                                         if (bs) {
                                             // 更新当前告警状态,是否有短信发出       
                                             db.update_alarm_info2(_csnms, _sms, false,log);
@@ -374,7 +374,7 @@ public class main extends Thread {
                             String _time = tools.systime_prase_string("");
                             String _SERIALNUM = _time.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", "");
                             //更新csnms中短信状态
-                            boolean bs = db.update_status_donghuan(_csnms, _SERIALNUM, _sms.STR_ID, true);
+                            boolean bs = db.update_status_donghuan(_csnms, _SERIALNUM, _sms.STR_ID, true,log);
                             if (bs) {
                                 // 更新当前告警短信发送状态
                                 db.update_alarm_info2(_csnms, _sms, true,log);
@@ -385,7 +385,7 @@ public class main extends Thread {
                         } else if (_sms.STATUS.equals("1")) {// 回执为 失败，或者无回执的                          
                             String _SERIALNUM = "-1";
                             //更新csnms中短信状态
-                            boolean bs = db.update_status_donghuan(_csnms, _SERIALNUM, _sms.STR_ID, false);
+                            boolean bs = db.update_status_donghuan(_csnms, _SERIALNUM, _sms.STR_ID, false,log);
                             if (bs) {
                                 // 更新当前告警短信发送状态
                                 db.update_alarm_info2(_csnms, _sms, false,log);
