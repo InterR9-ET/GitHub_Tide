@@ -27,7 +27,7 @@ public class socketclient extends socket {
     private util.GetFile.xmlconf _xmlconf = new util.GetFile.xmlconf();
 
     private Socket remote_socket = null;
-    private PrintWriter out = null;
+    public static PrintWriter out = null;
     private BufferedReader in = null;
     private String SOCKET_NAME = "";
     private String SOCKET_IP = "";
@@ -136,7 +136,7 @@ public class socketclient extends socket {
     }
 
     @Override
-    public  boolean sendmessage(String mes) {
+    public   boolean sendmessage(String mes) {
         boolean _bs = false;
         try {
             if (mes.length() > 0) {

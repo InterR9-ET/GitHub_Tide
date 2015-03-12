@@ -87,12 +87,15 @@ public class main extends Thread {
                         
                         //解析完成之后拷贝文件
                         File directory = new File("");
-                        String bfpath = "/file/xingneng/transper";
-                        String _url = directory.getCanonicalPath() + bfpath;
+                        String bfpath = "/file/";
+                        String _url = directory.getCanonicalPath()+ bfpath+fil;
                         File file2 = new File(fil);
+                        
                         boolean _bs_c = _excel.copy_file(fil, _url);
                             if (_bs_c) {
                                 log.info("Copy成功：" + _url);
+                            }else{
+                                log.info("Copy失败：" + _url);
                             }
                             
                         //解析完成之后删除文件
