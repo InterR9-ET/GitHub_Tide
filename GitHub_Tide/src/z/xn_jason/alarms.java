@@ -10,7 +10,9 @@ public class alarms {
 
     private List _list_node = list_node_gl();
 
-    public String return_alarm_path_open(String nodename, String nodeid, String pathid, int _alarmlevel, String _slot, String _port, String _value, String _alm_Con, String _alarm_type, String str_desc,GetSql.csnms _csnms) {
+    public String return_alarm_path_open(String nodename, String nodeid, String pathid,
+            int _alarmlevel, String _slot, String _port, String _value, String _alm_Con, String _alarm_type, 
+            String str_desc,util.GetSql.csnms _csnms) {
         strclass.Alarm _alarm = new strclass.Alarm();
         /*
          ALARMLEVEL.put("1", "CRITICAL");
@@ -79,7 +81,8 @@ public class alarms {
         return sb.toString();
     }
 
-    public String return_alarm_path_clear(String nodename, String nodeid, String pathid, int _alarmlevel, String _slot, String _port, String _value, String _alm_Con, String _alarm_type, String str_desc,GetSql.csnms _csnms) {
+    public String return_alarm_path_clear(String nodename, String nodeid, String pathid, int _alarmlevel,
+            String _slot, String _port, String _value, String _alm_Con, String _alarm_type, String str_desc,util.GetSql.csnms _csnms) {
 
         strclass.Alarm _alarm = new strclass.Alarm();
         /*
