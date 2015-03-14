@@ -17,7 +17,7 @@ public class main extends Thread {
 
     private static util.GetSql.csnms _csnms = new util.GetSql.csnms(); 
     //private static util.GetThread.thread _thread = new util.GetThread.thread(2);
-    private static GetThread.thread _thread = new GetThread.thread(1);
+    private static util.GetThread.thread _thread = new util.GetThread.thread(1);
   
     public static String wbs_url = "http://132.228.241.205:8080/tnms/services/pmService";
     
@@ -33,7 +33,7 @@ public class main extends Thread {
             if (db.ini(_csnms)) {
                 while (true) {
                     try {
-                        _thread = new GetThread.thread(10);
+                        _thread = new util.GetThread.thread(10);
                         doing_main();
                         Thread.sleep(1000 * 60);//60秒
                     } catch (Exception e) {
