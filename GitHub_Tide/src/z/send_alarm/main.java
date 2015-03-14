@@ -36,7 +36,7 @@ public class main extends Thread {
     private util.GetThread.thread _thread = new util.GetThread.thread(2);   //声明多线程 
     private util.GetSql.csnms _csnms = new util.GetSql.csnms();   //声明数据库
     private util.GetSocket.socketclient _socketclient = new util.GetSocket.socketclient();
-    private String socketname = "sc_alarmserver";
+    private String socketname = "socketc_alarmserver";
 
     public void run() {//启动线程      
         if (db.ini(log, _csnms)) {  //加载数据库
