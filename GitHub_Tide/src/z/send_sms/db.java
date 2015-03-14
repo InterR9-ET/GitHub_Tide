@@ -351,7 +351,7 @@ public class db {
                     + "HASDH='-9'  "
                     + "where 1=1  "
                     + "and id=?";
-            log.info("综调发送失败后，更新状态为9：" + sql);
+            log.info("综调发送失败后，更新状态为-9：" + sql);
             Object[] objs = new Object[]{
                 "-1",
                 "发送失败" + tools.systime_prase_string(""),
@@ -370,6 +370,7 @@ public class db {
         return bs;
     }
 
+    
     public static boolean update_in_status_donghuan(util.GetSql.csnms _csnms, String STATUS, String ID, org.apache.log4j.Logger log) {
         boolean bs = false;
         String sql = "update  sendmessage   set "
@@ -377,7 +378,7 @@ public class db {
                 + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')"
                 + "where 1=1  "
                 + "and id=?";
-        log.info("动环写入成功后，更新状态为1：" + sql);
+        log.info("动环写入的状态为"+STATUS+"：" + sql);
         Object[] objs = new Object[]{
             STATUS,
             Long.parseLong(ID)
@@ -394,6 +395,7 @@ public class db {
 
         return bs;
     }
+    
 
     public static boolean update_status_donghuan(util.GetSql.csnms _csnms, String SerialNum, String smsid, boolean status, org.apache.log4j.Logger log) {
         boolean bs = false;
@@ -420,16 +422,7 @@ public class db {
             }
             if (count > 0) {
                 bs = true;
-            }
-            /*
-             sql = "update sendmessage set "
-             + "SERIALNUM='DH" + SerialNum + "',"
-             + "dealflag='发送成功" + tools.systime_prase_string("") + "',"
-             + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss'),"
-             + "HASDH='9'  "
-             + "where 1=1  "
-             + "and id=" + smsid;
-             */
+            }           
         } else {
             String sql = "update  sendmessage   set "
                     + "SERIALNUM=?,"
@@ -438,7 +431,7 @@ public class db {
                     + "HASDH='-9'  "
                     + "where 1=1  "
                     + "and id=?";
-            log.info("动环发送失败后，更新状态为-1：" + sql);
+            log.info("动环发送失败后，更新状态为-9：" + sql);
             Object[] objs = new Object[]{
                 "-1",
                 "发送失败" + tools.systime_prase_string(""),
