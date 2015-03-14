@@ -3,7 +3,7 @@
 LANG=zh_CN
 export LANG
 
-pross=main.run_sendsms
+pross=main.run_send_sms
 date=`ps -ef |grep $pross|grep -v "grep" |awk '{print $2}'`
 echo now is $date
 
@@ -27,4 +27,4 @@ done
 PRO=./GitHub_Tide.jar
 CLASSPATH=$JAVA_HOME\lib\tools.jar:$JAVA_HOME\lib\dt.jar:$LIBRARY:$PRO
 MEM_ARGS="-Xms128m -Xmx256m"
-java $JAVA_VM $MEM_ARGS -cp $CLASSPATH main.run_sendsms
+java $JAVA_VM $MEM_ARGS -cp $CLASSPATH main.run_send_sms
