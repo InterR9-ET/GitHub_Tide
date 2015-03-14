@@ -69,42 +69,43 @@ public class fun {
         String kk = "";
         if (_city_code.equals("600837440")) {
             kk = "3";
-        }
-        if (_city_code.equals("613562383")) {
+        }else  if (_city_code.equals("613562383")) {
             kk = "4";
-        }
+        }else
         if (_city_code.equals("605023125")) {
             kk = "15";
-        }
+        }else
         if (_city_code.equals("618820000")) {
             kk = "20";
-        }
+        }else
         if (_city_code.equals("618830000")) {
             kk = "26";
-        }
+        }else
         if (_city_code.equals("618840000")) {
             kk = "33";
-        }
+        }else
         if (_city_code.equals("618850000")) {
             kk = "39";
-        }
+        }else
         if (_city_code.equals("618800000")) {
             kk = "48";
-        }
+        }else
         if (_city_code.equals("618860000")) {
             kk = "60";
-        }
+        }else
         if (_city_code.equals("618870000")) {
             kk = "63";
-        }
+        }else
         if (_city_code.equals("618747820")) {
             kk = "69";
-        }
+        }else
         if (_city_code.equals("618810000")) {
             kk = "79";
-        }
+        }else
         if (_city_code.equals("618880000")) {
             kk = "84";
+        }else{
+        return _city_code;
         }
         return kk;
     }
@@ -133,6 +134,8 @@ public class fun {
             //声明实体并赋值
             z.allClass.sendsms_sendstr _sms = new z.allClass.sendsms_sendstr();
             _sms = (z.allClass.sendsms_sendstr) _msm_data.get(i);//加载数据
+       
+            
             _sms.CITYID = fun.get_city_code(_sms.CITYID);//转换城市代码
             //判断短信所属的运营商
             String _tel_boss = fun.get_boss(_sms.TEL, headstr_yidong, headstr_liantong, headstr_dianxin);

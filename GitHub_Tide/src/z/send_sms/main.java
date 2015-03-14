@@ -173,6 +173,7 @@ public class main extends Thread {
                                 str_xml = str_xml + "</SQL>";
                                 str_xml = str_xml + "</DATASOURCE>";
                                 str_xml = str_xml + "</SERVICE>";
+                                                            
 
                                 Object[] fn01 = {str_xml};
                                 String val = (String) call.invoke(fn01);
@@ -220,7 +221,8 @@ public class main extends Thread {
                                         log.info("短信发送成功后，更新短信状态时出现异常：" + e.getMessage().toString());
                                     }
 
-                                } else {//发送失败的      
+                                } else {//发送失败的   
+                                        log.info("发送的xml字符串：" + str_xml);
                                     try {
                                         boolean bs = db.update_status_zongdiao(_csnms, "-1", _sms.STR_ID, false, log);
                                         if (bs) {
