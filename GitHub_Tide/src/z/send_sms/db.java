@@ -396,7 +396,7 @@ public class db {
         boolean bs = false;
         String sql = "update  sendmessage   set "
                 + "HASDH=?,"
-                + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss'),"
+                + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')"
                 + "where 1=1  "
                 + "and id=?";
         Object[] objs = new Object[]{
