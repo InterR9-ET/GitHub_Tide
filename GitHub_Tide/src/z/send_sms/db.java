@@ -399,6 +399,7 @@ public class db {
                 + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')"
                 + "where 1=1  "
                 + "and id=?";
+        log.info("写入成功后，更新状态为1：" + sql);
         Object[] objs = new Object[]{
             STATUS,
             Long.parseLong(ID)
@@ -413,25 +414,6 @@ public class db {
             bs = true;
         }
 
-        /*
-         String sql = "";
-         sql = "update  sendmessage  set  HASDH='"
-         + STATUS
-         + "', SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')  where id="
-         + ID;
-
-         if (sql.length() > 0) {
-         int count = 0;
-         try {
-         count = _csnms.execute(sql, null);
-         } catch (Exception ex) {
-         log.info("短信写入动环数据成功后，更新csnms中的状态发生异常：" + ex.getMessage() + "\r\n sql:" + sql);
-         }
-         if (count > 0) {
-         bs = true;
-         }
-         }
-         */
         return bs;
     }
 
@@ -445,6 +427,8 @@ public class db {
                     + "HASDH='9'  "
                     + "where 1=1  "
                     + "and id=?";
+            log.info("发送成功后，更新状态为9：" + sql);
+
             Object[] objs = new Object[]{
                 "DH" + SerialNum,
                 "发送成功" + tools.systime_prase_string(""),
@@ -476,6 +460,7 @@ public class db {
                     + "HASDH='-9'  "
                     + "where 1=1  "
                     + "and id=?";
+            log.info("发送失败后，更新状态为-1：" + sql);
             Object[] objs = new Object[]{
                 "-1",
                 "发送失败" + tools.systime_prase_string(""),
@@ -525,7 +510,6 @@ public class db {
                 + "'" + _sms.USERNAME.toString() + "'" + ","
                 + "'" + _sms.CONTENT + "'"
                 + ")";
-
         int count = 0;
         try {
             count = _donghuan_mysql.execute(sql, null);
