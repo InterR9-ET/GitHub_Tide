@@ -326,6 +326,9 @@ public class db {
                     + "HASDH='9'  "
                     + "where 1=1  "
                     + "and id=?";
+
+            log.info("综调发送成功后，更新状态为9：" + sql);
+
             Object[] objs = new Object[]{
                 SerialNum,
                 "发送成功" + tools.systime_prase_string(""),
@@ -340,15 +343,6 @@ public class db {
             if (count > 0) {
                 bs = true;
             }
-            /*
-             sql = "update sendmessage set "
-             + "SERIALNUM='" + SerialNum + "',"
-             + "dealflag='发送成功" + tools.systime_prase_string("") + "',"
-             + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss'),"
-             + "HASDH='9'  "
-             + "where 1=1  "
-             + "and id=" + smsid;
-             */
         } else {
             String sql = "update  sendmessage   set "
                     + "SERIALNUM=?,"
@@ -357,6 +351,7 @@ public class db {
                     + "HASDH='-9'  "
                     + "where 1=1  "
                     + "and id=?";
+            log.info("综调发送失败后，更新状态为9：" + sql);
             Object[] objs = new Object[]{
                 "-1",
                 "发送失败" + tools.systime_prase_string(""),
@@ -371,24 +366,7 @@ public class db {
             if (count > 0) {
                 bs = true;
             }
-            /*
-             sql = "update sendmessage set "
-             + "SERIALNUM='-1',"
-             + "dealflag='发送失败" + tools.systime_prase_string("") + "', "
-             + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') ,"
-             + "HASDH='-9' "
-             + "where 1=1 "
-             + "and id=" + smsid;
-             */
         }
-        /*
-         if (sql.length() > 0) {
-         int count = _csnms.execute(sql, null);
-         if (count > 0) {
-         bs = true;
-         }
-         }
-         */
         return bs;
     }
 
@@ -399,7 +377,7 @@ public class db {
                 + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')"
                 + "where 1=1  "
                 + "and id=?";
-        log.info("写入成功后，更新状态为1：" + sql);
+        log.info("动环写入成功后，更新状态为1：" + sql);
         Object[] objs = new Object[]{
             STATUS,
             Long.parseLong(ID)
@@ -427,7 +405,7 @@ public class db {
                     + "HASDH='9'  "
                     + "where 1=1  "
                     + "and id=?";
-            log.info("发送成功后，更新状态为9：" + sql);
+            log.info("动环发送成功后，更新状态为9：" + sql);
 
             Object[] objs = new Object[]{
                 "DH" + SerialNum,
@@ -460,7 +438,7 @@ public class db {
                     + "HASDH='-9'  "
                     + "where 1=1  "
                     + "and id=?";
-            log.info("发送失败后，更新状态为-1：" + sql);
+            log.info("动环发送失败后，更新状态为-1：" + sql);
             Object[] objs = new Object[]{
                 "-1",
                 "发送失败" + tools.systime_prase_string(""),
@@ -475,24 +453,7 @@ public class db {
             if (count > 0) {
                 bs = true;
             }
-            /*
-             String sql = "update sendmessage set "
-             + "SERIALNUM='-1',"
-             + "dealflag='发送失败" + tools.systime_prase_string("") + "', "
-             + "SENDTIME=to_date(to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') ,"
-             + "HASDH='-9' "
-             + "where 1=1 "
-             + "and id=" + smsid;
-             */
         }
-        /*
-         if (sql.length() > 0) {
-         int count = _csnms.execute(sql, null);
-         if (count > 0) {
-         bs = true;
-         }
-         }
-         */
         return bs;
     }
 
@@ -548,19 +509,6 @@ public class db {
                     // 更新成功
                     bs = true;
                 }
-                /*
-                 String sql = "update  alarm  a   set a.info2='" + status + "'  where  a.id=" + _sms.ALARM_ID.toString();
-                 int n = 0;
-                 try {
-                 n = _csnms.execute(sql, null);
-                 } catch (Exception ex) {
-                 log.info("更新活动告警的 短信发送状态异常：" + ex.getMessage() + "\r\n sql:" + sql);
-                 }               
-                 if (n > 0) {
-                 // 更新成功
-                 bs = true;
-                 }
-                 */
             }
         }
         return bs;
